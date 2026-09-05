@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap · Fullstack Java Júnior</title>
+<style>
+  :root{
+    --bg: #1B1E23;
+    --surface: #22262D;
+    --surface-2: #2A2F38;
+    --border: #333A45;
+    --border-soft: #2A303A;
+    --text: #ECEEF2;
+    --text-muted: #8F98A3;
+    --text-faint: #656D78;
+    --amber: #E3A548;
+    --amber-dim: #6b5330;
+    --teal: #5FAE93;
+    --teal-dim: #2c4a3f;
+    --violet: #948BDE;
+    --violet-dim: #423d6b;
+    --cyan: #6CC3D9;
+    --cyan-dim: #22434c;
+    --mono: 'JetBrains Mono', 'Fira Code', ui-monospace, 'SF Mono', Consolas, 'Courier New', monospace;
+    --sans: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --radius: 10px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 20px 100px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 8px;
+  }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  h1{
+    font-family: var(--mono);
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--text);
+  }
+  .lede{
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 60ch;
+    margin: 0 0 28px;
+  }
+  .lede b{ color: var(--text); font-weight: 600; }
+
+  .overall{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .overall-top{
+    display:flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 13px; color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .overall-top span.count{ color: var(--text); font-weight: 600; }
+  .bar-track{
+    height: 8px; border-radius: 6px; background: var(--surface-2);
+    overflow: hidden; border: 1px solid var(--border-soft);
+  }
+  .bar-fill{
+    height: 100%;
+    background: linear-gradient(90deg, var(--amber), var(--teal));
+    width: 0%;
+    transition: width .4s ease;
+    border-radius: 6px;
+  }
+
+  .streak-row{
+    display:flex; align-items:center; gap: 12px; flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .streak-pill{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .current-label{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  /* ---------- LEGEND ---------- */
+  .legend{
+    display: flex; flex-wrap: wrap; gap: 10px 22px;
+    font-size: 13px; color: var(--text-muted);
+    padding: 22px 2px 4px;
+  }
+  .legend span{ display:inline-flex; align-items:center; gap:7px; }
+  .legend i{ font-style: normal; }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{ position: relative; margin-top: 20px; }
+  .connector{
+    position: absolute;
+    left: 15px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--border) 0, var(--border) 4px, transparent 4px, transparent 8px);
+  }
+
+  .month{
+    position: relative;
+    padding-left: 46px;
+    margin-bottom: 14px;
+  }
+  .node{
+    position: absolute;
+    left: 6px; top: 22px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 2px solid var(--border);
+    z-index: 2;
+    transition: background .3s, border-color .3s;
+  }
+  .month.done .node{ background: var(--teal); border-color: var(--teal); }
+  .month.current .node{ background: var(--amber); border-color: var(--amber); box-shadow: 0 0 0 4px var(--amber-dim); }
+
+  .card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color .3s;
+  }
+  .month.done .card{ border-color: var(--teal-dim); }
+  .month.current .card{ border-color: var(--amber); }
+
+  .card-head{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .card-head:hover{ background: var(--surface-2); }
+  .card-head:focus-visible{ outline: 2px solid var(--amber); outline-offset: -2px; }
+
+  .m-num{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  .m-titles{ flex: 1; min-width: 0; }
+  .m-period{
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--amber);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .m-title{
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 2px;
+  }
+  .here-tag{
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--bg);
+    background: var(--amber);
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-left: 8px;
+    letter-spacing: .03em;
+  }
+  .m-mini{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .chevron{
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    color: var(--text-faint);
+    transition: transform .25s ease;
+  }
+  .month.open .chevron{ transform: rotate(90deg); }
+
+  .card-body{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease;
+  }
+  .card-body-inner{ padding: 0 20px 22px; }
+
+  .foco{
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+    padding-left: 12px;
+    border-left: 2px solid var(--border);
+  }
+
+  .marco{
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--violet-dim);
+    border: 1px solid var(--violet);
+    color: #E6E2FF;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    margin-bottom: 16px;
+  }
+
+  .criterio{
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--teal-dim);
+    border: 1px solid var(--teal);
+    color: #CFF3E6;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    margin-bottom: 16px;
+  }
+
+  .revisao{
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--surface-2);
+    border: 1px dashed var(--text-faint);
+    color: var(--text-muted);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .badge-row{
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .badge-pill{
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  .month.done .badge-pill{
+    background: var(--teal-dim); border-color: var(--teal); color: #CFF3E6;
+  }
+
+  .section-label{
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--text-faint);
+    margin: 18px 0 8px;
+  }
+  .section-label:first-of-type{ margin-top: 4px; }
+
+  ul.items{ list-style:none; margin:0; padding:0; }
+  ul.items li{ margin-bottom: 2px; }
+
+  label.item{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 8px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+  }
+  label.item:hover{ background: var(--surface-2); }
+
+  label.item input[type=checkbox]{
+    appearance: none;
+    -webkit-appearance: none;
+    width: 17px; height: 17px;
+    min-width: 17px;
+    margin-top: 2px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border);
+    background: var(--surface-2);
+    cursor: pointer;
+    position: relative;
+    transition: background .15s, border-color .15s;
+  }
+  label.item input[type=checkbox]:checked{
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  label.item input[type=checkbox]:checked::after{
+    content: "";
+    position: absolute;
+    left: 5px; top: 1.5px;
+    width: 4px; height: 8px;
+    border: solid var(--bg);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  label.item input[type=checkbox]:focus-visible{ outline: 2px solid var(--amber); outline-offset: 2px; }
+  label.item span.txt{ flex:1; }
+  label.item input:checked ~ span.txt{ color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--text-faint); }
+
+  label.item.project{
+    background: var(--surface-2);
+    border: 1px dashed var(--amber);
+  }
+  label.item.project:hover{ background: #313640; }
+
+  label.item.reading{ opacity: .78; }
+  label.item.reading span.txt{ font-size: 13.3px; font-style: italic; }
+
+  /* ---------- DIFERENCIAIS ---------- */
+  .dif-section{ margin-top: 52px; }
+  .dif-head{ margin-bottom: 18px; }
+  .dif-eyebrow{
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em;
+    color: var(--cyan); text-transform: uppercase; margin: 0 0 10px;
+  }
+  .dif-head h2{
+    font-family: var(--mono); font-size: 24px; font-weight: 700;
+    margin: 0 0 10px; color: var(--text);
+  }
+  .dif-intro{ font-size: 14px; color: var(--text-muted); max-width: 62ch; margin: 0 0 18px; }
+
+  .dif-overall{
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px; margin-bottom: 20px;
+  }
+  .dif-overall .bar-fill{ background: linear-gradient(90deg, var(--cyan), var(--teal)); }
+  .dif-overall-top{
+    display:flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 12.5px; color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .dif-card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--cyan);
+    border-radius: var(--radius);
+    padding: 16px 20px 18px;
+    margin-bottom: 14px;
+  }
+  .dif-card-head{
+    display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+    margin-bottom: 4px; flex-wrap: wrap;
+  }
+  .dif-cat-title{
+    font-size: 15px; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dif-mini{ font-family: var(--mono); font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+  .dif-encaixe{
+    font-family: var(--mono); font-size: 11px; color: var(--text-faint);
+    margin: 0 0 12px; text-transform: uppercase; letter-spacing: .03em;
+  }
+
+  .dif-info{
+    background: var(--surface-2);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .actions{
+    display:flex; justify-content: space-between; align-items:center;
+    margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--border-soft);
+    font-size: 13px; color: var(--text-muted);
+  }
+  #resetBtn{
+    font-family: var(--sans);
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 14px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  #resetBtn:hover{ border-color: #b0574f; color: #e79089; }
+
+  .sources{
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--text-faint);
+    line-height: 1.7;
+  }
+  .storage-warning{
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: #e3c17e;
+    background: #3a3320;
+    border: 1px solid #55491f;
+    padding: 9px 12px;
+    border-radius: 7px;
+  }
+
+  @media (max-width: 560px){
+    .page{ padding: 32px 14px 80px; }
+    .card-head{ flex-wrap: wrap; }
+    .m-mini{ order: 3; width: 100%; padding-left: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">roadmap pessoal · 17 meses, no seu ritmo</p>
+    <h1>Fullstack Java Júnior</h1>
+    <p class="lede">Do primeiro <code>git init</code> até a candidatura. <b>17 meses</b>, do zero real em Git/SQL/Front-end até um perfil júnior fullstack Java competitivo — nada presumido, nada pulado.</p>
+    <div class="overall">
+      <div class="overall-top">
+        <span>progresso geral</span>
+        <span class="count" id="overallCount">0/0 itens</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="overallBar"></div></div>
+    </div>
+    <div class="streak-row" id="streakRow">
+      <span class="streak-pill" id="streakPill">🔥 0 dias seguidos</span>
+      <span class="current-label" id="currentLabel"></span>
+    </div>
+  </header>
+
+  <div class="legend">
+    <span><i>📚</i> estudar</span>
+    <span><i>🛠️</i> projeto / checkpoint</span>
+    <span><i>🏆</i> conquista do mês</span>
+    <span><i>🎯</i> marco de candidatura</span>
+    <span><i>✅</i> critério de domínio (sinal de que pode seguir em frente)</span>
+    <span><i>🔁</i> ponto de revisão</span>
+    <span><i>·</i> itálico = vale conhecer, não é obrigatório aprofundar agora</span>
+  </div>
+
+  <section class="timeline" id="timeline">
+    <div class="connector"></div>
+    <!-- meses renderizados via JS -->
+  </section>
+
+  <section class="dif-section">
+    <div class="dif-head">
+      <p class="dif-eyebrow">🌟 diferenciais de mercado</p>
+      <h2>O que separa um currículo comum de um que passa</h2>
+      <p class="dif-intro">Isso não substitui os meses acima — é o que fica por cima. Encontrei nos seus próprios materiais (o bootcamp já traz mais IA aplicada do que parece) e em vagas reais de backend, fullstack e front-end pesquisadas agora. Cada categoria indica em que mês ela encaixa melhor.</p>
+    </div>
+    <div class="dif-overall">
+      <div class="dif-overall-top">
+        <span>progresso em diferenciais</span>
+        <span class="count" id="difCount">0/0 itens</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" id="difBar"></div></div>
+    </div>
+    <div id="difList"><!-- categorias renderizadas via JS --></div>
+    <div class="dif-info">
+      🎓 <b>O que você já tem a seu favor:</b> graduação em Ciência da Computação em andamento já é citada como diferencial real pelo mercado em 2026 — não é só formalidade. Leitura de documentação técnica em inglês, mesmo sem fluência completa, também já destrava bastante coisa.
+    </div>
+  </section>
+
+  <div class="actions">
+    <span id="doneMonths">0 de 16 marcos concluídos</span>
+    <button id="resetBtn" type="button">Zerar progresso</button>
+  </div>
+
+  <p class="storage-warning" id="storageWarning">
+    💾 O progresso é salvo automaticamente neste navegador. Se você acessar de outro dispositivo, o progresso não acompanha — use o board do GitHub Projects como referência entre dispositivos enquanto essa sincronização não existe (veja o README do repositório).
+  </p>
+
+  <p class="sources">
+    Fontes cruzadas para montar este roadmap: seu progresso real no Bootcamp Santander 2026 – AI Java Back-end (DIO); Roadmap Java 2026 (Matheus Leandro Ferreira); Programa de Acompanhamento Combo Fullstack (Javanauta); Roadmap Completo para Aprender Java 2025; roadmap.sh (Java e Full Stack); Plano de Estudos — Programador em 12 Meses; pesquisa ao vivo de vagas reais de estágio/júnior fullstack, backend e front-end Java (Indeed, Glassdoor, Gupy, Jooble, LinkedIn); e o relatório de mercado de programação 2026 da Alura sobre tendências e diferenciais (IA aplicada, DevSecOps, performance).
+  </p>
+
+</div>
+
+<script>
+(function(){
+
+  const roadmapData = [
+    {
+      numero: "1", periodo: "Set/2026", dataInicio: "2026-09-01",
+      titulo: "Git, Linux e SQL do zero (bootcamp já concluído)",
+      foco: "Antes de qualquer framework: controle de versão, terminal e banco de dados — do zero real, sem presumir nada. O bootcamp em si já foi concluído no prazo; o item de currículo abaixo já entra marcado.",
+      badge: "Fundamentos de Versionamento & Dados",
+      itens: [
+        "Git do zero: init, add, commit, push, branches, merge, resolução de conflitos, .gitignore",
+        "Terminal / Linux básico: navegação (cd, ls, pwd), permissões, comandos essenciais",
+        "SQL fundamentos: SELECT, INSERT, UPDATE, DELETE, JOIN, chave primária/estrangeira, modelagem básica de tabelas",
+        "Concluir módulos restantes do bootcamp: Annotations, SOLID/Clean Code, JDBC, Design Patterns (GoF → Spring)",
+        "Collections em profundidade: List/Set/Map/Queue/Deque/Iterator, Generics, Optionals",
+        "Exception handling: hierarquia checked/unchecked, try-with-resources, exceptions customizadas",
+        "JVM e Garbage Collector — visão conceitual (a mecânica fina de concorrência fica pro Mês 11, com projeto de verdade em vez de teoria a seco)"
+      ],
+      leituras: [
+        "Java 25 já é o novo LTS do mercado, mas boa parte das empresas brasileiras ainda roda 8/11/17 em produção — não é urgência dominar o mais novo agora"
+      ],
+      criterio: "Critério de domínio: você resolve um conflito de merge sozinho e escreve 10 queries SQL com JOIN sem colar de lugar nenhum.",
+      projeto: "Sem projeto grande ainda — mas suba os desafios do bootcamp para um repositório Git público, com commits organizados (não um único commit \"projeto final\")."
+    },
+    {
+      numero: "2", periodo: "Out/2026", dataInicio: "2026-10-01",
+      titulo: "1º projeto backend real, fora do bootcamp",
+      foco: "O bootcamp Santander/DIO já foi concluído no prazo — os itens de currículo abaixo já entram marcados. O foco real deste mês é sair do modo tutorial-guiado e praticar sem rede de segurança.",
+      badge: "Backend com Spring Boot 🎓",
+      itens: [
+        "Concluir: Spring REST API, Spring Data JPA (Hibernate por baixo dos panos), Spring Security básico, Spring Cloud OpenFeign",
+        "Projeto final do bootcamp: assistente de voz com IA (Spring Boot + reconhecimento de fala)",
+        "Módulos de IA do próprio bootcamp: Copilotos com IA no Desenvolvimento, Fundamentos da IA Moderna, Engenharia de Prompts — isso já é diferencial real de mercado, não conteúdo de preenchimento",
+        "Lombok para reduzir boilerplate (getters/setters/construtores)",
+        "Design de API REST profissional: status codes corretos, paginação, filtros, versionamento de API",
+        "Tratamento global de erros (@ControllerAdvice) e Bean Validation",
+        "application.properties / profiles para múltiplos ambientes"
+      ],
+      criterio: "Critério de domínio: você explica, sem consultar nada, por que um endpoint seu retorna 404 vs. 400 vs. 422.",
+      projeto: "Saia do tutorial hell: construa uma API REST do zero, sem seguir tutorial — pode ser pequena (ex: uma agenda de contatos com CRUD completo). Suba no GitHub com README explicando o que faz e por quê."
+    },
+    {
+      numero: "3", periodo: "Nov/2026", dataInicio: "2026-11-01",
+      titulo: "Segurança, testes e arquitetura limpa",
+      foco: "O gap mais comum entre \"sei Java\" e \"sou júnior contratável\" é não saber testar nem estruturar o próprio código.",
+      badge: "Segurança & Testes Automatizados",
+      itens: [
+        "Spring Security com JWT — autenticação/autorização completas, além do básico do bootcamp",
+        "JUnit 5 + Mockito: testes unitários e de integração, mocks, @SpringBootTest",
+        "Clean Architecture / Arquitetura Hexagonal aplicada de verdade",
+        "Mentalidade DevSecOps: OWASP Top 10 (as vulnerabilidades mais comuns) e noção de LGPD/Privacy by Design",
+        "Boas práticas de Git no dia a dia: commits semânticos, branches, PRs bem escritos"
+      ],
+      leituras: [
+        "Existem alternativas de teste (TestNG, REST Assured, Cucumber-JVM) — JUnit + Mockito já cobre a grande maioria do que vaga júnior pede"
+      ],
+      projeto: "Refatore o projeto do Mês 2 aplicando camadas (domínio/aplicação/infra), adicione autenticação JWT e escreva testes com cobertura relevante nas regras de negócio — não em getters/setters."
+    },
+    {
+      numero: "4", periodo: "Dez/2026", dataInicio: "2026-12-01",
+      titulo: "SQL avançado + Docker",
+      foco: "Com banco de dados e containerização, seu projeto já parece profissional — e você já atende ao patamar técnico pedido em estágio.",
+      badge: "Persistência & Containerização",
+      marco: "Comece a se candidatar para vagas de ESTÁGIO em Java (Gupy, LinkedIn, Vagas.com.br)",
+      itens: [
+        "SQL avançado: índices, transações, isolamento, concorrência, locks e deadlocks",
+        "Docker: Dockerfile para a aplicação Spring Boot, docker-compose com Postgres"
+      ],
+      leituras: [
+        "Noção de bancos não-relacionais (MongoDB) — quando faz mais sentido que um banco relacional"
+      ],
+      projeto: "Dockerize o projeto do Mês 3 — \"docker-compose up\" funcionando do zero em qualquer máquina."
+    },
+    {
+      numero: "5", periodo: "Jan/2027", dataInicio: "2027-01-01",
+      titulo: "HTML e CSS do zero",
+      foco: "Front-end começa aqui, de verdade — não é revisão, é primeira vez entendendo o que cada linha faz.",
+      badge: "Fundamentos de Front-end",
+      itens: [
+        "HTML semântico: estrutura, tags, formulários, acessibilidade básica",
+        "CSS: seletores, box model, Flexbox, Grid, responsividade (mobile-first)",
+        "Tailwind CSS (utility-first) — o que você já tinha visto no projeto vibe-coded, agora entendendo de verdade"
+      ],
+      revisao: "Antes de virar a chave pro front-end: você sobe uma API Spring Boot com JWT e Docker do zero, sem consultar nada? Se travar em algum ponto, vale 2-3 dias revisando antes de seguir.",
+      projeto: "Construa uma página estática do zero (ex: um portfólio pessoal simples) só com HTML/CSS puro — depois recrie a mesma página usando Tailwind, pra sentir a diferença."
+    },
+    {
+      numero: "6", periodo: "Fev/2027", dataInicio: "2027-02-01",
+      titulo: "JavaScript do zero",
+      foco: "A lógica que você já tem de Java ajuda — a sintaxe e os hábitos de JS são o que muda.",
+      badge: "Lógica em JavaScript",
+      itens: [
+        "Variáveis (var/let/const), tipos de dados, operadores, conversão de tipos",
+        "Condicionais e loops, arrays e métodos (map/filter/reduce/forEach)",
+        "Funções, callbacks, escopo, arrow functions",
+        "DOM: seleção de elementos, eventos, manipulação de página",
+        "Fetch básico: consumir uma API pública"
+      ],
+      projeto: "Um app em JavaScript puro e interativo (ex: lista de tarefas, ou conversor de moedas usando uma API pública) — sem nenhum framework ainda."
+    },
+    {
+      numero: "7", periodo: "Mar/2027", dataInicio: "2027-03-01",
+      titulo: "TypeScript + React fundamentos",
+      foco: "Agora sim: os mesmos nomes que apareciam no projeto vibe-coded, mas você escrevendo e entendendo cada um.",
+      badge: "React & TypeScript",
+      itens: [
+        "TypeScript: tipos, interfaces, generics básicos, por que usar em vez de JS puro",
+        "React: componentes, JSX, props, state, hooks (useState, useEffect)",
+        "Roteamento básico (React Router)",
+        "npm e Vite: o que cada comando faz de verdade, não só copiar/colar"
+      ],
+      leituras: [
+        "Angular aparece em algumas vagas mais corporativas/legadas — não é prioridade agora, mas vale saber que existe como alternativa ao React",
+        "Next.js, acessibilidade e testes de front-end estão detalhados na seção Diferenciais mais abaixo — vale uma olhada antes de fechar este mês"
+      ],
+      projeto: "Um app React isolado, ainda SEM conectar a nenhum backend — ex: uma calculadora ou um bloco de notas com estado local."
+    },
+    {
+      numero: "8", periodo: "Abr/2027", dataInicio: "2027-04-01",
+      titulo: "Fullstack de verdade",
+      foco: "O momento em que front e back se encontram — e o Study Roadmap Platform pode renascer, desta vez entendido de verdade.",
+      badge: "Fullstack Java + React",
+      itens: [
+        "Consumo de API com Axios/fetch a partir do React",
+        "Fluxo completo de autenticação: login, armazenar token JWT, proteger rotas",
+        "CORS, variáveis de ambiente no front, tratamento de erros de rede na UI",
+        "Testes de front-end: Jest + React Testing Library para os componentes principais — apareceu como requisito (não só diferencial) em boa parte das vagas de React pesquisadas"
+      ],
+      projeto: "Reconstrua a ideia do Study Roadmap Platform — desta vez linha por linha, entendendo cada decisão — conectando seu front-end React ao backend Spring Boot construído nos meses anteriores."
+    },
+    {
+      numero: "9", periodo: "Mai/2027", dataInicio: "2027-05-01",
+      titulo: "CI/CD e Deploy em produção",
+      foco: "Projeto testado, containerizado, seguro e agora publicado — este é o ponto em que o currículo compete de igual pra igual em vaga júnior, não só estágio.",
+      badge: "CI/CD & Deploy em Produção",
+      marco: "Currículo competitivo para vagas de JÚNIOR (não só estágio)",
+      itens: [
+        "GitHub Actions: pipeline de build + testes a cada push",
+        "Deploy: Render / Railway / Fly.io para portfólio pessoal (grátis, sem burocracia)",
+        "Noção de AWS (EC2, RDS, S3) — não precisa usar em produção pessoal, mas aparece em quase toda vaga",
+        "Monitoramento básico: logs estruturados, health checks"
+      ],
+      projeto: "Projeto fullstack do Mês 8 no ar, com URL pública, pipeline de CI rodando os testes automaticamente a cada push."
+    },
+    {
+      numero: "10", periodo: "Jun/2027", dataInicio: "2027-06-01",
+      titulo: "Estruturas de dados + preparação para entrevistas",
+      foco: "Processos seletivos brasileiros (Gupy principalmente) costumam ter uma etapa de raciocínio lógico antes da entrevista técnica — treinar isso é parte do trabalho.",
+      badge: "Preparado para Entrevistas Técnicas",
+      itens: [
+        "Complexidade (Big O), recursão, arrays vs. listas ligadas",
+        "Prática em Beecrowd/URI e LeetCode fácil/médio",
+        "Simulação de teste de raciocínio lógico (formato Gupy)",
+        "Entrevista comportamental: 3-4 histórias reais preparadas (método STAR)"
+      ]
+    },
+    {
+      numero: "11", periodo: "Jul/2027", dataInicio: "2027-07-01",
+      titulo: "Concorrência na prática + segundo projeto + Ágil",
+      foco: "Concorrência aprendida construindo, não lendo teoria a seco — e um segundo projeto tecnicamente bem diferente do primeiro mostra versatilidade de verdade.",
+      badge: "Concorrência & Portfólio Versátil",
+      itens: [
+        "Threads, Virtual Threads (Java 21+) e CompletableFuture — agora aplicados a um projeto real, não em abstrato",
+        "Records, diferença entre pass-by-value e pass-by-reference em Java, Regex básico",
+        "Scrum e Kanban na prática — aparece em praticamente toda vaga júnior pesquisada",
+        "Consumo de API externa real (o módulo OpenFeign do bootcamp já deu a base)"
+      ],
+      projeto: "Simulador de Zoológico: animais como threads concorrentes, alimentação compartilhada com controle de deadlock/starvation via CompletableFuture — tecnicamente bem diferente do projeto CRUD dos meses anteriores."
+    },
+    {
+      numero: "12", periodo: "Ago/2027", dataInicio: "2027-08-01",
+      titulo: "Mensageria, cache e IA no backend",
+      foco: "Raramente pedido em estágio, mas cada vez mais comum até em júnior/pleno — e conecta direto com o que você já mexeu no projeto final do bootcamp.",
+      badge: "Mensageria, Cache & IA",
+      itens: [
+        "RabbitMQ ou Kafka: conceitos (fila, pub/sub) + uma integração simples",
+        "Redis para cache",
+        "Spring AI ou integração simples com LLM a partir do backend Java — você já tem experiência com Whisper/Gemini do projeto final do bootcamp"
+      ],
+      projeto: "Adicione UM desses recursos a um projeto já existente — não é necessário um projeto novo."
+    },
+    {
+      numero: "13", periodo: "Set/2027", dataInicio: "2027-09-01",
+      titulo: "Arquitetura avançada + correção de gaps",
+      foco: "Hora de revisitar tudo com olhar crítico e atacar especificamente o que reprovou você nos processos seletivos até aqui.",
+      badge: "Arquitetura & Observabilidade",
+      marco: "Fase estatisticamente comum de maior conversão em contratações",
+      itens: [
+        "Logging profissional (SLF4J/Logback), observabilidade básica",
+        "Microsserviços: quando faz sentido usar, padrão BFF",
+        "Otimização de performance: identificar e resolver queries N+1, medir tempo de resposta de endpoints",
+        "Revisite feedbacks de entrevistas anteriores e ataque fraquezas específicas"
+      ]
+    },
+    {
+      numero: "14", periodo: "Out/2027", dataInicio: "2027-10-01",
+      titulo: "Networking e posicionamento",
+      foco: "Currículo bom sem visibilidade chega menos longe do que currículo bom com rede.",
+      badge: "Rede de Contatos & Posicionamento",
+      itens: [
+        "Currículo e LinkedIn atualizados — reaproveite a base em LaTeX de quando aplicou pro CIT",
+        "Comunidades: Discord de dev, meetups, eventos tipo DevFest",
+        "Postar sobre os projetos no LinkedIn — recrutadores e ATS pesquisam por palavras-chave"
+      ]
+    },
+    {
+      numero: "15", periodo: "Nov/2027", dataInicio: "2027-11-01",
+      titulo: "Candidatura intensiva",
+      foco: "Currículo maduro, dois projetos, feedback de mercado incorporado. Agora é volume e consistência.",
+      badge: "Pronto para o Mercado",
+      marco: "Meta: contratação como estagiário ou desenvolvedor júnior fullstack Java",
+      revisao: "Revisão final: Git, SQL, Spring Security, Docker, React + testes, CI/CD. Se algum desses te deixar em dúvida numa explicação rápida, é ali que vale focar antes da reta final.",
+      itens: [
+        "Aplicações em ritmo alto e consistente (Gupy, LinkedIn, Vagas.com.br)",
+        "Noções de negociação: diferença entre estágio, CLT júnior e faixas salariais da sua região",
+        "Registre o que cada processo seletivo pediu — isso vira seu próprio radar de gaps"
+      ]
+    },
+    {
+      numero: "16-17", periodo: "Dez/2027–Jan/2028", dataInicio: "2027-12-01",
+      titulo: "Extensão / buffer",
+      foco: "Se já estiver empregado, use este bloco pra evoluir dentro do primeiro emprego. Se ainda estiver no processo, use como reforço.",
+      badge: "Especialista em Evolução Contínua",
+      itens: [
+        "Aprofundar nuvem (AWS ou Azure) com um projeto de fato hospedado lá",
+        "Explorar Spring Boot 4 / Java 25 — o novo padrão do mercado a partir de 2026",
+        "Infraestrutura como código (Terraform/Ansible) — nível introdutório",
+        "Continuar candidaturas sem pausa"
+      ]
+    }
+  ];
+
+  const diferenciaisData = [
+    {
+      categoria: "IA aplicada ao desenvolvimento",
+      icone: "🤖",
+      encaixe: "desde o Mês 1 — você já começa com vantagem aqui",
+      itens: [
+        "Usar GitHub Copilot (ou similar) no dia a dia de código, não só no módulo do bootcamp — praticar de verdade, todo dia",
+        "Prompt engineering aplicado a debugging e geração de testes",
+        "Saber explicar em entrevista COMO e QUANDO você usa IA no seu fluxo — virou pergunta comum em processos seletivos de 2026"
+      ]
+    },
+    {
+      categoria: "Segurança & Performance",
+      icone: "🔒",
+      encaixe: "Mês 3 (Security) e Mês 13 (arquitetura)",
+      itens: [
+        "OWASP Top 10 — principais vulnerabilidades web e como preveni-las",
+        "LGPD / Privacy by Design — noção de como isso afeta arquitetura de sistemas no Brasil",
+        "Otimização de performance: queries N+1, tempo de resposta de API, cache de consultas"
+      ]
+    },
+    {
+      categoria: "Qualidade e recursos avançados de Front-end",
+      icone: "🧪",
+      encaixe: "Mês 7-8, depois de React fundamentos",
+      itens: [
+        "Next.js (SSR/SSG) — cada vez mais pedido além do React puro",
+        "Acessibilidade (a11y): HTML semântico, ARIA, contraste, navegação por teclado",
+        "Gerenciamento de estado além do useState: Context API, Zustand ou Redux",
+        "Cypress ou Playwright para testes end-to-end"
+      ]
+    },
+    {
+      categoria: "Backend avançado (opcional, mais visto em pleno)",
+      icone: "📦",
+      encaixe: "Mês 12 em diante, se sobrar tempo",
+      itens: [
+        "Kubernetes — conceitos básicos de orquestração de containers",
+        "GraphQL como alternativa ao REST em algumas vagas"
+      ]
+    },
+    {
+      categoria: "Portfólio & prova social",
+      icone: "🌐",
+      encaixe: "contínuo, principalmente a partir do Mês 9",
+      itens: [
+        "2-3 projetos completos no GitHub com README que mostra COMO você pensa, não só o que o código faz — é citado como o principal diferencial competitivo no mercado júnior saturado",
+        "Contribuir com um projeto open source, mesmo que pequeno (issue simples, correção de documentação)",
+        "Compartilhar o processo de construção dos projetos no LinkedIn"
+      ]
+    }
+  ];
+
+  const STORAGE_KEY = 'roadmap-progress';
+  const DIF_STORAGE_KEY = 'roadmap-diferenciais';
+  const STREAK_KEY = 'roadmap-streak';
+
+  // Itens já concluídos porque fazem parte do currículo oficial do Bootcamp
+  // Santander/DIO, concluído no prazo (23/08/2026). Isso só é usado na
+  // primeira visita (quando ainda não existe progresso salvo neste navegador).
+  const DEFAULT_SEED_STATE = {
+    'm0-item-3': true, // Mês 1: módulos restantes do bootcamp (Annotations, SOLID, JDBC, Design Patterns)
+    'm1-item-0': true, // Mês 2: Spring REST API, Spring Data JPA, Spring Security básico, OpenFeign
+    'm1-item-1': true, // Mês 2: projeto final do bootcamp (assistente de voz com IA)
+    'm1-item-2': true  // Mês 2: módulos de IA do próprio bootcamp
+  };
+
+  let state = {};
+  let difState = {};
+  let streak = { count: 0, lastActive: null };
+
+  function itemId(mi, kind, ii){
+    return 'm' + mi + '-' + kind + (ii !== undefined ? '-' + ii : '');
+  }
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){ /* localStorage indisponível ou dado corrompido */ }
+    return Object.assign({}, DEFAULT_SEED_STATE);
+  }
+
+  function saveState(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }catch(e){
+      console.error('Falha ao salvar progresso', e);
+    }
+  }
+
+  function loadDifState(){
+    try{
+      const raw = localStorage.getItem(DIF_STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){ /* localStorage indisponível ou dado corrompido */ }
+    return {};
+  }
+
+  function saveDifState(){
+    try{
+      localStorage.setItem(DIF_STORAGE_KEY, JSON.stringify(difState));
+    }catch(e){
+      console.error('Falha ao salvar progresso de diferenciais', e);
+    }
+  }
+
+  function loadStreak(){
+    try{
+      const raw = localStorage.getItem(STREAK_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){ /* localStorage indisponível ou dado corrompido */ }
+    return { count: 0, lastActive: null };
+  }
+
+  function saveStreak(){
+    try{
+      localStorage.setItem(STREAK_KEY, JSON.stringify(streak));
+    }catch(e){
+      console.error('Falha ao salvar streak', e);
+    }
+  }
+
+  function todayStr(){
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function registerActivity(){
+    const today = todayStr();
+    if(streak.lastActive === today) return; // já contou hoje
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    streak.count = (streak.lastActive === yesterday) ? streak.count + 1 : 1;
+    streak.lastActive = today;
+    saveStreak();
+    updateStreakUI();
+  }
+
+  function updateStreakUI(){
+    const pill = document.getElementById('streakPill');
+    if(!pill) return;
+    const n = streak.count;
+    pill.textContent = '🔥 ' + n + (n === 1 ? ' dia seguido' : ' dias seguidos');
+  }
+
+  function allIdsForMonth(m, mi){
+    const ids = [];
+    m.itens.forEach((_, ii) => ids.push(itemId(mi, 'item', ii)));
+    if(m.projeto) ids.push(itemId(mi, 'project'));
+    if(m.leituras) m.leituras.forEach((_, ii) => ids.push(itemId(mi, 'read', ii)));
+    return ids;
+  }
+
+  function computeCurrentIndex(){
+    // "Mês atual" = primeiro mês com item pendente, não a data do calendário.
+    // Isso evita que o roadmap fique "desalinhado" quando a rotina muda.
+    for(let i = 0; i < roadmapData.length; i++){
+      const ids = allIdsForMonth(roadmapData[i], i);
+      const done = ids.filter(id => state[id]).length;
+      if(ids.length === 0 || done < ids.length) return i;
+    }
+    return roadmapData.length - 1;
+  }
+
+  function checklistItemHTML(id, text, extraClass){
+    const checked = state[id] ? 'checked' : '';
+    return '<li><label class="item ' + (extraClass||'') + '">' +
+      '<input type="checkbox" data-id="' + id + '" ' + checked + '>' +
+      '<span class="txt">' + text + '</span>' +
+      '</label></li>';
+  }
+
+  function renderMonth(m, mi, currentIdx){
+    const ids = allIdsForMonth(m, mi);
+    const doneCount = ids.filter(id => state[id]).length;
+    const total = ids.length;
+    const isDone = total > 0 && doneCount === total;
+    const isCurrent = mi === currentIdx && !isDone;
+
+    let itemsHTML = m.itens.map((t, ii) => checklistItemHTML(itemId(mi,'item',ii), t)).join('');
+
+    let projHTML = '';
+    if(m.projeto){
+      projHTML = '<p class="section-label">🛠️ Projeto / checkpoint</p><ul class="items">' +
+        checklistItemHTML(itemId(mi,'project'), m.projeto, 'project') + '</ul>';
+    }
+
+    let readHTML = '';
+    if(m.leituras){
+      readHTML = '<p class="section-label">Vale conhecer (não precisa aprofundar agora)</p><ul class="items">' +
+        m.leituras.map((t, ii) => checklistItemHTML(itemId(mi,'read',ii), t, 'reading')).join('') + '</ul>';
+    }
+
+    let marcoHTML = m.marco ? '<div class="marco">🎯 <span>' + m.marco + '</span></div>' : '';
+    let criterioHTML = m.criterio ? '<div class="criterio">✅ <span>' + m.criterio + '</span></div>' : '';
+    let revisaoHTML = m.revisao ? '<div class="revisao">🔁 <span>' + m.revisao + '</span></div>' : '';
+    let hereTag = isCurrent ? '<span class="here-tag">você está aqui</span>' : '';
+
+    return (
+      '<div class="month' + (isDone ? ' done' : '') + (isCurrent ? ' current' : '') + '" data-mi="' + mi + '">' +
+        '<div class="node"></div>' +
+        '<div class="card">' +
+          '<div class="card-head" data-toggle="' + mi + '" tabindex="0" role="button" aria-expanded="false">' +
+            '<span class="m-num">MÊS ' + m.numero + '</span>' +
+            '<div class="m-titles">' +
+              '<div class="m-period">~ ' + m.periodo + hereTag + '</div>' +
+              '<div class="m-title">' + m.titulo + '</div>' +
+            '</div>' +
+            '<span class="m-mini">' + doneCount + '/' + total + '</span>' +
+            '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>' +
+          '</div>' +
+          '<div class="card-body" id="body-' + mi + '">' +
+            '<div class="card-body-inner">' +
+              '<p class="foco">' + m.foco + '</p>' +
+              revisaoHTML +
+              marcoHTML +
+              criterioHTML +
+              '<div class="badge-row">🏆 <span class="badge-pill">' + m.badge + '</span></div>' +
+              '<p class="section-label">📚 Estudar</p>' +
+              '<ul class="items">' + itemsHTML + '</ul>' +
+              readHTML +
+              projHTML +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderAll(){
+    const currentIdx = computeCurrentIndex();
+    const html = roadmapData.map((m, mi) => renderMonth(m, mi, currentIdx)).join('');
+    document.getElementById('timeline').insertAdjacentHTML('beforeend', html);
+    attachHandlers();
+    updateProgressUI();
+    openMonth(currentIdx, true);
+  }
+
+  function difItemId(ci, ii){
+    return 'd' + ci + '-item-' + ii;
+  }
+
+  function renderCategory(cat, ci){
+    const ids = cat.itens.map((_, ii) => difItemId(ci, ii));
+    const doneCount = ids.filter(id => difState[id]).length;
+    const total = ids.length;
+    const itemsHTML = cat.itens.map((t, ii) => checklistItemHTML(difItemId(ci, ii), t)).join('');
+    return (
+      '<div class="dif-card" data-ci="' + ci + '">' +
+        '<div class="dif-card-head">' +
+          '<span class="dif-cat-title">' + cat.icone + ' ' + cat.categoria + '</span>' +
+          '<span class="dif-mini">' + doneCount + '/' + total + '</span>' +
+        '</div>' +
+        '<p class="dif-encaixe">encaixa bem: ' + cat.encaixe + '</p>' +
+        '<ul class="items">' + itemsHTML + '</ul>' +
+      '</div>'
+    );
+  }
+
+  function renderDiferenciais(){
+    const html = diferenciaisData.map((c, ci) => renderCategory(c, ci)).join('');
+    document.getElementById('difList').insertAdjacentHTML('beforeend', html);
+    attachDifHandlers();
+    updateDifProgressUI();
+  }
+
+  function attachDifHandlers(){
+    document.querySelectorAll('#difList input[type=checkbox][data-id]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        difState[cb.getAttribute('data-id')] = cb.checked;
+        saveDifState();
+        if(cb.checked) registerActivity();
+        refreshDifCard(cb.closest('.dif-card'));
+        updateDifProgressUI();
+      });
+    });
+  }
+
+  function refreshDifCard(cardEl){
+    const ci = parseInt(cardEl.getAttribute('data-ci'), 10);
+    const cat = diferenciaisData[ci];
+    const ids = cat.itens.map((_, ii) => difItemId(ci, ii));
+    const doneCount = ids.filter(id => difState[id]).length;
+    cardEl.querySelector('.dif-mini').textContent = doneCount + '/' + ids.length;
+  }
+
+  function updateDifProgressUI(){
+    let total = 0, done = 0;
+    diferenciaisData.forEach((cat, ci) => {
+      const ids = cat.itens.map((_, ii) => difItemId(ci, ii));
+      total += ids.length;
+      done += ids.filter(id => difState[id]).length;
+    });
+    const pct = total > 0 ? Math.round((done/total)*100) : 0;
+    document.getElementById('difBar').style.width = pct + '%';
+    document.getElementById('difCount').textContent = done + '/' + total + ' itens (' + pct + '%)';
+  }
+
+  function attachHandlers(){
+    document.querySelectorAll('[data-toggle]').forEach(head => {
+      head.addEventListener('click', () => {
+        const mi = parseInt(head.getAttribute('data-toggle'), 10);
+        toggleMonth(mi);
+      });
+      head.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          const mi = parseInt(head.getAttribute('data-toggle'), 10);
+          toggleMonth(mi);
+        }
+      });
+    });
+
+    document.querySelectorAll('#timeline input[type=checkbox][data-id]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        state[cb.getAttribute('data-id')] = cb.checked;
+        saveState();
+        if(cb.checked) registerActivity();
+        refreshMonthCard(cb.closest('.month'));
+        updateProgressUI();
+      });
+    });
+  }
+
+  function refreshMonthCard(monthEl){
+    const mi = parseInt(monthEl.getAttribute('data-mi'), 10);
+    const m = roadmapData[mi];
+    const ids = allIdsForMonth(m, mi);
+    const doneCount = ids.filter(id => state[id]).length;
+    const total = ids.length;
+    monthEl.querySelector('.m-mini').textContent = doneCount + '/' + total;
+    monthEl.classList.toggle('done', total > 0 && doneCount === total);
+  }
+
+  function toggleMonth(mi){
+    const monthEl = document.querySelector('.month[data-mi="' + mi + '"]');
+    const isOpen = monthEl.classList.contains('open');
+    openMonth(mi, !isOpen);
+  }
+
+  function openMonth(mi, open){
+    const monthEl = document.querySelector('.month[data-mi="' + mi + '"]');
+    if(!monthEl) return;
+    const body = document.getElementById('body-' + mi);
+    const head = monthEl.querySelector('.card-head');
+    monthEl.classList.toggle('open', open);
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+  }
+
+  function updateProgressUI(){
+    let total = 0, done = 0, monthsDone = 0;
+    roadmapData.forEach((m, mi) => {
+      const ids = allIdsForMonth(m, mi);
+      const d = ids.filter(id => state[id]).length;
+      total += ids.length;
+      done += d;
+      if(ids.length > 0 && d === ids.length) monthsDone++;
+    });
+    const pct = total > 0 ? Math.round((done/total)*100) : 0;
+    document.getElementById('overallBar').style.width = pct + '%';
+    document.getElementById('overallCount').textContent = done + '/' + total + ' itens (' + pct + '%)';
+    document.getElementById('doneMonths').textContent = monthsDone + ' de ' + roadmapData.length + ' marcos concluídos';
+
+    const currentIdx = computeCurrentIndex();
+    const cur = roadmapData[currentIdx];
+    const label = document.getElementById('currentLabel');
+    if(label && cur) label.textContent = 'você está em: Mês ' + cur.numero + ' · ' + cur.titulo;
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if(!confirm('Isso vai zerar todo o progresso marcado neste roadmap (meses, diferenciais e streak). Continuar?')) return;
+    state = {};
+    difState = {};
+    streak = { count: 0, lastActive: null };
+    saveState();
+    saveDifState();
+    saveStreak();
+    document.querySelectorAll('input[type=checkbox][data-id]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.month').forEach(refreshMonthCard);
+    document.querySelectorAll('.dif-card').forEach(refreshDifCard);
+    updateProgressUI();
+    updateDifProgressUI();
+    updateStreakUI();
+  });
+
+  (function init(){
+    state = loadState();
+    difState = loadDifState();
+    streak = loadStreak();
+    updateStreakUI();
+    renderAll();
+    renderDiferenciais();
+  })();
+
+})();
+</script>
+</body>
+</html>
