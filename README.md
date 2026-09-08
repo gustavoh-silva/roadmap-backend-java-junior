@@ -16,7 +16,7 @@ board no GitHub Projects como camada complementar de organização.
 ```
 .
 ├── index.html                     # o dashboard em si
-└── .github/workflows/pages.yml    # publica o index.html no GitHub Pages a cada push
+└── .github/workflows/Pages.yml    # publica o index.html no GitHub Pages a cada push
 ```
 
 Não há build step nem framework: os dados do roadmap (os 17 meses e os
@@ -41,15 +41,13 @@ conteúdo é abrir o array, mudar o texto, commitar.
 - Os rótulos de período (ex: "~ Set/2026") são só uma referência de ritmo, não
   um prazo travado — o `~` na frente é proposital.
 
-## Colocar no ar (primeira vez)
+## Colocar no ar
 
-1. Crie um repositório novo no GitHub (público ou privado — em repositório
-   privado, o GitHub Pages exige um plano pago).
-2. Suba estes arquivos para a branch `main`.
-3. Em **Settings → Pages**, em "Build and deployment", escolha
-   **Source: GitHub Actions**.
-4. Dê um push. O workflow em `.github/workflows/pages.yml` builda e publica
-   sozinho. A URL fica em `https://SEU-USUARIO.github.io/NOME-DO-REPO/`.
+1. Em **Settings → Pages**, em "Build and deployment", confirme que
+   **Source** está em **GitHub Actions**.
+2. O workflow em `.github/workflows/Pages.yml` builda e publica sozinho a
+   cada push na `main`. A URL fica em
+   `https://gustavoh-silva.github.io/roadmap-fullstack-java-junior/`.
 
 ## GitHub Projects (organização de tarefas — opcional, manual por enquanto)
 
