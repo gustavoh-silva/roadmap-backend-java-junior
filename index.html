@@ -3,1150 +3,485 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roadmap · Fullstack Java Júnior</title>
+<title>Roadmap Java Backend → Júnior</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #1B1E23;
-    --surface: #22262D;
-    --surface-2: #2A2F38;
-    --border: #333A45;
-    --border-soft: #2A303A;
-    --text: #ECEEF2;
-    --text-muted: #8F98A3;
-    --text-faint: #656D78;
-    --amber: #E3A548;
-    --amber-dim: #6b5330;
-    --teal: #5FAE93;
-    --teal-dim: #2c4a3f;
-    --violet: #948BDE;
-    --violet-dim: #423d6b;
-    --cyan: #6CC3D9;
-    --cyan-dim: #22434c;
-    --mono: 'JetBrains Mono', 'Fira Code', ui-monospace, 'SF Mono', Consolas, 'Courier New', monospace;
-    --sans: 'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --radius: 10px;
+    --canvas:#07080a; --tile-1:#0d0d0f; --tile-2:#121215; --tile-3:#1a1b1e;
+    --frosted:rgba(7,8,10,0.8);
+    --hairline:#242728; --hairline-soft:rgba(255,255,255,0.08); --hairline-strong:rgba(255,255,255,0.16);
+    --primary:#2997ff; --primary-focus:#0071e3; --primary-pressed:#1f8af0; --on-primary:#ffffff;
+    --ink:#f4f4f6; --body:#cdcdcd; --mute:#9c9c9d; --ash:#6a6b6c; --stone:#434345;
+    --on-dark:#ffffff; --on-dark-mute:rgba(255,255,255,0.72);
+    --accent-blue:#57c1ff; --accent-blue-soft:rgba(87,193,255,0.15);
+    --accent-red:#ff6161; --accent-red-soft:rgba(255,97,97,0.15);
+    --accent-green:#59d499; --accent-green-soft:rgba(89,212,153,0.15);
+    --accent-yellow:#ffc533; --accent-yellow-soft:rgba(255,197,51,0.15);
+    --hero-glow-start:#2997ff; --hero-glow-end:#0a1930;
+    --sans:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --feat:"calt","kern","liga","ss03";
   }
-
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-
-  body{
-    margin:0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .page{
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 48px 20px 100px;
-  }
-
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--canvas);color:var(--body);font-family:var(--sans);font-feature-settings:var(--feat);font-size:17px;line-height:1.47;letter-spacing:-0.15px;-webkit-font-smoothing:antialiased}
+  /* ---------- NAV ---------- */
+  .global-nav{height:44px;display:flex;align-items:center;gap:18px;padding:0 24px;background:var(--canvas);border-bottom:1px solid var(--hairline);font-size:12px;letter-spacing:-0.12px;position:sticky;top:0;z-index:50}
+  .global-nav .wordmark{color:var(--on-dark);font-weight:600;font-size:13px;letter-spacing:-0.1px}
+  .global-nav nav{display:flex;gap:16px;flex:1}
+  .global-nav nav a{color:var(--mute);text-decoration:none}
+  .global-nav nav a:hover{color:var(--on-dark)}
+  .streak-pill{font-size:12px;color:var(--on-dark);background:var(--tile-3);border:1px solid var(--hairline);padding:5px 12px;border-radius:9999px;white-space:nowrap}
+  .sub-nav{height:52px;display:flex;align-items:center;gap:14px;padding:0 24px;background:var(--frosted);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--hairline);position:sticky;top:44px;z-index:49;font-size:14px;font-weight:500}
+  .sub-nav .gate-mini{color:var(--mute);font-weight:400;font-size:13px}
+  .sub-nav .spacer{flex:1}
+  .btn-primary{background:var(--primary);color:var(--on-primary);font-size:15px;font-weight:500;letter-spacing:0.1px;border:none;border-radius:9999px;padding:11px 22px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn-primary:hover{filter:brightness(1.06)}
+  .btn-primary:focus-visible{outline:2px solid var(--primary-focus);outline-offset:2px}
+  .btn-primary:active{background:var(--primary-pressed);transform:scale(0.95)}
+  .btn-small{padding:8px 16px;font-size:14px}
+  .btn-ghost{background:transparent;color:var(--primary);border:1px solid var(--primary);font-size:15px;font-weight:500;border-radius:9999px;padding:11px 22px;cursor:pointer;text-decoration:none;display:inline-block}
   /* ---------- HERO ---------- */
-  .hero{
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--border-soft);
-    margin-bottom: 8px;
-  }
-  .eyebrow{
-    font-family: var(--mono);
-    font-size: 12.5px;
-    letter-spacing: 0.06em;
-    color: var(--amber);
-    text-transform: uppercase;
-    margin: 0 0 14px;
-  }
-  h1{
-    font-family: var(--mono);
-    font-size: clamp(28px, 5vw, 42px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin: 0 0 14px;
-    color: var(--text);
-  }
-  .lede{
-    font-size: 16px;
-    color: var(--text-muted);
-    max-width: 60ch;
-    margin: 0 0 28px;
-  }
-  .lede b{ color: var(--text); font-weight: 600; }
-
-  .overall{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-  }
-  .overall-top{
-    display:flex; justify-content: space-between; align-items: baseline;
-    font-family: var(--mono); font-size: 13px; color: var(--text-muted);
-    margin-bottom: 10px;
-  }
-  .overall-top span.count{ color: var(--text); font-weight: 600; }
-  .bar-track{
-    height: 8px; border-radius: 6px; background: var(--surface-2);
-    overflow: hidden; border: 1px solid var(--border-soft);
-  }
-  .bar-fill{
-    height: 100%;
-    background: linear-gradient(90deg, var(--amber), var(--teal));
-    width: 0%;
-    transition: width .4s ease;
-    border-radius: 6px;
-  }
-
-  .streak-row{
-    display:flex; align-items:center; gap: 12px; flex-wrap: wrap;
-    margin-top: 14px;
-  }
-  .streak-pill{
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 5px 12px;
-    border-radius: 20px;
-  }
-  .current-label{
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text-muted);
-  }
-
-  /* ---------- LEGEND ---------- */
-  .legend{
-    display: flex; flex-wrap: wrap; gap: 10px 22px;
-    font-size: 13px; color: var(--text-muted);
-    padding: 22px 2px 4px;
-  }
-  .legend span{ display:inline-flex; align-items:center; gap:7px; }
-  .legend i{ font-style: normal; }
-
-  /* ---------- TIMELINE ---------- */
-  .timeline{ position: relative; margin-top: 20px; }
-  .connector{
-    position: absolute;
-    left: 15px; top: 8px; bottom: 8px;
-    width: 2px;
-    background: repeating-linear-gradient(to bottom, var(--border) 0, var(--border) 4px, transparent 4px, transparent 8px);
-  }
-
-  .month{
-    position: relative;
-    padding-left: 46px;
-    margin-bottom: 14px;
-  }
-  .node{
-    position: absolute;
-    left: 6px; top: 22px;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: var(--surface-2);
-    border: 2px solid var(--border);
-    z-index: 2;
-    transition: background .3s, border-color .3s;
-  }
-  .month.done .node{ background: var(--teal); border-color: var(--teal); }
-  .month.current .node{ background: var(--amber); border-color: var(--amber); box-shadow: 0 0 0 4px var(--amber-dim); }
-
-  .card{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: border-color .3s;
-  }
-  .month.done .card{ border-color: var(--teal-dim); }
-  .month.current .card{ border-color: var(--amber); }
-
-  .card-head{
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    cursor: pointer;
-    user-select: none;
-  }
-  .card-head:hover{ background: var(--surface-2); }
-  .card-head:focus-visible{ outline: 2px solid var(--amber); outline-offset: -2px; }
-
-  .m-num{
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-faint);
-    white-space: nowrap;
-  }
-  .m-titles{ flex: 1; min-width: 0; }
-  .m-period{
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--amber);
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-  .m-title{
-    font-size: 15.5px;
-    font-weight: 600;
-    color: var(--text);
-    margin-top: 2px;
-  }
-  .here-tag{
-    font-family: var(--mono);
-    font-size: 10.5px;
-    color: var(--bg);
-    background: var(--amber);
-    padding: 2px 7px;
-    border-radius: 20px;
-    margin-left: 8px;
-    letter-spacing: .03em;
-  }
-  .m-mini{
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-muted);
-    white-space: nowrap;
-  }
-  .chevron{
-    width: 18px; height: 18px;
-    flex-shrink: 0;
-    color: var(--text-faint);
-    transition: transform .25s ease;
-  }
-  .month.open .chevron{ transform: rotate(90deg); }
-
-  .card-body{
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .35s ease;
-  }
-  .card-body-inner{ padding: 0 20px 22px; }
-
-  .foco{
-    font-size: 14px;
-    color: var(--text-muted);
-    margin: 0 0 16px;
-    padding-left: 12px;
-    border-left: 2px solid var(--border);
-  }
-
-  .marco{
-    display: flex; gap: 10px; align-items: flex-start;
-    background: var(--violet-dim);
-    border: 1px solid var(--violet);
-    color: #E6E2FF;
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13.5px;
-    margin-bottom: 16px;
-  }
-
-  .criterio{
-    display: flex; gap: 10px; align-items: flex-start;
-    background: var(--teal-dim);
-    border: 1px solid var(--teal);
-    color: #CFF3E6;
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13.5px;
-    margin-bottom: 16px;
-  }
-
-  .revisao{
-    display: flex; gap: 10px; align-items: flex-start;
-    background: var(--surface-2);
-    border: 1px dashed var(--text-faint);
-    color: var(--text-muted);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 13px;
-    margin-bottom: 16px;
-  }
-
-  .badge-row{
-    display: flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 12px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-  }
-  .badge-pill{
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-  }
-  .month.done .badge-pill{
-    background: var(--teal-dim); border-color: var(--teal); color: #CFF3E6;
-  }
-
-  .section-label{
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--text-faint);
-    margin: 18px 0 8px;
-  }
-  .section-label:first-of-type{ margin-top: 4px; }
-
-  ul.items{ list-style:none; margin:0; padding:0; }
-  ul.items li{ margin-bottom: 2px; }
-
-  label.item{
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 8px 8px;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--text);
-  }
-  label.item:hover{ background: var(--surface-2); }
-
-  label.item input[type=checkbox]{
-    appearance: none;
-    -webkit-appearance: none;
-    width: 17px; height: 17px;
-    min-width: 17px;
-    margin-top: 2px;
-    border-radius: 5px;
-    border: 1.5px solid var(--border);
-    background: var(--surface-2);
-    cursor: pointer;
-    position: relative;
-    transition: background .15s, border-color .15s;
-  }
-  label.item input[type=checkbox]:checked{
-    background: var(--teal);
-    border-color: var(--teal);
-  }
-  label.item input[type=checkbox]:checked::after{
-    content: "";
-    position: absolute;
-    left: 5px; top: 1.5px;
-    width: 4px; height: 8px;
-    border: solid var(--bg);
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-  }
-  label.item input[type=checkbox]:focus-visible{ outline: 2px solid var(--amber); outline-offset: 2px; }
-  label.item span.txt{ flex:1; }
-  label.item input:checked ~ span.txt{ color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--text-faint); }
-
-  label.item.project{
-    background: var(--surface-2);
-    border: 1px dashed var(--amber);
-  }
-  label.item.project:hover{ background: #313640; }
-
-  label.item.reading{ opacity: .78; }
-  label.item.reading span.txt{ font-size: 13.3px; font-style: italic; }
-
-  /* ---------- DIFERENCIAIS ---------- */
-  .dif-section{ margin-top: 52px; }
-  .dif-head{ margin-bottom: 18px; }
-  .dif-eyebrow{
-    font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em;
-    color: var(--cyan); text-transform: uppercase; margin: 0 0 10px;
-  }
-  .dif-head h2{
-    font-family: var(--mono); font-size: 24px; font-weight: 700;
-    margin: 0 0 10px; color: var(--text);
-  }
-  .dif-intro{ font-size: 14px; color: var(--text-muted); max-width: 62ch; margin: 0 0 18px; }
-
-  .dif-overall{
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px 18px; margin-bottom: 20px;
-  }
-  .dif-overall .bar-fill{ background: linear-gradient(90deg, var(--cyan), var(--teal)); }
-  .dif-overall-top{
-    display:flex; justify-content: space-between; align-items: baseline;
-    font-family: var(--mono); font-size: 12.5px; color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-
-  .dif-card{
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--cyan);
-    border-radius: var(--radius);
-    padding: 16px 20px 18px;
-    margin-bottom: 14px;
-  }
-  .dif-card-head{
-    display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
-    margin-bottom: 4px; flex-wrap: wrap;
-  }
-  .dif-cat-title{
-    font-size: 15px; font-weight: 600; color: var(--text);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .dif-mini{ font-family: var(--mono); font-size: 12px; color: var(--text-muted); white-space: nowrap; }
-  .dif-encaixe{
-    font-family: var(--mono); font-size: 11px; color: var(--text-faint);
-    margin: 0 0 12px; text-transform: uppercase; letter-spacing: .03em;
-  }
-
-  .dif-info{
-    background: var(--surface-2);
-    border: 1px dashed var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 13.5px;
-    color: var(--text-muted);
-    margin-top: 6px;
-  }
-
-  /* ---------- FOOTER ---------- */
-  .actions{
-    display:flex; justify-content: space-between; align-items:center;
-    margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--border-soft);
-    font-size: 13px; color: var(--text-muted);
-  }
-  #resetBtn{
-    font-family: var(--sans);
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    padding: 8px 14px;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 13px;
-  }
-  #resetBtn:hover{ border-color: #b0574f; color: #e79089; }
-
-  .sources{
-    margin-top: 18px;
-    font-size: 12.5px;
-    color: var(--text-faint);
-    line-height: 1.7;
-  }
-  .storage-warning{
-    margin-top: 14px;
-    font-size: 12.5px;
-    color: #e3c17e;
-    background: #3a3320;
-    border: 1px solid #55491f;
-    padding: 9px 12px;
-    border-radius: 7px;
-  }
-
-  @media (max-width: 560px){
-    .page{ padding: 32px 14px 80px; }
-    .card-head{ flex-wrap: wrap; }
-    .m-mini{ order: 3; width: 100%; padding-left: 40px; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ transition: none !important; scroll-behavior: auto !important; }
-  }
+  .hero-tile{position:relative;background:var(--canvas);padding:80px 24px 64px;overflow:hidden}
+  .hero-glow{position:absolute;top:-120px;left:-10%;width:120%;height:340px;background:linear-gradient(115deg,transparent 20%,var(--hero-glow-start) 45%,var(--hero-glow-end) 70%,transparent 90%);opacity:0.28;transform:rotate(-4deg);pointer-events:none}
+  .hero-inner{position:relative;max-width:1240px;margin:0 auto}
+  .eyebrow{font-size:12.5px;letter-spacing:0.06em;color:var(--primary);text-transform:uppercase;margin:0 0 14px}
+  h1{font-size:56px;font-weight:600;line-height:1.07;letter-spacing:-0.28px;color:var(--ink);margin:0 0 14px}
+  .lede{font-size:21px;line-height:1.4;letter-spacing:-0.1px;color:var(--body);max-width:62ch;margin:0 0 12px}
+  .lede b{color:var(--on-dark)}
+  .golden{border:1px solid var(--hairline-strong);border-left:3px solid var(--accent-yellow);border-radius:8px;padding:12px 16px;font-size:14px;color:var(--body);max-width:70ch;margin:18px 0 0;background:var(--tile-1)}
+  .hero-grid{display:grid;grid-template-columns:40% 60%;gap:24px;margin-top:48px}
+  .palette-card{background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:24px}
+  .palette-card.hero-shadow{box-shadow:rgba(0,0,0,0.6) 0 8px 40px}
+  .palette-card h3{font-size:20px;font-weight:500;letter-spacing:0.2px;color:var(--on-dark);margin:0 0 6px}
+  .palette-card p{font-size:14px;line-height:1.6;margin:0 0 14px}
+  .palette-card .big{font-size:24px;font-weight:500;color:var(--on-dark);letter-spacing:0.2px}
+  .palette-search{display:flex;align-items:center;gap:10px;background:var(--tile-2);border:1px solid var(--hairline);border-radius:9999px;padding:12px 20px;height:44px;margin-top:24px;max-width:720px}
+  .palette-search:focus-within{border-color:var(--hairline-strong)}
+  .palette-search input{flex:1;background:transparent;border:none;outline:none;color:var(--on-dark);font-family:var(--sans);font-size:17px}
+  .palette-search input::placeholder{color:var(--ash)}
+  .keycap{background:linear-gradient(#121212,#0d0d0d);background-color:var(--tile-2);color:var(--body);font-size:13px;border:1px solid var(--hairline);border-radius:4px;padding:1px 6px;height:20px;line-height:18px;white-space:nowrap}
+  .bars{display:grid;gap:12px;margin-top:24px}
+  .bar-row{background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:16px 20px}
+  .bar-top{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-bottom:8px}
+  .bar-top .count{color:var(--on-dark);font-weight:600}
+  .bar-track{height:8px;border-radius:6px;background:var(--tile-3);overflow:hidden;border:1px solid var(--hairline-soft)}
+  .bar-fill{height:100%;width:0%;transition:width .4s ease;border-radius:6px;background:var(--primary)}
+  .bar-fill.green{background:var(--accent-green)}
+  .bar-fill.yellow{background:var(--accent-yellow)}
+  .hierarchy{margin-top:32px;background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:24px;overflow-x:auto}
+  .hierarchy pre{margin:0;font-family:var(--sans);font-size:14px;line-height:1.7;color:var(--body);white-space:pre}
+  .hierarchy .hl{color:var(--on-dark);font-weight:600}
+  .hierarchy .grn{color:var(--accent-green)}
+  .gate-trail{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;font-size:14px}
+  .badge-pro{background:var(--tile-3);color:var(--on-dark-mute);font-size:12px;border:1px solid var(--hairline);border-radius:4px;padding:2px 6px;white-space:nowrap}
+  .badge-pro.done{color:var(--accent-green);border-color:var(--accent-green)}
+  .badge-pro.now{color:var(--primary);border-color:var(--primary)}
+  /* ---------- TILES / GATES ---------- */
+  .tile{padding:80px 24px}
+  .tile-1{background:var(--tile-1)} .tile-2{background:var(--tile-2)} .tile-3{background:var(--tile-3)}
+  .wrap{max-width:1240px;margin:0 auto}
+  .tile-head{max-width:760px;margin-bottom:32px}
+  .tile-head h2{font-size:40px;font-weight:600;letter-spacing:-0.2px;line-height:1.1;color:var(--ink);margin:0 0 10px}
+  .tile-head p{font-size:17px;color:var(--body);margin:0}
+  .gate-card{background:var(--tile-2);border:1px solid var(--hairline);border-radius:18px;padding:24px;margin-bottom:24px}
+  .tile-2 .gate-card{background:var(--tile-1)} .tile-3 .gate-card{background:var(--tile-2)}
+  .gate-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .gate-title{font-size:20px;font-weight:500;letter-spacing:0.2px;color:var(--on-dark)}
+  .gate-meta{font-size:13px;color:var(--mute)}
+  .gate-obj{font-size:14px;color:var(--mute);margin:0 0 12px}
+  .gate-status{font-size:13px;font-weight:600;margin-bottom:12px}
+  .gate-status.red{color:var(--accent-red)} .gate-status.yellow{color:var(--accent-yellow)} .gate-status.green{color:var(--accent-green)}
+  .gate-criteria{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ash);margin:16px 0 8px}
+  ul.items{list-style:none;margin:0;padding:0}
+  ul.items li{margin-bottom:2px}
+  label.item{display:flex;align-items:flex-start;gap:10px;padding:8px;border-radius:8px;cursor:pointer;font-size:14px;color:var(--on-dark)}
+  label.item:hover{background:var(--tile-3)}
+  label.item input[type=checkbox]{appearance:none;-webkit-appearance:none;width:17px;height:17px;min-width:17px;margin-top:2px;border-radius:5px;border:1.5px solid var(--hairline-strong);background:var(--tile-3);cursor:pointer;position:relative}
+  label.item input[type=checkbox]:checked{background:var(--primary);border-color:var(--primary)}
+  label.item input[type=checkbox]:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  label.item input[type=checkbox]:focus-visible{outline:2px solid var(--primary-focus);outline-offset:2px}
+  label.item span.txt{flex:1}
+  label.item input:checked ~ span.txt{color:var(--mute);text-decoration:line-through;text-decoration-color:var(--stone)}
+  .prio-pill{font-size:11px;font-weight:600;letter-spacing:0.04em;border-radius:9999px;padding:2px 10px;white-space:nowrap;border:1px solid}
+  .prio-CORE{color:var(--accent-red);background:var(--accent-red-soft);border-color:var(--accent-red)}
+  .prio-COMP{color:var(--accent-yellow);background:var(--accent-yellow-soft);border-color:var(--accent-yellow)}
+  .prio-AVANC{color:var(--accent-blue);background:var(--accent-blue-soft);border-color:var(--accent-blue)}
+  .prio-FRONT{color:var(--accent-green);background:var(--accent-green-soft);border-color:var(--accent-green)}
+  .practice-tag{font-size:11px;color:var(--accent-yellow);border:1px dashed var(--accent-yellow);border-radius:9999px;padding:1px 8px;white-space:nowrap;cursor:pointer;background:transparent}
+  .proj-box{margin-top:16px;border:1px dashed var(--hairline-strong);border-radius:8px;padding:14px 16px;background:var(--tile-1)}
+  .proj-box h4{font-size:14px;font-weight:500;color:var(--on-dark);margin:0 0 8px}
+  .proj-box p{font-size:14px;margin:0 0 10px}
+  .ev-seg{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .pill-tab{background:transparent;color:var(--body);font-size:14px;border:1px solid var(--hairline);border-radius:9999px;padding:4px 12px;cursor:pointer}
+  .pill-tab.active{background:var(--tile-3);color:var(--on-dark);border-color:var(--hairline-strong)}
+  .ev-link{width:100%;background:var(--tile-2);border:1px solid var(--hairline);border-radius:9999px;padding:10px 18px;color:var(--on-dark);font-family:var(--sans);font-size:14px;outline:none}
+  .ev-link:focus{border-color:var(--hairline-strong)}
+  .ev-link::placeholder{color:var(--ash)}
+  .noexige{font-size:13px;color:var(--mute);margin-top:10px}
+  .ref-time{font-size:12px;color:var(--ash);text-transform:uppercase;letter-spacing:0.06em}
+  /* ---------- SECONDARY SECTIONS ---------- */
+  .sec-card{background:var(--tile-2);border:1px solid var(--hairline);border-radius:18px;padding:24px;margin-bottom:24px}
+  .sec-card h3{font-size:18px;font-weight:500;color:var(--on-dark);margin:0 0 8px}
+  .sec-card p{font-size:14px;margin:0 0 12px}
+  .dont-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .dont-list li{font-size:13px;color:var(--mute);border:1px solid var(--hairline);border-radius:9999px;padding:4px 12px;background:var(--tile-1)}
+  .vaga-form{display:grid;gap:10px;margin-bottom:16px}
+  .vaga-form input,.vaga-form textarea{background:var(--tile-1);border:1px solid var(--hairline);border-radius:8px;padding:10px 14px;color:var(--on-dark);font-family:var(--sans);font-size:14px;outline:none;width:100%}
+  .vaga-form input:focus,.vaga-form textarea:focus{border-color:var(--hairline-strong)}
+  .vaga-item{border:1px solid var(--hairline);border-radius:8px;padding:12px 14px;margin-bottom:10px;font-size:14px;background:var(--tile-1)}
+  .vaga-item button{background:transparent;border:1px solid var(--hairline);color:var(--mute);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:12px}
+  .dif-card{background:var(--tile-2);border:1px solid var(--hairline);border-radius:18px;padding:20px 22px;margin-bottom:14px}
+  .dif-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+  .dif-title{font-size:15px;font-weight:600;color:var(--on-dark)}
+  .dif-mini{font-size:12px;color:var(--mute)}
+  .dif-encaixe{font-size:11px;color:var(--stone);text-transform:uppercase;letter-spacing:0.03em;margin:0 0 12px}
+  footer.footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:64px 24px;color:var(--mute);font-size:12px}
+  .actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;max-width:1240px;margin:0 auto 18px;font-size:13px}
+  #resetBtn{background:transparent;border:1px solid var(--hairline);color:var(--mute);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--sans)}
+  #resetBtn:hover{border-color:var(--accent-red);color:var(--accent-red)}
+  .sources{max-width:1240px;margin:0 auto;line-height:1.7;color:var(--stone)}
+  .storage-warning{max-width:1240px;margin:14px auto 0;color:var(--accent-yellow);background:var(--accent-yellow-soft);border:1px solid var(--accent-yellow);padding:9px 12px;border-radius:8px;font-size:12.5px}
+  .hidden{display:none !important}
+  a.inline-link{color:var(--primary);text-decoration:none}
+  @media (max-width:1023px){.hero-grid{grid-template-columns:1fr}.global-nav nav{display:none}}
+  @media (max-width:640px){h1{font-size:34px}.tile-head h2{font-size:28px}.hero-tile,.tile{padding:48px 16px}.palette-search{max-width:100%}}
+  @media (max-width:419px){h1{font-size:28px}.palette-search input{font-size:15px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}.hero-glow{display:none}}
 </style>
 </head>
 <body>
 
-<div class="page">
+<nav class="global-nav" aria-label="Navegação principal">
+  <span class="wordmark">Roadmap Java Backend → Júnior</span>
+  <nav>
+    <a href="#gates">Gates</a><a href="#frontend">Frontend</a><a href="#vagas">Vagas</a><a href="#candidatura">Estágio</a><a href="#diferenciais">Diferenciais</a>
+  </nav>
+  <span class="streak-pill" id="streakPill">🔥 0 dias seguidos</span>
+</nav>
+<div class="sub-nav">
+  <span class="gate-mini" id="gateMini">G2 — Gate de Estágio · 0%</span>
+  <span class="spacer"></span>
+  <a class="btn-primary btn-small" href="#proximo" id="continueBtn">Continuar</a>
+</div>
 
-  <header class="hero">
-    <p class="eyebrow">roadmap pessoal · 17 meses, no seu ritmo</p>
-    <h1>Fullstack Java Júnior</h1>
-    <p class="lede">Do primeiro <code>git init</code> até a candidatura. <b>17 meses</b>, do zero real em Git/SQL/Front-end até um perfil júnior fullstack Java competitivo — nada presumido, nada pulado.</p>
-    <div class="overall">
-      <div class="overall-top">
-        <span>progresso geral</span>
-        <span class="count" id="overallCount">0/0 itens</span>
+<header class="hero-tile">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">Trilha prática · 80–90% Backend · Frontend é trilha secundária</p>
+    <h1>Roadmap Java Backend → Júnior</h1>
+    <p class="lede">Uma trilha prática para sair dos <b>fundamentos de Java</b>, conquistar um <b>estágio Backend</b> e evoluir até o nível <b>Júnior</b> — com Full Stack como trilha complementar. <b>Não precisa concluir Frontend para nenhum Gate de Backend.</b></p>
+    <div class="golden">“Você não precisa saber tudo. Precisa conseguir fazer.” — Se você demonstra a competência em código, o Gate pode ser concluído mesmo com tópicos a aprofundar. Checkbox não é prova: projeto + evidência é.</div>
+
+    <div class="hero-grid">
+      <div class="palette-card hero-shadow">
+        <h3>🎯 Objetivo</h3>
+        <p class="big">Java Backend</p>
+        <p id="hereText">Calculando sua posição…</p>
+        <div class="bars">
+          <div class="bar-row"><div class="bar-top"><span>BACKEND Core</span><span class="count" id="backendCount">0%</span></div><div class="bar-track"><div class="bar-fill" id="backendBar"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span>G2 — GATE ESTÁGIO</span><span class="count" id="g2Count">0%</span></div><div class="bar-track"><div class="bar-fill yellow" id="g2Bar"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span>FRONTEND — secundário</span><span class="count" id="frontCount">0%</span></div><div class="bar-track"><div class="bar-fill green" id="frontBar"></div></div></div>
+        </div>
       </div>
-      <div class="bar-track"><div class="bar-fill" id="overallBar"></div></div>
+      <div class="palette-card" id="proximo">
+        <h3>🚀 Próximo bloqueio</h3>
+        <p class="big" id="nextTitle">—</p>
+        <p id="nextDesc">—</p>
+        <p><span class="badge-pro" id="nextGate">—</span> <span class="gate-mini" id="nextRemaining"></span></p>
+        <a class="btn-ghost btn-small" href="#gates" id="nextGo">Ver critério</a>
+      </div>
     </div>
-    <div class="streak-row" id="streakRow">
-      <span class="streak-pill" id="streakPill">🔥 0 dias seguidos</span>
-      <span class="current-label" id="currentLabel"></span>
-    </div>
-  </header>
 
-  <div class="legend">
-    <span><i>📚</i> estudar</span>
-    <span><i>🛠️</i> projeto / checkpoint</span>
-    <span><i>🏆</i> conquista do mês</span>
-    <span><i>🎯</i> marco de candidatura</span>
-    <span><i>✅</i> critério de domínio (sinal de que pode seguir em frente)</span>
-    <span><i>🔁</i> ponto de revisão</span>
-    <span><i>·</i> itálico = vale conhecer, não é obrigatório aprofundar agora</span>
+    <div class="palette-search" role="search">
+      <span aria-hidden="true">⌕</span>
+      <input id="cmdk" type="text" placeholder="Filtrar Gates e critérios…  ( / ou ⌘K )" aria-label="Filtrar Gates e critérios">
+      <span class="keycap">⌘K</span>
+    </div>
+
+    <div class="hierarchy" aria-label="Hierarquia de carreira">
+<pre><span class="hl">JAVA BACKEND</span>  →  FUNDAMENTOS JAVA  →  BACKEND FOUNDATION  →  SPRING BOOT / SQL
+          →  <span class="hl">BACKEND PROFISSIONAL</span>  →  🚀 <span class="hl">GATE DE ESTÁGIO</span>  →  <span class="hl">JAVA BACKEND JÚNIOR</span>  →  BACKEND AVANÇADO
+                →  Cloud / Mensageria / Arquitetura
+          ↳  <span class="grn">FULL STACK — TRILHA OPCIONAL  →  React + TypeScript (nunca bloqueia Backend)</span></pre>
+    </div>
+    <div class="gate-trail" id="gateTrail"></div>
   </div>
+</header>
 
-  <section class="timeline" id="timeline">
-    <div class="connector"></div>
-    <!-- meses renderizados via JS -->
-  </section>
+<main id="gates"></main>
 
-  <section class="dif-section">
-    <div class="dif-head">
-      <p class="dif-eyebrow">🌟 diferenciais de mercado</p>
-      <h2>O que separa um currículo comum de um que passa</h2>
-      <p class="dif-intro">Isso não substitui os meses acima — é o que fica por cima. Encontrei nos seus próprios materiais (o bootcamp já traz mais IA aplicada do que parece) e em vagas reais de backend, fullstack e front-end pesquisadas agora. Cada categoria indica em que mês ela encaixa melhor.</p>
-    </div>
-    <div class="dif-overall">
-      <div class="dif-overall-top">
-        <span>progresso em diferenciais</span>
-        <span class="count" id="difCount">0/0 itens</span>
+<section class="tile tile-1" id="frontend">
+  <div class="wrap">
+    <div class="tile-head"><h2>🟢 Trilha Secundária: Frontend</h2>
+    <p>Existe para aumentar sua autonomia como Backend Developer. <b>Você não precisa concluí-la para atingir nenhum Gate de Backend (G0–G4).</b> Objetivo: criar uma interface funcional que consuma sua própria API e entender o frontend moderno — não se tornar especialista em React.</p></div>
+    <div id="frontList"></div>
+    <div class="sec-card"><h3>Integração Full Stack (extensão, não requisito)</h3>
+    <p>Somente aqui você conecta: React ↓ HTTP ↓ Spring Boot ↓ PostgreSQL — login, listagem, criação, edição, exclusão e tratamento de erros consumindo sua API.</p></div>
+  </div>
+</section>
+
+<section class="tile tile-2" id="nao-prioridade">
+  <div class="wrap">
+    <div class="tile-head"><h2>❌ Não é prioridade agora</h2>
+    <p>“Essas tecnologias podem ser importantes depois, mas não devem competir com os fundamentos da sua próxima etapa.” Antes de adicionar qualquer assunto, pergunte (regra de decisão): 1) é necessário p/ Java Backend? 2) aparece em vagas relevantes? 3) ajuda no próximo Gate? 4) tem aplicação prática? 5) é mais importante que o atual? Se não → Complementar / Avançado / Backlog.</p></div>
+    <ul class="dont-list"><li>Kubernetes</li><li>Terraform</li><li>Kafka avançado</li><li>Microservices</li><li>GraphQL</li><li>Arquitetura distribuída</li><li>AWS avançado</li><li>Next.js</li><li>Redux</li><li>Observabilidade avançada</li></ul>
+  </div>
+</section>
+
+<section class="tile tile-3" id="vagas">
+  <div class="wrap">
+    <div class="tile-head"><h2>📊 Feedback do mercado</h2>
+    <p>Ciclo: vagas reais ↓ requisitos ↓ comparar com roadmap ↓ lacunas ↓ estudar ↓ praticar ↓ atualizar roadmap.</p></div>
+    <div class="sec-card">
+      <h3>Registrar vaga analisada</h3>
+      <div class="vaga-form">
+        <input id="vagaTitulo" placeholder="Ex: Estágio Java Backend — Empresa X (Gupy)">
+        <textarea id="vagaReqs" rows="2" placeholder="Tecnologias recorrentes / requisitos (ex: Java 17, Spring, SQL, Git)"></textarea>
+        <textarea id="vagaLacunas" rows="2" placeholder="Lacunas vs. meu roadmap (ex: falta JWT + Docker)"></textarea>
+        <div><button class="btn-primary btn-small" id="vagaAdd" type="button">Adicionar vaga</button></div>
       </div>
-      <div class="bar-track"><div class="bar-fill" id="difBar"></div></div>
+      <div id="vagaList"></div>
     </div>
-    <div id="difList"><!-- categorias renderizadas via JS --></div>
-    <div class="dif-info">
-      🎓 <b>O que você já tem a seu favor:</b> graduação em Ciência da Computação em andamento já é citada como diferencial real pelo mercado em 2026 — não é só formalidade. Leitura de documentação técnica em inglês, mesmo sem fluência completa, também já destrava bastante coisa.
-    </div>
-  </section>
+  </div>
+</section>
 
+<section class="tile tile-1" id="candidatura">
+  <div class="wrap">
+    <div class="tile-head"><h2>🚀 Preparação para estágio</h2>
+    <p>Candidate-se assim que atingir o nível necessário — não espere o roadmap completo. Prioridade: <b>Java Backend → Estágio → Backend Júnior</b>.</p></div>
+    <div class="sec-card"><h3>Checklist de candidatura <span class="dif-mini" id="candMini"></span></h3><ul class="items" id="candList"></ul></div>
+  </div>
+</section>
+
+<section class="tile tile-2" id="diferenciais">
+  <div class="wrap">
+    <div class="tile-head"><h2>🌟 Diferenciais de mercado</h2>
+    <p>O que fica por cima dos Gates. Ordem de prioridade: competência &gt; prática &gt; projeto &gt; experiência &gt; portfólio &gt; <b>certificação (diferencial futuro, nunca obrigatória)</b>.</p></div>
+    <div class="sec-card"><div class="bar-top"><span>progresso em diferenciais</span><span class="count" id="difCount">0/0</span></div><div class="bar-track"><div class="bar-fill" id="difBar"></div></div></div>
+    <div id="difList"></div>
+    <div class="sec-card"><h3>🎓 A seu favor</h3><p>Graduação em Ciência da Computação em andamento é diferencial real em 2026. Leitura de documentação técnica em inglês destrava muita coisa, mesmo sem fluência.</p></div>
+  </div>
+</section>
+
+<footer class="footer">
   <div class="actions">
-    <span id="doneMonths">0 de 16 marcos concluídos</span>
+    <span id="doneGates">0 de 6 gates concluídos</span>
     <button id="resetBtn" type="button">Zerar progresso</button>
   </div>
-
-  <p class="storage-warning" id="storageWarning">
-    💾 O progresso é salvo automaticamente neste navegador. Se você acessar de outro dispositivo, o progresso não acompanha — use o board do GitHub Projects como referência entre dispositivos enquanto essa sincronização não existe (veja o README do repositório).
-  </p>
-
-  <p class="sources">
-    Fontes cruzadas para montar este roadmap: seu progresso real no Bootcamp Santander 2026 – AI Java Back-end (DIO); Roadmap Java 2026 (Matheus Leandro Ferreira); Programa de Acompanhamento Combo Fullstack (Javanauta); Roadmap Completo para Aprender Java 2025; roadmap.sh (Java e Full Stack); Plano de Estudos — Programador em 12 Meses; pesquisa ao vivo de vagas reais de estágio/júnior fullstack, backend e front-end Java (Indeed, Glassdoor, Gupy, Jooble, LinkedIn); e o relatório de mercado de programação 2026 da Alura sobre tendências e diferenciais (IA aplicada, DevSecOps, performance).
-  </p>
-
-</div>
+  <p class="storage-warning">💾 Progresso salvo neste navegador (inclui evidências e vagas). Em outro dispositivo, use o GitHub como referência.</p>
+  <p class="sources">Fontes: bootcamp Santander/DIO AI Java Back-end; Roadmap Java 2026; Javanauta; roadmap.sh; vagas reais (Gupy, LinkedIn, Vagas.com.br, Indeed, Glassdoor); relatório Alura 2026 (IA aplicada, DevSecOps, performance). Repositório mantém o nome <b>roadmap-fullstack-java-junior</b> por compatibilidade.</p>
+</footer>
 
 <script>
 (function(){
-
-  const roadmapData = [
-    {
-      numero: "1", periodo: "Set/2026", dataInicio: "2026-09-01",
-      titulo: "Git, Linux e SQL do zero (bootcamp já concluído)",
-      foco: "Antes de qualquer framework: controle de versão, terminal e banco de dados — do zero real, sem presumir nada. O bootcamp em si já foi concluído no prazo; o item de currículo abaixo já entra marcado.",
-      badge: "Fundamentos de Versionamento & Dados",
-      itens: [
-        "Git do zero: init, add, commit, push, branches, merge, resolução de conflitos, .gitignore",
-        "Terminal / Linux básico: navegação (cd, ls, pwd), permissões, comandos essenciais",
-        "SQL fundamentos: SELECT, INSERT, UPDATE, DELETE, JOIN, chave primária/estrangeira, modelagem básica de tabelas",
-        "Concluir módulos restantes do bootcamp: Annotations, SOLID/Clean Code, JDBC, Design Patterns (GoF → Spring)",
-        "Collections em profundidade: List/Set/Map/Queue/Deque/Iterator, Generics, Optionals",
-        "Exception handling: hierarquia checked/unchecked, try-with-resources, exceptions customizadas",
-        "JVM e Garbage Collector — visão conceitual (a mecânica fina de concorrência fica pro Mês 11, com projeto de verdade em vez de teoria a seco)"
-      ],
-      leituras: [
-        "Java 25 já é o novo LTS do mercado, mas boa parte das empresas brasileiras ainda roda 8/11/17 em produção — não é urgência dominar o mais novo agora"
-      ],
-      criterio: "Critério de domínio: você resolve um conflito de merge sozinho e escreve 10 queries SQL com JOIN sem colar de lugar nenhum.",
-      projeto: "Sem projeto grande ainda — mas suba os desafios do bootcamp para um repositório Git público, com commits organizados (não um único commit \"projeto final\")."
-    },
-    {
-      numero: "2", periodo: "Out/2026", dataInicio: "2026-10-01",
-      titulo: "1º projeto backend real, fora do bootcamp",
-      foco: "O bootcamp Santander/DIO já foi concluído no prazo — os itens de currículo abaixo já entram marcados. O foco real deste mês é sair do modo tutorial-guiado e praticar sem rede de segurança.",
-      badge: "Backend com Spring Boot 🎓",
-      itens: [
-        "Concluir: Spring REST API, Spring Data JPA (Hibernate por baixo dos panos), Spring Security básico, Spring Cloud OpenFeign",
-        "Projeto final do bootcamp: assistente de voz com IA (Spring Boot + reconhecimento de fala)",
-        "Módulos de IA do próprio bootcamp: Copilotos com IA no Desenvolvimento, Fundamentos da IA Moderna, Engenharia de Prompts — isso já é diferencial real de mercado, não conteúdo de preenchimento",
-        "Lombok para reduzir boilerplate (getters/setters/construtores)",
-        "Design de API REST profissional: status codes corretos, paginação, filtros, versionamento de API",
-        "Tratamento global de erros (@ControllerAdvice) e Bean Validation",
-        "application.properties / profiles para múltiplos ambientes"
-      ],
-      criterio: "Critério de domínio: você explica, sem consultar nada, por que um endpoint seu retorna 404 vs. 400 vs. 422.",
-      projeto: "Saia do tutorial hell: construa uma API REST do zero, sem seguir tutorial — pode ser pequena (ex: uma agenda de contatos com CRUD completo). Suba no GitHub com README explicando o que faz e por quê."
-    },
-    {
-      numero: "3", periodo: "Nov/2026", dataInicio: "2026-11-01",
-      titulo: "Segurança, testes e arquitetura limpa",
-      foco: "O gap mais comum entre \"sei Java\" e \"sou júnior contratável\" é não saber testar nem estruturar o próprio código.",
-      badge: "Segurança & Testes Automatizados",
-      itens: [
-        "Spring Security com JWT — autenticação/autorização completas, além do básico do bootcamp",
-        "JUnit 5 + Mockito: testes unitários e de integração, mocks, @SpringBootTest",
-        "Clean Architecture / Arquitetura Hexagonal aplicada de verdade",
-        "Mentalidade DevSecOps: OWASP Top 10 (as vulnerabilidades mais comuns) e noção de LGPD/Privacy by Design",
-        "Boas práticas de Git no dia a dia: commits semânticos, branches, PRs bem escritos"
-      ],
-      leituras: [
-        "Existem alternativas de teste (TestNG, REST Assured, Cucumber-JVM) — JUnit + Mockito já cobre a grande maioria do que vaga júnior pede"
-      ],
-      projeto: "Refatore o projeto do Mês 2 aplicando camadas (domínio/aplicação/infra), adicione autenticação JWT e escreva testes com cobertura relevante nas regras de negócio — não em getters/setters."
-    },
-    {
-      numero: "4", periodo: "Dez/2026", dataInicio: "2026-12-01",
-      titulo: "SQL avançado + Docker",
-      foco: "Com banco de dados e containerização, seu projeto já parece profissional — e você já atende ao patamar técnico pedido em estágio.",
-      badge: "Persistência & Containerização",
-      marco: "Comece a se candidatar para vagas de ESTÁGIO em Java (Gupy, LinkedIn, Vagas.com.br)",
-      itens: [
-        "SQL avançado: índices, transações, isolamento, concorrência, locks e deadlocks",
-        "Docker: Dockerfile para a aplicação Spring Boot, docker-compose com Postgres"
-      ],
-      leituras: [
-        "Noção de bancos não-relacionais (MongoDB) — quando faz mais sentido que um banco relacional"
-      ],
-      projeto: "Dockerize o projeto do Mês 3 — \"docker-compose up\" funcionando do zero em qualquer máquina."
-    },
-    {
-      numero: "5", periodo: "Jan/2027", dataInicio: "2027-01-01",
-      titulo: "HTML e CSS do zero",
-      foco: "Front-end começa aqui, de verdade — não é revisão, é primeira vez entendendo o que cada linha faz.",
-      badge: "Fundamentos de Front-end",
-      itens: [
-        "HTML semântico: estrutura, tags, formulários, acessibilidade básica",
-        "CSS: seletores, box model, Flexbox, Grid, responsividade (mobile-first)",
-        "Tailwind CSS (utility-first) — o que você já tinha visto no projeto vibe-coded, agora entendendo de verdade"
-      ],
-      revisao: "Antes de virar a chave pro front-end: você sobe uma API Spring Boot com JWT e Docker do zero, sem consultar nada? Se travar em algum ponto, vale 2-3 dias revisando antes de seguir.",
-      projeto: "Construa uma página estática do zero (ex: um portfólio pessoal simples) só com HTML/CSS puro — depois recrie a mesma página usando Tailwind, pra sentir a diferença."
-    },
-    {
-      numero: "6", periodo: "Fev/2027", dataInicio: "2027-02-01",
-      titulo: "JavaScript do zero",
-      foco: "A lógica que você já tem de Java ajuda — a sintaxe e os hábitos de JS são o que muda.",
-      badge: "Lógica em JavaScript",
-      itens: [
-        "Variáveis (var/let/const), tipos de dados, operadores, conversão de tipos",
-        "Condicionais e loops, arrays e métodos (map/filter/reduce/forEach)",
-        "Funções, callbacks, escopo, arrow functions",
-        "DOM: seleção de elementos, eventos, manipulação de página",
-        "Fetch básico: consumir uma API pública"
-      ],
-      projeto: "Um app em JavaScript puro e interativo (ex: lista de tarefas, ou conversor de moedas usando uma API pública) — sem nenhum framework ainda."
-    },
-    {
-      numero: "7", periodo: "Mar/2027", dataInicio: "2027-03-01",
-      titulo: "TypeScript + React fundamentos",
-      foco: "Agora sim: os mesmos nomes que apareciam no projeto vibe-coded, mas você escrevendo e entendendo cada um.",
-      badge: "React & TypeScript",
-      itens: [
-        "TypeScript: tipos, interfaces, generics básicos, por que usar em vez de JS puro",
-        "React: componentes, JSX, props, state, hooks (useState, useEffect)",
-        "Roteamento básico (React Router)",
-        "npm e Vite: o que cada comando faz de verdade, não só copiar/colar"
-      ],
-      leituras: [
-        "Angular aparece em algumas vagas mais corporativas/legadas — não é prioridade agora, mas vale saber que existe como alternativa ao React",
-        "Next.js, acessibilidade e testes de front-end estão detalhados na seção Diferenciais mais abaixo — vale uma olhada antes de fechar este mês"
-      ],
-      projeto: "Um app React isolado, ainda SEM conectar a nenhum backend — ex: uma calculadora ou um bloco de notas com estado local."
-    },
-    {
-      numero: "8", periodo: "Abr/2027", dataInicio: "2027-04-01",
-      titulo: "Fullstack de verdade",
-      foco: "O momento em que front e back se encontram — e o Study Roadmap Platform pode renascer, desta vez entendido de verdade.",
-      badge: "Fullstack Java + React",
-      itens: [
-        "Consumo de API com Axios/fetch a partir do React",
-        "Fluxo completo de autenticação: login, armazenar token JWT, proteger rotas",
-        "CORS, variáveis de ambiente no front, tratamento de erros de rede na UI",
-        "Testes de front-end: Jest + React Testing Library para os componentes principais — apareceu como requisito (não só diferencial) em boa parte das vagas de React pesquisadas"
-      ],
-      projeto: "Reconstrua a ideia do Study Roadmap Platform — desta vez linha por linha, entendendo cada decisão — conectando seu front-end React ao backend Spring Boot construído nos meses anteriores."
-    },
-    {
-      numero: "9", periodo: "Mai/2027", dataInicio: "2027-05-01",
-      titulo: "CI/CD e Deploy em produção",
-      foco: "Projeto testado, containerizado, seguro e agora publicado — este é o ponto em que o currículo compete de igual pra igual em vaga júnior, não só estágio.",
-      badge: "CI/CD & Deploy em Produção",
-      marco: "Currículo competitivo para vagas de JÚNIOR (não só estágio)",
-      itens: [
-        "GitHub Actions: pipeline de build + testes a cada push",
-        "Deploy: Render / Railway / Fly.io para portfólio pessoal (grátis, sem burocracia)",
-        "Noção de AWS (EC2, RDS, S3) — não precisa usar em produção pessoal, mas aparece em quase toda vaga",
-        "Monitoramento básico: logs estruturados, health checks"
-      ],
-      projeto: "Projeto fullstack do Mês 8 no ar, com URL pública, pipeline de CI rodando os testes automaticamente a cada push."
-    },
-    {
-      numero: "10", periodo: "Jun/2027", dataInicio: "2027-06-01",
-      titulo: "Estruturas de dados + preparação para entrevistas",
-      foco: "Processos seletivos brasileiros (Gupy principalmente) costumam ter uma etapa de raciocínio lógico antes da entrevista técnica — treinar isso é parte do trabalho.",
-      badge: "Preparado para Entrevistas Técnicas",
-      itens: [
-        "Complexidade (Big O), recursão, arrays vs. listas ligadas",
-        "Prática em Beecrowd/URI e LeetCode fácil/médio",
-        "Simulação de teste de raciocínio lógico (formato Gupy)",
-        "Entrevista comportamental: 3-4 histórias reais preparadas (método STAR)"
-      ]
-    },
-    {
-      numero: "11", periodo: "Jul/2027", dataInicio: "2027-07-01",
-      titulo: "Concorrência na prática + segundo projeto + Ágil",
-      foco: "Concorrência aprendida construindo, não lendo teoria a seco — e um segundo projeto tecnicamente bem diferente do primeiro mostra versatilidade de verdade.",
-      badge: "Concorrência & Portfólio Versátil",
-      itens: [
-        "Threads, Virtual Threads (Java 21+) e CompletableFuture — agora aplicados a um projeto real, não em abstrato",
-        "Records, diferença entre pass-by-value e pass-by-reference em Java, Regex básico",
-        "Scrum e Kanban na prática — aparece em praticamente toda vaga júnior pesquisada",
-        "Consumo de API externa real (o módulo OpenFeign do bootcamp já deu a base)"
-      ],
-      projeto: "Simulador de Zoológico: animais como threads concorrentes, alimentação compartilhada com controle de deadlock/starvation via CompletableFuture — tecnicamente bem diferente do projeto CRUD dos meses anteriores."
-    },
-    {
-      numero: "12", periodo: "Ago/2027", dataInicio: "2027-08-01",
-      titulo: "Mensageria, cache e IA no backend",
-      foco: "Raramente pedido em estágio, mas cada vez mais comum até em júnior/pleno — e conecta direto com o que você já mexeu no projeto final do bootcamp.",
-      badge: "Mensageria, Cache & IA",
-      itens: [
-        "RabbitMQ ou Kafka: conceitos (fila, pub/sub) + uma integração simples",
-        "Redis para cache",
-        "Spring AI ou integração simples com LLM a partir do backend Java — você já tem experiência com Whisper/Gemini do projeto final do bootcamp"
-      ],
-      projeto: "Adicione UM desses recursos a um projeto já existente — não é necessário um projeto novo."
-    },
-    {
-      numero: "13", periodo: "Set/2027", dataInicio: "2027-09-01",
-      titulo: "Arquitetura avançada + correção de gaps",
-      foco: "Hora de revisitar tudo com olhar crítico e atacar especificamente o que reprovou você nos processos seletivos até aqui.",
-      badge: "Arquitetura & Observabilidade",
-      marco: "Fase estatisticamente comum de maior conversão em contratações",
-      itens: [
-        "Logging profissional (SLF4J/Logback), observabilidade básica",
-        "Microsserviços: quando faz sentido usar, padrão BFF",
-        "Otimização de performance: identificar e resolver queries N+1, medir tempo de resposta de endpoints",
-        "Revisite feedbacks de entrevistas anteriores e ataque fraquezas específicas"
-      ]
-    },
-    {
-      numero: "14", periodo: "Out/2027", dataInicio: "2027-10-01",
-      titulo: "Networking e posicionamento",
-      foco: "Currículo bom sem visibilidade chega menos longe do que currículo bom com rede.",
-      badge: "Rede de Contatos & Posicionamento",
-      itens: [
-        "Currículo e LinkedIn atualizados — reaproveite a base em LaTeX de quando aplicou pro CIT",
-        "Comunidades: Discord de dev, meetups, eventos tipo DevFest",
-        "Postar sobre os projetos no LinkedIn — recrutadores e ATS pesquisam por palavras-chave"
-      ]
-    },
-    {
-      numero: "15", periodo: "Nov/2027", dataInicio: "2027-11-01",
-      titulo: "Candidatura intensiva",
-      foco: "Currículo maduro, dois projetos, feedback de mercado incorporado. Agora é volume e consistência.",
-      badge: "Pronto para o Mercado",
-      marco: "Meta: contratação como estagiário ou desenvolvedor júnior fullstack Java",
-      revisao: "Revisão final: Git, SQL, Spring Security, Docker, React + testes, CI/CD. Se algum desses te deixar em dúvida numa explicação rápida, é ali que vale focar antes da reta final.",
-      itens: [
-        "Aplicações em ritmo alto e consistente (Gupy, LinkedIn, Vagas.com.br)",
-        "Noções de negociação: diferença entre estágio, CLT júnior e faixas salariais da sua região",
-        "Registre o que cada processo seletivo pediu — isso vira seu próprio radar de gaps"
-      ]
-    },
-    {
-      numero: "16-17", periodo: "Dez/2027–Jan/2028", dataInicio: "2027-12-01",
-      titulo: "Extensão / buffer",
-      foco: "Se já estiver empregado, use este bloco pra evoluir dentro do primeiro emprego. Se ainda estiver no processo, use como reforço.",
-      badge: "Especialista em Evolução Contínua",
-      itens: [
-        "Aprofundar nuvem (AWS ou Azure) com um projeto de fato hospedado lá",
-        "Explorar Spring Boot 4 / Java 25 — o novo padrão do mercado a partir de 2026",
-        "Infraestrutura como código (Terraform/Ansible) — nível introdutório",
-        "Continuar candidaturas sem pausa"
-      ]
-    }
-  ];
-
-  const diferenciaisData = [
-    {
-      categoria: "IA aplicada ao desenvolvimento",
-      icone: "🤖",
-      encaixe: "desde o Mês 1 — você já começa com vantagem aqui",
-      itens: [
-        "Usar GitHub Copilot (ou similar) no dia a dia de código, não só no módulo do bootcamp — praticar de verdade, todo dia",
-        "Prompt engineering aplicado a debugging e geração de testes",
-        "Saber explicar em entrevista COMO e QUANDO você usa IA no seu fluxo — virou pergunta comum em processos seletivos de 2026"
-      ]
-    },
-    {
-      categoria: "Segurança & Performance",
-      icone: "🔒",
-      encaixe: "Mês 3 (Security) e Mês 13 (arquitetura)",
-      itens: [
-        "OWASP Top 10 — principais vulnerabilidades web e como preveni-las",
-        "LGPD / Privacy by Design — noção de como isso afeta arquitetura de sistemas no Brasil",
-        "Otimização de performance: queries N+1, tempo de resposta de API, cache de consultas"
-      ]
-    },
-    {
-      categoria: "Qualidade e recursos avançados de Front-end",
-      icone: "🧪",
-      encaixe: "Mês 7-8, depois de React fundamentos",
-      itens: [
-        "Next.js (SSR/SSG) — cada vez mais pedido além do React puro",
-        "Acessibilidade (a11y): HTML semântico, ARIA, contraste, navegação por teclado",
-        "Gerenciamento de estado além do useState: Context API, Zustand ou Redux",
-        "Cypress ou Playwright para testes end-to-end"
-      ]
-    },
-    {
-      categoria: "Backend avançado (opcional, mais visto em pleno)",
-      icone: "📦",
-      encaixe: "Mês 12 em diante, se sobrar tempo",
-      itens: [
-        "Kubernetes — conceitos básicos de orquestração de containers",
-        "GraphQL como alternativa ao REST em algumas vagas"
-      ]
-    },
-    {
-      categoria: "Portfólio & prova social",
-      icone: "🌐",
-      encaixe: "contínuo, principalmente a partir do Mês 9",
-      itens: [
-        "2-3 projetos completos no GitHub com README que mostra COMO você pensa, não só o que o código faz — é citado como o principal diferencial competitivo no mercado júnior saturado",
-        "Contribuir com um projeto open source, mesmo que pequeno (issue simples, correção de documentação)",
-        "Compartilhar o processo de construção dos projetos no LinkedIn"
-      ]
-    }
-  ];
-
-  const STORAGE_KEY = 'roadmap-progress';
-  const DIF_STORAGE_KEY = 'roadmap-diferenciais';
-  const STREAK_KEY = 'roadmap-streak';
-
-  // Itens já concluídos porque fazem parte do currículo oficial do Bootcamp
-  // Santander/DIO, concluído no prazo (23/08/2026). Isso só é usado na
-  // primeira visita (quando ainda não existe progresso salvo neste navegador).
-  const DEFAULT_SEED_STATE = {
-    'm0-item-3': true, // Mês 1: módulos restantes do bootcamp (Annotations, SOLID, JDBC, Design Patterns)
-    'm1-item-0': true, // Mês 2: Spring REST API, Spring Data JPA, Spring Security básico, OpenFeign
-    'm1-item-1': true, // Mês 2: projeto final do bootcamp (assistente de voz com IA)
-    'm1-item-2': true  // Mês 2: módulos de IA do próprio bootcamp
-  };
-
-  let state = {};
-  let difState = {};
-  let streak = { count: 0, lastActive: null };
-
-  function itemId(mi, kind, ii){
-    return 'm' + mi + '-' + kind + (ii !== undefined ? '-' + ii : '');
-  }
-
-  function loadState(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(raw) return JSON.parse(raw);
-    }catch(e){ /* localStorage indisponível ou dado corrompido */ }
-    return Object.assign({}, DEFAULT_SEED_STATE);
-  }
-
-  function saveState(){
-    try{
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }catch(e){
-      console.error('Falha ao salvar progresso', e);
-    }
-  }
-
-  function loadDifState(){
-    try{
-      const raw = localStorage.getItem(DIF_STORAGE_KEY);
-      if(raw) return JSON.parse(raw);
-    }catch(e){ /* localStorage indisponível ou dado corrompido */ }
-    return {};
-  }
-
-  function saveDifState(){
-    try{
-      localStorage.setItem(DIF_STORAGE_KEY, JSON.stringify(difState));
-    }catch(e){
-      console.error('Falha ao salvar progresso de diferenciais', e);
-    }
-  }
-
-  function loadStreak(){
-    try{
-      const raw = localStorage.getItem(STREAK_KEY);
-      if(raw) return JSON.parse(raw);
-    }catch(e){ /* localStorage indisponível ou dado corrompido */ }
-    return { count: 0, lastActive: null };
-  }
-
-  function saveStreak(){
-    try{
-      localStorage.setItem(STREAK_KEY, JSON.stringify(streak));
-    }catch(e){
-      console.error('Falha ao salvar streak', e);
-    }
-  }
-
-  function todayStr(){
-    return new Date().toISOString().slice(0, 10);
-  }
-
-  function registerActivity(){
-    const today = todayStr();
-    if(streak.lastActive === today) return; // já contou hoje
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-    streak.count = (streak.lastActive === yesterday) ? streak.count + 1 : 1;
-    streak.lastActive = today;
-    saveStreak();
-    updateStreakUI();
-  }
-
-  function updateStreakUI(){
-    const pill = document.getElementById('streakPill');
-    if(!pill) return;
-    const n = streak.count;
-    pill.textContent = '🔥 ' + n + (n === 1 ? ' dia seguido' : ' dias seguidos');
-  }
-
-  function allIdsForMonth(m, mi){
-    const ids = [];
-    m.itens.forEach((_, ii) => ids.push(itemId(mi, 'item', ii)));
-    if(m.projeto) ids.push(itemId(mi, 'project'));
-    if(m.leituras) m.leituras.forEach((_, ii) => ids.push(itemId(mi, 'read', ii)));
-    return ids;
-  }
-
-  function computeCurrentIndex(){
-    // "Mês atual" = primeiro mês com item pendente, não a data do calendário.
-    // Isso evita que o roadmap fique "desalinhado" quando a rotina muda.
-    for(let i = 0; i < roadmapData.length; i++){
-      const ids = allIdsForMonth(roadmapData[i], i);
-      const done = ids.filter(id => state[id]).length;
-      if(ids.length === 0 || done < ids.length) return i;
-    }
-    return roadmapData.length - 1;
-  }
-
-  function checklistItemHTML(id, text, extraClass){
-    const checked = state[id] ? 'checked' : '';
-    return '<li><label class="item ' + (extraClass||'') + '">' +
-      '<input type="checkbox" data-id="' + id + '" ' + checked + '>' +
-      '<span class="txt">' + text + '</span>' +
-      '</label></li>';
-  }
-
-  function renderMonth(m, mi, currentIdx){
-    const ids = allIdsForMonth(m, mi);
-    const doneCount = ids.filter(id => state[id]).length;
-    const total = ids.length;
-    const isDone = total > 0 && doneCount === total;
-    const isCurrent = mi === currentIdx && !isDone;
-
-    let itemsHTML = m.itens.map((t, ii) => checklistItemHTML(itemId(mi,'item',ii), t)).join('');
-
-    let projHTML = '';
-    if(m.projeto){
-      projHTML = '<p class="section-label">🛠️ Projeto / checkpoint</p><ul class="items">' +
-        checklistItemHTML(itemId(mi,'project'), m.projeto, 'project') + '</ul>';
-    }
-
-    let readHTML = '';
-    if(m.leituras){
-      readHTML = '<p class="section-label">Vale conhecer (não precisa aprofundar agora)</p><ul class="items">' +
-        m.leituras.map((t, ii) => checklistItemHTML(itemId(mi,'read',ii), t, 'reading')).join('') + '</ul>';
-    }
-
-    let marcoHTML = m.marco ? '<div class="marco">🎯 <span>' + m.marco + '</span></div>' : '';
-    let criterioHTML = m.criterio ? '<div class="criterio">✅ <span>' + m.criterio + '</span></div>' : '';
-    let revisaoHTML = m.revisao ? '<div class="revisao">🔁 <span>' + m.revisao + '</span></div>' : '';
-    let hereTag = isCurrent ? '<span class="here-tag">você está aqui</span>' : '';
-
-    return (
-      '<div class="month' + (isDone ? ' done' : '') + (isCurrent ? ' current' : '') + '" data-mi="' + mi + '">' +
-        '<div class="node"></div>' +
-        '<div class="card">' +
-          '<div class="card-head" data-toggle="' + mi + '" tabindex="0" role="button" aria-expanded="false">' +
-            '<span class="m-num">MÊS ' + m.numero + '</span>' +
-            '<div class="m-titles">' +
-              '<div class="m-period">~ ' + m.periodo + hereTag + '</div>' +
-              '<div class="m-title">' + m.titulo + '</div>' +
-            '</div>' +
-            '<span class="m-mini">' + doneCount + '/' + total + '</span>' +
-            '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>' +
-          '</div>' +
-          '<div class="card-body" id="body-' + mi + '">' +
-            '<div class="card-body-inner">' +
-              '<p class="foco">' + m.foco + '</p>' +
-              revisaoHTML +
-              marcoHTML +
-              criterioHTML +
-              '<div class="badge-row">🏆 <span class="badge-pill">' + m.badge + '</span></div>' +
-              '<p class="section-label">📚 Estudar</p>' +
-              '<ul class="items">' + itemsHTML + '</ul>' +
-              readHTML +
-              projHTML +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>'
-    );
-  }
-
-  function renderAll(){
-    const currentIdx = computeCurrentIndex();
-    const html = roadmapData.map((m, mi) => renderMonth(m, mi, currentIdx)).join('');
-    document.getElementById('timeline').insertAdjacentHTML('beforeend', html);
-    attachHandlers();
-    updateProgressUI();
-    openMonth(currentIdx, true);
-  }
-
-  function difItemId(ci, ii){
-    return 'd' + ci + '-item-' + ii;
-  }
-
-  function renderCategory(cat, ci){
-    const ids = cat.itens.map((_, ii) => difItemId(ci, ii));
-    const doneCount = ids.filter(id => difState[id]).length;
-    const total = ids.length;
-    const itemsHTML = cat.itens.map((t, ii) => checklistItemHTML(difItemId(ci, ii), t)).join('');
-    return (
-      '<div class="dif-card" data-ci="' + ci + '">' +
-        '<div class="dif-card-head">' +
-          '<span class="dif-cat-title">' + cat.icone + ' ' + cat.categoria + '</span>' +
-          '<span class="dif-mini">' + doneCount + '/' + total + '</span>' +
-        '</div>' +
-        '<p class="dif-encaixe">encaixa bem: ' + cat.encaixe + '</p>' +
-        '<ul class="items">' + itemsHTML + '</ul>' +
-      '</div>'
-    );
-  }
-
-  function renderDiferenciais(){
-    const html = diferenciaisData.map((c, ci) => renderCategory(c, ci)).join('');
-    document.getElementById('difList').insertAdjacentHTML('beforeend', html);
-    attachDifHandlers();
-    updateDifProgressUI();
-  }
-
-  function attachDifHandlers(){
-    document.querySelectorAll('#difList input[type=checkbox][data-id]').forEach(cb => {
-      cb.addEventListener('change', () => {
-        difState[cb.getAttribute('data-id')] = cb.checked;
-        saveDifState();
-        if(cb.checked) registerActivity();
-        refreshDifCard(cb.closest('.dif-card'));
-        updateDifProgressUI();
-      });
-    });
-  }
-
-  function refreshDifCard(cardEl){
-    const ci = parseInt(cardEl.getAttribute('data-ci'), 10);
-    const cat = diferenciaisData[ci];
-    const ids = cat.itens.map((_, ii) => difItemId(ci, ii));
-    const doneCount = ids.filter(id => difState[id]).length;
-    cardEl.querySelector('.dif-mini').textContent = doneCount + '/' + ids.length;
-  }
-
-  function updateDifProgressUI(){
-    let total = 0, done = 0;
-    diferenciaisData.forEach((cat, ci) => {
-      const ids = cat.itens.map((_, ii) => difItemId(ci, ii));
-      total += ids.length;
-      done += ids.filter(id => difState[id]).length;
-    });
-    const pct = total > 0 ? Math.round((done/total)*100) : 0;
-    document.getElementById('difBar').style.width = pct + '%';
-    document.getElementById('difCount').textContent = done + '/' + total + ' itens (' + pct + '%)';
-  }
-
-  function attachHandlers(){
-    document.querySelectorAll('[data-toggle]').forEach(head => {
-      head.addEventListener('click', () => {
-        const mi = parseInt(head.getAttribute('data-toggle'), 10);
-        toggleMonth(mi);
-      });
-      head.addEventListener('keydown', (e) => {
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          const mi = parseInt(head.getAttribute('data-toggle'), 10);
-          toggleMonth(mi);
-        }
-      });
-    });
-
-    document.querySelectorAll('#timeline input[type=checkbox][data-id]').forEach(cb => {
-      cb.addEventListener('change', () => {
-        state[cb.getAttribute('data-id')] = cb.checked;
-        saveState();
-        if(cb.checked) registerActivity();
-        refreshMonthCard(cb.closest('.month'));
-        updateProgressUI();
-      });
-    });
-  }
-
-  function refreshMonthCard(monthEl){
-    const mi = parseInt(monthEl.getAttribute('data-mi'), 10);
-    const m = roadmapData[mi];
-    const ids = allIdsForMonth(m, mi);
-    const doneCount = ids.filter(id => state[id]).length;
-    const total = ids.length;
-    monthEl.querySelector('.m-mini').textContent = doneCount + '/' + total;
-    monthEl.classList.toggle('done', total > 0 && doneCount === total);
-  }
-
-  function toggleMonth(mi){
-    const monthEl = document.querySelector('.month[data-mi="' + mi + '"]');
-    const isOpen = monthEl.classList.contains('open');
-    openMonth(mi, !isOpen);
-  }
-
-  function openMonth(mi, open){
-    const monthEl = document.querySelector('.month[data-mi="' + mi + '"]');
-    if(!monthEl) return;
-    const body = document.getElementById('body-' + mi);
-    const head = monthEl.querySelector('.card-head');
-    monthEl.classList.toggle('open', open);
-    head.setAttribute('aria-expanded', open ? 'true' : 'false');
-    body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
-  }
-
-  function updateProgressUI(){
-    let total = 0, done = 0, monthsDone = 0;
-    roadmapData.forEach((m, mi) => {
-      const ids = allIdsForMonth(m, mi);
-      const d = ids.filter(id => state[id]).length;
-      total += ids.length;
-      done += d;
-      if(ids.length > 0 && d === ids.length) monthsDone++;
-    });
-    const pct = total > 0 ? Math.round((done/total)*100) : 0;
-    document.getElementById('overallBar').style.width = pct + '%';
-    document.getElementById('overallCount').textContent = done + '/' + total + ' itens (' + pct + '%)';
-    document.getElementById('doneMonths').textContent = monthsDone + ' de ' + roadmapData.length + ' marcos concluídos';
-
-    const currentIdx = computeCurrentIndex();
-    const cur = roadmapData[currentIdx];
-    const label = document.getElementById('currentLabel');
-    if(label && cur) label.textContent = 'você está em: Mês ' + cur.numero + ' · ' + cur.titulo;
-  }
-
-  document.getElementById('resetBtn').addEventListener('click', () => {
-    if(!confirm('Isso vai zerar todo o progresso marcado neste roadmap (meses, diferenciais e streak). Continuar?')) return;
-    state = {};
-    difState = {};
-    streak = { count: 0, lastActive: null };
-    saveState();
-    saveDifState();
-    saveStreak();
-    document.querySelectorAll('input[type=checkbox][data-id]').forEach(cb => cb.checked = false);
-    document.querySelectorAll('.month').forEach(refreshMonthCard);
-    document.querySelectorAll('.dif-card').forEach(refreshDifCard);
-    updateProgressUI();
-    updateDifProgressUI();
-    updateStreakUI();
+"use strict";
+/* ============ DADOS V2 ============ */
+const GATES=[
+{id:"G0",titulo:"Fundamentos de Programação Java",threshold:80,ref:"~ Set/2026 · Java + Git + SQL · CORE — sem aprofundar JVM/GC",
+objetivo:"Programar em Java sem depender de tutorial: estruturar → implementar → executar → corrigir.",
+criterios:[
+["g0-01","Resolver 20 exercícios de lógica em Java","CORE"],["g0-02","≥80% de aproveitamento; ≥15 sem consultar solução","CORE"],
+["g0-03","Classes, objetos, métodos e encapsulamento na prática","CORE"],["g0-04","Composição e interfaces","CORE"],
+["g0-05","Collections (List/Set/Map/Queue) + Generics + Optional","CORE"],["g0-06","Exceptions: checked/unchecked, try-with-resources, customizadas","CORE"],
+["g0-07","Streams em situações apropriadas","CORE"],["g0-08","3 programas de console do zero, sem tutorial","CORE"],
+["g0-09","Git: init, add, commit, push, branches, merge, conflitos, .gitignore","CORE"],["g0-10","Linux básico: cd, ls, pwd, permissões","CORE"],
+["g0-11","SQL: SELECT, INSERT, UPDATE, DELETE, JOIN, PK/FK","CORE"],["g0-12","JVM e GC — visão conceitual (sem aprofundar agora)","COMP"]],
+projeto:{id:"g0-proj",titulo:"App de console 500+ linhas (banco, biblioteca, estoque ou tarefas), sem tutorial passo a passo."},naoExige:[]},
+{id:"G1",titulo:"Backend Foundation — primeira API real",threshold:80,ref:"~ Out/2026 · Spring Boot + primeiro backend real · CORE",
+objetivo:"Construir uma API REST funcional com Spring Boot + PostgreSQL.",
+criterios:[
+["g1-01","Criar projeto Spring Boot do zero","CORE"],["g1-02","5+ endpoints com CRUD completo","CORE"],
+["g1-03","HTTP methods + status codes (explicar 404 vs 400 vs 422 sem consultar)","CORE"],["g1-04","DTOs + Bean Validation","CORE"],
+["g1-05","Tratamento global de erros (@ControllerAdvice)","CORE"],["g1-06","Controller + Service + Repository + DI/IoC","CORE"],
+["g1-07","Spring Data JPA + Hibernate","CORE"],["g1-08","PostgreSQL + 4 tabelas relacionadas + CRUD via JPA","CORE"],
+["g1-09","5 queries SQL manuais + 3 JOINs + 1 agregada","CORE"],["g1-10","application.properties / profiles p/ múltiplos ambientes","CORE"],
+["g1-11","Lombok p/ boilerplate","COMP"],["g1-12","Paginação, filtros e versionamento de API","COMP"]],
+projeto:{id:"g1-proj",titulo:"API funcional: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres, README + instruções."},naoExige:[]},
+{id:"G2",titulo:"🚀 Gate de Estágio Java Backend",threshold:90,ref:"~ Nov–Dez/2026 · Security + testes + Docker → COMEÇAR A SE CANDIDATAR",
+objetivo:"Estar tecnicamente pronto para candidaturas a estágio. Não exige React, AWS, K8s, Kafka ou microservices.",
+criterios:[
+["g2-01","30 problemas de programação, 80% de aproveitamento","CORE"],["g2-02","Explicar POO sem consultar; Collections/Exceptions/Streams adequados","CORE"],
+["g2-03","Ler código Java desconhecido e explicar","CORE"],["g2-04","Banco relacional do zero: 5+ tabelas, PK/FK","CORE"],
+["g2-05","JOIN, GROUP BY, HAVING, subquery, ORDER BY, LIMIT/OFFSET","CORE"],["g2-06","20+ consultas SQL escritas à mão","CORE"],
+["g2-07","API sem tutorial: CRUD + DTO + Validation + JPA + Postgres + paginação + filtros + exceptions + docs","CORE"],
+["g2-08","15+ testes (service + controller + 1 integração)","CORE"],["g2-09","Login + hashing + JWT + rotas protegidas + autorização básica","CORE"],
+["g2-10","Branches + merge + 3 conflitos simulados + PR + commits claros","CORE"],["g2-11","Dockerfile + app em container + Postgres em container + Compose","CORE"],
+["g2-12","Projeto final no GitHub: Spring + Postgres + JPA + REST + DTO + Validation + JWT + Tests + Docker + README","CORE"],
+["g2-13","Swagger/OpenAPI documentando a API","COMP"],["g2-14","Consumo de API externa (base OpenFeign do bootcamp)","COMP"]],
+projeto:{id:"g2-proj",titulo:"Projeto final validado: sobe com docker-compose, CRUD persiste, erros retornam adequadamente, README completo."},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
+{id:"G3",titulo:"Backend Júnior — práticas profissionais",threshold:85,ref:"~ 2027 · Arquitetura, testes, CI/CD, cloud, performance",
+objetivo:"Desenvolver e manter backend de verdade, em produção.",
+criterios:[
+["g3-01","SOLID aplicado + responsabilidades separadas + decisões explicadas","CORE"],["g3-02","2 padrões de projeto conscientes + 1 refatoração real","CORE"],
+["g3-03","50+ testes (unit + integração + Testcontainers) + pipeline executa testes","CORE"],["g3-04","Dockerfile otimizado + Compose + CI GitHub Actions (build + testes)","CORE"],
+["g3-05","Deploy: API pública + banco remoto + HTTPS + env + logs + health check","CORE"],["g3-06","Performance: corrigir N+1, query desnecessária, índice ausente, paginação","CORE"],
+["g3-07","Redis: hit/miss + invalidação","COMP"],["g3-08","Observabilidade: logs estruturados, métricas, health checks","COMP"],
+["g3-09","Cloud (EC2/RDS/S3, noção→uso) + concorrência básica (threads/virtual threads)","COMP"]],
+projeto:{id:"g3-proj",titulo:"Backend em produção: URL pública + CI verde + logs + health check."},naoExige:[]},
+{id:"G4",titulo:"Backend Avançado — sistemas complexos",threshold:80,ref:"2027+ · Mensageria, cache, concorrência, arquitetura",
+objetivo:"Lidar com problemas reais distribuídos (sem lista rígida de tecnologias obrigatórias).",
+criterios:[
+["g4-01","Mensageria async (RabbitMQ ou Kafka): retry + DLQ + idempotência","AVANC"],["g4-02","Redis: hit/miss demonstrado + invalidação","AVANC"],
+["g4-03","Concorrência: race/deadlock/starvation + CompletableFuture ou virtual threads em projeto","AVANC"],["g4-04","Observabilidade: logs estruturados + métricas + tracing + erro via logs","AVANC"],
+["g4-05","Explicar monólito/modular/micro/async/consistência/escalabilidade/trade-offs","AVANC"],["g4-06","System design: disponibilidade + escalabilidade","AVANC"]],
+projeto:{id:"g4-proj",titulo:"Um projeto demonstrando aplicação real (mensageria OU cache OU concorrência)."},naoExige:[]}
+];
+const FRONT={id:"F1",titulo:"Frontend Complementar",threshold:70,ref:"Paralelo e opcional em 2027 · menor carga",
+objetivo:"Consumir e apresentar sua própria API. Nunca bloqueia G0–G4.",
+criterios:[
+["f1-01","HTML semântico + CSS Flexbox/Grid + responsivo → página estática","FRONT"],["f1-02","JS: vars, tipos, condicionais, loops, arrays, funções, callbacks, arrow","FRONT"],
+["f1-03","DOM, eventos, fetch, async/await → app consumindo API pública","FRONT"],["f1-04","TS: types, interfaces, generics, union, narrowing → reescrever projeto JS","FRONT"],
+["f1-05","React: componentes, JSX, props, state, hooks, Router, formulários","FRONT"],["f1-06","Axios/fetch + login JWT + protected routes + CORS + env + erros UI","FRONT"]],
+projeto:{id:"f1-proj",titulo:"Interface React consumindo sua API Spring Boot (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres."}};
+const CAND=[["cand-01","GitHub organizado (perfil, pins, READMEs)"],["cand-02","Projeto backend completo no ar/documentado"],["cand-03","README que mostra COMO você pensa"],["cand-04","Currículo focado em Backend"],["cand-05","LinkedIn com palavras-chave + posts sobre projetos"],["cand-06","Perguntas técnicas ensaiadas"],["cand-07","Histórias comportamentais (STAR)"],["cand-08","Simulação de entrevista"],["cand-09","Primeira candidatura enviada"]];
+/* Diferenciais: textos V1 preservados p/ manter chaves dX-item-Y */
+const DIF=[
+{categoria:"IA aplicada ao desenvolvimento",icone:"🤖",encaixe:"desde G0 — vantagem inicial",itens:["Usar GitHub Copilot (ou similar) no dia a dia, não só no bootcamp","Prompt engineering aplicado a debugging e geração de testes","Explicar em entrevista COMO e QUANDO usa IA no fluxo"]},
+{categoria:"Segurança & Performance",icone:"🔒",encaixe:"G1/G2 (Security) e G3 (arquitetura)",itens:["OWASP Top 10 e prevenção","LGPD / Privacy by Design no Brasil","Performance: N+1, tempo de resposta, cache"]},
+{categoria:"Qualidade e recursos avançados de Front-end",icone:"🧪",encaixe:"F1, após React",itens:["Next.js (SSR/SSG)","Acessibilidade (a11y): semântica, ARIA, contraste, teclado","Estado além do useState: Context, Zustand ou Redux","Cypress ou Playwright (e2e)"]},
+{categoria:"Backend avançado",icone:"📦",encaixe:"G4, se sobrar tempo",itens:["Kubernetes — conceitos de orquestração","GraphQL como alternativa ao REST","Redis em projeto real","Mensageria (RabbitMQ/Kafka) em projeto real","AWS com app hospedado (EC2/RDS/S3)"]},
+{categoria:"Portfólio & prova social",icone:"🌐",encaixe:"contínuo, após G2",itens:["2-3 projetos com README que mostra COMO você pensa","Contribuir com open source (mesmo docs)","Compartilhar construção no LinkedIn"]}];
+const EV_LEVELS=["ESTUDADO","PRATICADO","APLICADO","COMPROVADO"];
+/* ============ STORAGE ============ */
+const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",mig:"roadmap-v2-migrated"};
+const load=(k,f)=>{try{const r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null});
+/* ============ MIGRAÇÃO V1→V2 ============ */
+function migrate(){
+  if(localStorage.getItem(K.mig))return;
+  const hadV1=localStorage.getItem(K.prog)!==null;
+  if(!hadV1){state={};save(K.prog,state);localStorage.setItem(K.mig,"1");return;}
+  state=state||{};
+  const mv=(from,to,prac)=>{if(state[from]){state[to]=true;if(prac)practice[to]=true;delete state[from];}};
+  /* bootcamp seed → concluído + precisa praticar */
+  mv("m0-item-3","g0-03",true);state["g0-04"]=state["g0-04"]||!!practice["g0-03"];if(practice["g0-03"])practice["g0-04"]=true;
+  mv("m1-item-0","g1-07",true);["g1-02","g1-06","g2-14"].forEach(id=>{if(state["g1-07"]){state[id]=true;practice[id]=true;}});
+  if(state["m1-item-1"]){state["g2-14"]=true;practice["g2-14"]=true;delete state["m1-item-1"];}
+  if(state["m1-item-2"]){["d0-item-0","d0-item-1","d0-item-2"].forEach(id=>difState[id]=true);delete state["m1-item-2"];}
+  /* demais itens por posição/tema */
+  const map={"m0-item-0":"g0-09","m0-item-1":"g0-10","m0-item-2":"g0-11","m0-item-4":"g0-05","m0-item-5":"g0-06","m0-item-6":"g0-12",
+  "m1-item-3":"g1-11","m1-item-4":"g1-12","m1-item-5":"g1-05","m1-item-6":"g1-10",
+  "m2-item-0":"g2-09","m2-item-1":"g2-08","m2-item-2":"g3-01","m2-item-4":"g2-10",
+  "m3-item-0":"g2-05","m3-item-1":"g2-11",
+  "m4-item-0":"f1-01","m4-item-1":"f1-01","m4-item-2":"f1-01",
+  "m5-item-0":"f1-02","m5-item-1":"f1-02","m5-item-2":"f1-02","m5-item-3":"f1-03","m5-item-4":"f1-03",
+  "m6-item-0":"f1-04","m6-item-1":"f1-05","m6-item-2":"f1-05","m6-item-3":"f1-05",
+  "m7-item-0":"f1-06","m7-item-1":"f1-06","m7-item-2":"f1-06","m7-item-3":"f1-06",
+  "m8-item-0":"g3-04","m8-item-1":"g3-05","m8-item-2":"g3-09","m8-item-3":"g3-08",
+  "m9-item-3":"cand-06","m9-item-2":"cand-07",
+  "m10-item-0":"g4-03","m10-item-3":"g2-14",
+  "m11-item-0":"g4-01","m11-item-1":"g4-02",
+  "m12-item-0":"g3-08","m12-item-2":"g3-06",
+  "m13-item-0":"cand-04","m13-item-1":"cand-05",
+  "m14-item-0":"cand-09","m14-item-1":"cand-09"};
+  Object.keys(map).forEach(from=>mv(from,map[from],false));
+  /* projetos V1 → evidência APLICADO (crédito parcial; 🟢 exige COMPROVADO+link) */
+  const projMap={"m1-project":"g1-proj","m2-project":"g3-01","m3-project":"g2-proj","m4-project":"f1-01","m5-project":"f1-03","m6-project":"f1-05","m7-project":"f1-proj","m8-project":"g3-proj","m10-project":"g4-proj","m11-project":"g4-proj","m0-project":"g0-proj"};
+  Object.keys(projMap).forEach(from=>{if(state[from]){const pid=projMap[from];if(!evState[pid])evState[pid]={nivel:"APLICADO",link:""};if(pid.indexOf("g")===0||pid.indexOf("f")===0){/* mantém */} delete state[from];}});
+  save(K.prog,state);save(K.dif,difState);save(K.ev,evState);save(K.prac,practice);
+  localStorage.setItem(K.mig,"1");
+}
+/* ============ STREAK ============ */
+function todayStr(){return new Date().toISOString().slice(0,10)}
+function registerActivity(){const t=todayStr();if(streak.lastActive===t)return;const y=new Date(Date.now()-864e5).toISOString().slice(0,10);streak.count=(streak.lastActive===y)?streak.count+1:1;streak.lastActive=t;save(K.streak,streak);updateStreak();}
+function updateStreak(){const el=document.getElementById("streakPill");if(el)el.textContent="🔥 "+streak.count+(streak.count===1?" dia seguido":" dias seguidos");}
+/* ============ CÁLCULOS ============ */
+function gateStats(g){const tot=g.criterios.length;const done=g.criterios.filter(c=>state[c[0]]).length;
+  const core=g.criterios.filter(c=>c[2]==="CORE");const coreDone=core.filter(c=>state[c[0]]).length;
+  const pct=tot?Math.round(done/tot*100):0;return{tot,done,coreTot:core.length,coreDone,pct};}
+function projOk(pid){const e=evState[pid];return e&&e.nivel==="COMPROVADO"&&e.link;}
+function gateStatus(g,s){if(g.criterios.length&&s.done===g.criterios.length&&(!g.projeto||projOk(g.projeto.id)))return["green","🟢 Gate concluído"];
+  if(s.pct>=g.threshold&&(!g.projeto||projOk(g.projeto.id)))return["green","🟢 Gate concluído"];
+  if(s.pct>=g.threshold)return["yellow","🟡 Pronto para avançar — falta comprovar o projeto"];
+  if(s.pct>=g.threshold-25)return["yellow","🟡 Pronto para avançar"];
+  return["red","🔴 Não pronto"];}
+function backendCore(){let t=0,d=0;GATES.slice(0,4).forEach(g=>g.criterios.forEach(c=>{if(c[2]==="CORE"){t++;if(state[c[0]])d++;}}));return{t,d,pct:t?Math.round(d/t*100):0};}
+function frontStats(){const t=FRONT.criterios.length,d=FRONT.criterios.filter(c=>state[c[0]]).length;return{t,d,pct:t?Math.round(d/t*100):0};}
+function nextBlock(){for(const g of GATES.slice(0,4)){for(const c of g.criterios){if(c[2]==="CORE"&&!state[c[0]])return{g,c};}}
+  for(const g of GATES.slice(0,4)){if(g.projeto&&!projOk(g.projeto.id))return{g,c:null,proj:true};}
+  const g3=GATES[3],s3=gateStats(g3);if(s3.pct<85)return{g:g3,c:null};
+  return{g:GATES[4],c:GATES[4].criterios.find(c=>!state[c[0]])};}
+/* ============ RENDER ============ */
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]]?' <button class="practice-tag" data-prac="'+c[0]+'" title="Marcar como consolidado">conheço → praticar</button>':"";
+  return '<li data-text="'+esc(c[1].toLowerCase())+'"><label class="item"><input type="checkbox" data-id="'+c[0]+'" '+checked+'><span class="txt">'+esc(c[1])+pr+'</span><span class="prio-pill prio-'+c[2]+'">'+c[2]+'</span></label></li>';}
+function projBox(p){const e=evState[p.id]||{nivel:"ESTUDADO",link:""};
+  const segs=EV_LEVELS.map(l=>'<button type="button" class="pill-tab'+(e.nivel===l?" active":"")+'" data-ev="'+p.id+'" data-nivel="'+l+'">'+l+'</button>').join("");
+  return '<div class="proj-box" data-proj="'+p.id+'"><h4>🛠️ Projeto obrigatório</h4><p>'+esc(p.titulo)+'</p><div class="ev-seg" role="group" aria-label="Nível de evidência">'+segs+'</div><input class="ev-link" data-evlink="'+p.id+'" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" value="'+esc(e.link||"")+'"></div>';}
+function renderGates(){
+  const host=document.getElementById("gates");let html="";
+  GATES.forEach((g,i)=>{const s=gateStats(g);const st=gateStatus(g,s);const tile=(i%3)+1;
+    html+='<section class="tile tile-'+tile+'" id="gate-'+g.id+'"><div class="wrap"><div class="tile-head"><p class="ref-time">'+esc(g.ref)+'</p><h2>'+esc(g.titulo)+'</h2><p>'+esc(g.objetivo)+' <b style="color:var(--on-dark)">Meta: '+g.threshold+'%.</b></p></div>';
+    html+='<div class="gate-card"><div class="gate-top"><span class="gate-title">'+g.id+' · '+esc(g.titulo)+'</span><span class="gate-meta">'+s.done+'/'+s.tot+' · '+s.pct+'%</span></div><div class="gate-status '+st[0]+'">'+st[1]+'</div><div class="bar-track"><div class="bar-fill" style="width:'+s.pct+'%"></div></div><p class="gate-criteria">Critérios mensuráveis</p><ul class="items">'+g.criterios.map(critLI).join("")+'</ul>'+projBox(g.projeto);
+    if(g.naoExige&&g.naoExige.length)html+='<p class="noexige">Não exige: '+g.naoExige.join(" · ")+'</p>';
+    html+='</div></div></section>';});
+  host.innerHTML=html;
+}
+function renderFront(){const s=frontStats();
+  document.getElementById("frontList").innerHTML='<div class="gate-card"><div class="gate-top"><span class="gate-title">F1 · '+esc(FRONT.titulo)+'</span><span class="gate-meta">'+s.d+'/'+s.t+' · '+s.pct+'% — meta 70%, nunca bloqueia Backend</span></div><p class="gate-obj">'+esc(FRONT.objetivo)+'</p><div class="bar-track"><div class="bar-fill green" style="width:'+s.pct+'%"></div></div><p class="gate-criteria">Critérios</p><ul class="items">'+FRONT.criterios.map(critLI).join("")+'</ul>'+projBox(FRONT.projeto)+'</div>';}
+function renderCand(){document.getElementById("candList").innerHTML=CAND.map(c=>'<li data-text="'+esc(c[1].toLowerCase())+'"><label class="item"><input type="checkbox" data-cand="'+c[0]+'" '+(candState[c[0]]?"checked":"")+ '><span class="txt">'+esc(c[1])+'</span></label></li>').join("");
+  const d=CAND.filter(c=>candState[c[0]]).length;document.getElementById("candMini").textContent=d+"/"+CAND.length;}
+function renderDif(){document.getElementById("difList").innerHTML=DIF.map((cat,ci)=>{const ids=cat.itens.map((_,ii)=>"d"+ci+"-item-"+ii);const d=ids.filter(id=>difState[id]).length;
+  return '<div class="dif-card"><div class="dif-head"><span class="dif-title">'+cat.icone+' '+esc(cat.categoria)+'</span><span class="dif-mini">'+d+'/'+ids.length+'</span></div><p class="dif-encaixe">encaixa bem: '+esc(cat.encaixe)+'</p><ul class="items">'+cat.itens.map((t,ii)=>{const id="d"+ci+"-item-"+ii;return '<li><label class="item"><input type="checkbox" data-dif="'+id+'" '+(difState[id]?"checked":"")+'><span class="txt">'+esc(t)+'</span></label></li>';}).join("")+'</ul></div>';}).join("");
+  let t=0,d=0;DIF.forEach((cat,ci)=>cat.itens.forEach((_,ii)=>{t++;if(difState["d"+ci+"-item-"+ii])d++;}));
+  const pct=t?Math.round(d/t*100):0;document.getElementById("difBar").style.width=pct+"%";document.getElementById("difCount").textContent=d+"/"+t+" ("+pct+"%)";}
+function renderVagas(){const host=document.getElementById("vagaList");
+  host.innerHTML=vagas.length?vagas.map((v,i)=>'<div class="vaga-item"><b style="color:var(--on-dark)">'+esc(v.t)+'</b><br><span style="color:var(--mute)">Requisitos:</span> '+esc(v.r)+'<br><span style="color:var(--accent-yellow)">Lacunas:</span> '+esc(v.l)+' <button data-del="'+i+'" type="button">remover</button></div>').join(""):'<p style="font-size:14px;color:var(--ash)">Nenhuma vaga registrada ainda.</p>';}
+function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f=frontStats();
+  document.getElementById("backendBar").style.width=b.pct+"%";document.getElementById("backendCount").textContent=b.d+"/"+b.t+" ("+b.pct+"%)";
+  document.getElementById("g2Bar").style.width=g2.pct+"%";document.getElementById("g2Count").textContent=g2.done+"/"+g2.tot+" ("+g2.pct+"%)";
+  document.getElementById("frontBar").style.width=f.pct+"%";document.getElementById("frontCount").textContent=f.d+"/"+f.t+" ("+f.pct+"%)";
+  document.getElementById("gateMini").textContent="G2 — Gate de Estágio · "+g2.pct+"%";
+  const nb=nextBlock();
+  if(nb.c){document.getElementById("nextTitle").textContent=nb.c[1];document.getElementById("nextDesc").textContent="Implemente e marque o critério. Competência > calendário.";
+    document.getElementById("nextGate").textContent=nb.g.id+" · restante: "+nb.g.criterios.filter(c=>!state[c[0]]).length;document.getElementById("nextRemaining").textContent=nb.g.titulo;
+    document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;
+    document.getElementById("hereText").textContent="Você está em: "+nb.g.id+" · "+nb.g.titulo+" — próximo: "+nb.c[1];}
+  else{document.getElementById("nextTitle").textContent=nb.g.projeto.titulo;document.getElementById("nextDesc").textContent="Critérios prontos — falta comprovar o projeto com link de evidência.";
+    document.getElementById("nextGate").textContent=nb.g.id+" · comprovar projeto";document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;
+    document.getElementById("hereText").textContent="Você está em: "+nb.g.id+" · "+nb.g.titulo;}
+  const trail=document.getElementById("gateTrail");
+  trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
+    return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
+  let done=0;GATES.forEach(g=>{if(gateStatus(g,gateStats(g))[0]==="green")done++;});if(frontStats().pct>=70)done++;
+  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";}
+/* ============ EVENTOS ============ */
+function bind(){
+  document.addEventListener("change",e=>{const t=e.target;
+    if(t.matches("input[data-id]")){state[t.getAttribute("data-id")]=t.checked;save(K.prog,state);if(t.checked)registerActivity();if(practice[t.getAttribute("data-id")]&&!t.checked)delete practice[t.getAttribute("data-id")];save(K.prac,practice);renderGates();renderFront();bind2();updateDash();reapplyFilter();}
+    if(t.matches("input[data-dif]")){difState[t.getAttribute("data-dif")]=t.checked;save(K.dif,difState);if(t.checked)registerActivity();renderDif();}
+    if(t.matches("input[data-cand]")){candState[t.getAttribute("data-cand")]=t.checked;save(K.cand,candState);if(t.checked)registerActivity();renderCand();}
   });
-
-  (function init(){
-    state = loadState();
-    difState = loadDifState();
-    streak = loadStreak();
-    updateStreakUI();
-    renderAll();
-    renderDiferenciais();
-  })();
-
+  document.addEventListener("click",e=>{const t=e.target;
+    if(t.matches("[data-ev]")){const pid=t.getAttribute("data-ev");const cur=evState[pid]||{nivel:"ESTUDADO",link:""};cur.nivel=t.getAttribute("data-nivel");evState[pid]=cur;save(K.ev,evState);registerActivity();renderGates();renderFront();bind2();updateDash();}
+    if(t.matches("[data-prac]")){e.preventDefault();const id=t.getAttribute("data-prac");delete practice[id];save(K.prac,practice);registerActivity();renderGates();renderFront();bind2();updateDash();}
+    if(t.matches("[data-del]")){vagas.splice(parseInt(t.getAttribute("data-del"),10),1);save(K.vagas,vagas);renderVagas();}
+  });
+  document.addEventListener("input",e=>{const t=e.target;
+    if(t.matches("[data-evlink]")){const pid=t.getAttribute("data-evlink");const cur=evState[pid]||{nivel:"ESTUDADO",link:""};cur.link=t.value;evState[pid]=cur;save(K.ev,evState);}
+  });
+  document.getElementById("vagaAdd").addEventListener("click",()=>{const t=document.getElementById("vagaTitulo").value.trim();if(!t)return;
+    vagas.push({t,r:document.getElementById("vagaReqs").value.trim(),l:document.getElementById("vagaLacunas").value.trim()});save(K.vagas,vagas);
+    document.getElementById("vagaTitulo").value="";document.getElementById("vagaReqs").value="";document.getElementById("vagaLacunas").value="";registerActivity();renderVagas();});
+  /* filtro ⌘K */
+  const input=document.getElementById("cmdk");
+  input.addEventListener("input",()=>{const q=input.value.trim().toLowerCase();
+    document.querySelectorAll("li[data-text]").forEach(li=>li.classList.toggle("hidden",q&&li.getAttribute("data-text").indexOf(q)<0));});
+  document.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();input.focus();}
+    if(e.key==="/"&&document.activeElement!==input){e.preventDefault();input.focus();}});
+  document.getElementById("resetBtn").addEventListener("click",()=>{if(!confirm("Zerar todo o progresso (gates, frontend, diferenciais, evidências, vagas, candidatura e streak)?"))return;
+    state={};difState={};evState={};candState={};vagas=[];practice={};streak={count:0,lastActive:null};
+    Object.values(K).forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});save(K.prog,state);
+    renderGates();renderFront();renderCand();renderDif();renderVagas();bind2();updateDash();updateStreak();});
+}
+function bind2(){/* re-anexo não necessário (delegação), mantido p/ clareza */}
+function reapplyFilter(){const input=document.getElementById("cmdk");const q=(input.value||"").trim().toLowerCase();
+  document.querySelectorAll("li[data-text]").forEach(li=>li.classList.toggle("hidden",!!q&&li.getAttribute("data-text").indexOf(q)<0));}
+/* ============ INIT ============ */
+migrate();updateStreak();renderGates();renderFront();renderCand();renderDif();renderVagas();bind();updateDash();
 })();
 </script>
 </body>

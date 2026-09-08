@@ -1,7 +1,8 @@
-# Roadmap Fullstack Java Júnior
+# Roadmap Java Backend → Júnior
 
-Dashboard interativo de um roadmap de 17 meses, saindo do bootcamp Santander/DIO
-rumo a uma vaga real de dev fullstack Java júnior.
+> **Nome do repositório mantido** (`roadmap-fullstack-java-junior`) por compatibilidade com o GitHub. **Posicionamento V2:** trilha Backend-first (80–90% Backend, 10–20% Frontend como trilha secundária que nunca bloqueia os Gates de Backend).
+
+Dashboard estático em `index.html` (sem build, GitHub Pages), agora orientado a **Gates de competência**: G0 Fundamentos → G1 Backend Foundation → **G2 Gate de Estágio** → G3 Backend Júnior → G4 Avançado, mais **F1 Frontend Complementar** (opcional).
 
 ## Por que isso existe
 
@@ -19,27 +20,37 @@ board no GitHub Projects como camada complementar de organização.
 └── .github/workflows/Pages.yml    # publica o index.html no GitHub Pages a cada push
 ```
 
-Não há build step nem framework: os dados do roadmap (os 17 meses e os
-diferenciais de mercado) ficam embutidos no próprio `index.html`, dentro do
-bloco `<script>`, nas constantes `roadmapData` e `diferenciaisData`. Editar o
-conteúdo é abrir o array, mudar o texto, commitar.
+Não há build step nem framework: os dados ficam embutidos no próprio `index.html`,
+dentro do bloco `<script>`, nas constantes `GATES` (G0–G4), `FRONT` (F1), `CAND`
+(candidatura) e `DIF` (diferenciais). Editar o conteúdo é abrir o array, mudar
+o texto, commitar. Visual segue o tema **Nocturne Gallery** (dark-only, Inter
+ss03, Action Sky `#2997ff`, tiles alternados, busca `⌘K` que filtra critérios);
+pills de prioridade usam os accents: `CORE` vermelho, `COMP` amarelo, `AVANC`
+azul, `FRONT` verde.
 
 ## Como o progresso funciona
 
-- Cada checkbox marcado é salvo em `localStorage`, no navegador — não depende
-  mais do Claude.ai nem de nenhum chat específico.
-- O indicador **"você está aqui"** não é mais calculado pela data do
-  calendário. Ele é sempre o primeiro mês com algum item pendente. Se a rotina
-  mudar (como já mudou uma vez), o roadmap não fica "desalinhado" — ele
-  acompanha o progresso real, não o relógio.
+- Cada checkbox é salvo em `localStorage` (`roadmap-progress`), mais
+  `roadmap-diferenciais`, `roadmap-streak`, `roadmap-evidencias`,
+  `roadmap-candidatura`, `roadmap-vagas`, `roadmap-practice` e a flag
+  `roadmap-v2-migrated`.
+- **Migração automática V1→V2:** na primeira carga, o progresso antigo
+  (`mX-item-Y`, `mX-project`, seed do bootcamp) é mapeado para os novos IDs
+  (`gX-…`, `f1-…`); itens do bootcamp entram marcados com o selo
+  **"conheço → praticar"** (clique para dar baixa ao consolidar); projetos V1
+  viram evidência `APLICADO` (o 🟢 exige `COMPROVADO` + link). Nada é apagado.
+- **Gates com 3 estados:** 🔴 Não pronto / 🟡 Pronto para avançar / 🟢 Gate
+  concluído (thresholds: G0 80, G1 80+projeto, G2 90+projeto, G3 85+prod,
+  G4 80, F1 70). Projeto só conta com nível `COMPROVADO` + link
+  (commit/PR/API/deploy) — checkbox sozinho não é prova.
+- **Dashboard separado:** Backend Core, G2 Estágio e Frontend têm barras
+  próprias (Frontend nunca mascara o Backend). **"Você está aqui"** =
+  primeira competência CORE pendente (competência > calendário).
 - Um contador de sequência (🔥) soma dias seguidos com pelo menos um item
   marcado.
-- Os itens que fazem parte do currículo oficial do bootcamp Santander/DIO já
-  entram marcados como concluídos (ele foi finalizado dentro do prazo, em
-  23/08/2026). Itens fora do currículo oficial do bootcamp continuam em
-  aberto, mesmo nos meses 1 e 2.
-- Os rótulos de período (ex: "~ Set/2026") são só uma referência de ritmo, não
-  um prazo travado — o `~` na frente é proposital.
+- Os itens do bootcamp Santander/DIO (concluído em 23/08/2026) entram
+  marcados como concluídos + selo "praticar".
+- Os rótulos de período (ex: "~ Set/2026") são só referência de ritmo.
 
 ## Colocar no ar
 
