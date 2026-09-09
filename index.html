@@ -129,6 +129,11 @@
   .ev-link::placeholder{color:var(--ash)}
   .noexige{font-size:13px;color:var(--mute);margin-top:10px}
   .ref-time{font-size:12px;color:var(--ash);text-transform:uppercase;letter-spacing:0.06em}
+  .explain-box{margin-top:16px;border:1px solid var(--hairline);border-radius:8px;padding:14px 16px;background:var(--tile-2)}
+  .tile-2 .explain-box{background:var(--tile-1)} .tile-3 .explain-box{background:var(--tile-2)}
+  .explain-box h4{font-size:13px;font-weight:600;color:var(--accent-blue);margin:0 0 8px;text-transform:uppercase;letter-spacing:0.04em}
+  .explain-box ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--body);line-height:1.7}
+  .indicator-note{font-size:12.5px;color:var(--ash);margin:8px 0 0;font-style:italic}
   /* ---------- SECONDARY SECTIONS ---------- */
   .sec-card{background:var(--tile-2);border:1px solid var(--hairline);border-radius:18px;padding:24px;margin-bottom:24px}
   .sec-card h3{font-size:18px;font-weight:500;color:var(--on-dark);margin:0 0 8px}
@@ -145,6 +150,11 @@
   .dif-title{font-size:15px;font-weight:600;color:var(--on-dark)}
   .dif-mini{font-size:12px;color:var(--mute)}
   .dif-encaixe{font-size:11px;color:var(--stone);text-transform:uppercase;letter-spacing:0.03em;margin:0 0 12px}
+  .ia-card{background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:24px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .ia-card>div h4{font-size:14px;font-weight:600;margin:0 0 10px}
+  .ia-card>div:first-child h4{color:var(--accent-green)} .ia-card>div:last-child h4{color:var(--accent-red)}
+  .ia-card ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.8;color:var(--body)}
+  @media (max-width:640px){.ia-card{grid-template-columns:1fr}}
   footer.footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:64px 24px;color:var(--mute);font-size:12px}
   .actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;max-width:1240px;margin:0 auto 18px;font-size:13px}
   #resetBtn{background:transparent;border:1px solid var(--hairline);color:var(--mute);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-family:var(--sans)}
@@ -222,7 +232,18 @@
 
 <main id="gates"></main>
 
-<section class="tile tile-1" id="frontend">
+<section class="tile tile-1" id="ia">
+  <div class="wrap">
+    <div class="tile-head"><h2>🧭 IA como ferramenta, não substituto</h2>
+    <p>Vale pra todos os Gates: usar IA pra acelerar não é trapaça — depender dela pra pensar por você é o risco real.</p></div>
+    <div class="ia-card">
+      <div><h4>✅ Pode usar IA para</h4><ul><li>Boilerplate (getters, DTOs repetitivos, configs)</li><li>Explicar uma mensagem de erro</li><li>Rascunhar documentação (README, comentários)</li><li>Gerar massa de dados de teste</li><li>Sugerir uma refatoração pra você avaliar</li></ul></div>
+      <div><h4>❌ Precisa conseguir sozinho</h4><ul><li>Explicar o próprio código, linha por linha, se perguntado</li><li>Escolher entre duas soluções e justificar por quê</li><li>Debugar sem colar o erro inteiro numa IA</li><li>Explicar decisões de arquitetura em entrevista</li><li>Resolver o núcleo do problema — IA ajuda na borda, não no centro</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="tile tile-2" id="frontend">
   <div class="wrap">
     <div class="tile-head"><h2>🟢 Trilha Secundária: Frontend</h2>
     <p>Existe para aumentar sua autonomia como Backend Developer. <b>Você não precisa concluí-la para atingir nenhum Gate de Backend (G0–G4).</b> Objetivo: criar uma interface funcional que consuma sua própria API e entender o frontend moderno — não se tornar especialista em React.</p></div>
@@ -232,7 +253,7 @@
   </div>
 </section>
 
-<section class="tile tile-2" id="nao-prioridade">
+<section class="tile tile-3" id="nao-prioridade">
   <div class="wrap">
     <div class="tile-head"><h2>❌ Não é prioridade agora</h2>
     <p>“Essas tecnologias podem ser importantes depois, mas não devem competir com os fundamentos da sua próxima etapa.” Antes de adicionar qualquer assunto, pergunte (regra de decisão): 1) é necessário p/ Java Backend? 2) aparece em vagas relevantes? 3) ajuda no próximo Gate? 4) tem aplicação prática? 5) é mais importante que o atual? Se não → Complementar / Avançado / Backlog.</p></div>
@@ -240,7 +261,7 @@
   </div>
 </section>
 
-<section class="tile tile-3" id="vagas">
+<section class="tile tile-1" id="vagas">
   <div class="wrap">
     <div class="tile-head"><h2>📊 Feedback do mercado</h2>
     <p>Ciclo: vagas reais ↓ requisitos ↓ comparar com roadmap ↓ lacunas ↓ estudar ↓ praticar ↓ atualizar roadmap.</p></div>
@@ -257,7 +278,7 @@
   </div>
 </section>
 
-<section class="tile tile-1" id="candidatura">
+<section class="tile tile-2" id="candidatura">
   <div class="wrap">
     <div class="tile-head"><h2>🚀 Preparação para estágio</h2>
     <p>Candidate-se assim que atingir o nível necessário — não espere o roadmap completo. Prioridade: <b>Java Backend → Estágio → Backend Júnior</b>.</p></div>
@@ -265,10 +286,10 @@
   </div>
 </section>
 
-<section class="tile tile-2" id="diferenciais">
+<section class="tile tile-3" id="diferenciais">
   <div class="wrap">
     <div class="tile-head"><h2>🌟 Diferenciais de mercado</h2>
-    <p>O que fica por cima dos Gates. Ordem de prioridade: competência &gt; prática &gt; projeto &gt; experiência &gt; portfólio &gt; <b>certificação (diferencial futuro, nunca obrigatória)</b>.</p></div>
+    <p>O que fica por cima dos Gates. Ordem de prioridade: competência &gt; prática &gt; projeto &gt; experiência &gt; portfólio &gt; <b>certificação (diferencial futuro, nunca obrigatória)</b>. Diferencial ≠ requisito de entrada.</p></div>
     <div class="sec-card"><div class="bar-top"><span>progresso em diferenciais</span><span class="count" id="difCount">0/0</span></div><div class="bar-track"><div class="bar-fill" id="difBar"></div></div></div>
     <div id="difList"></div>
     <div class="sec-card"><h3>🎓 A seu favor</h3><p>Graduação em Ciência da Computação em andamento é diferencial real em 2026. Leitura de documentação técnica em inglês destrava muita coisa, mesmo sem fluência.</p></div>
@@ -281,62 +302,70 @@
     <button id="resetBtn" type="button">Zerar progresso</button>
   </div>
   <p class="storage-warning">💾 Progresso salvo neste navegador (inclui evidências e vagas). Em outro dispositivo, use o GitHub como referência.</p>
-  <p class="sources">Fontes: bootcamp Santander/DIO AI Java Back-end; Roadmap Java 2026; Javanauta; roadmap.sh; vagas reais (Gupy, LinkedIn, Vagas.com.br, Indeed, Glassdoor); relatório Alura 2026 (IA aplicada, DevSecOps, performance). Repositório mantém o nome <b>roadmap-fullstack-java-junior</b> por compatibilidade.</p>
+  <p class="sources">Fontes: bootcamp Santander/DIO AI Java Back-end; Roadmap Java 2026; Javanauta; roadmap.sh; vagas reais (Gupy, LinkedIn, Vagas.com.br, Indeed, Glassdoor); relatório Alura 2026 (IA aplicada, DevSecOps, performance); versões conferidas em set/2026 (Spring Boot 4.1 sobre Spring Framework 7, Java 17+ mínimo).</p>
 </footer>
 
 <script>
 (function(){
 "use strict";
-/* ============ DADOS V2 ============ */
+/* ============ DADOS V3 ============ */
 const GATES=[
 {id:"G0",titulo:"Fundamentos de Programação Java",threshold:80,ref:"~ Set/2026 · Java + Git + SQL · CORE — sem aprofundar JVM/GC",
 objetivo:"Programar em Java sem depender de tutorial: estruturar → implementar → executar → corrigir.",
+explicar:["O que muda entre checked e unchecked exception","Por que Collections usa Generics (e o que dá errado sem eles)","Diferença entre composição e herança, com exemplo próprio"],
 criterios:[
 ["g0-01","Resolver 20 exercícios de lógica em Java","CORE"],["g0-02","≥80% de aproveitamento; ≥15 sem consultar solução","CORE"],
-["g0-03","Classes, objetos, métodos e encapsulamento na prática","CORE"],["g0-04","Composição e interfaces","CORE"],
+["g0-03","Classes, objetos, métodos e encapsulamento na prática","CORE"],["g0-04","Composição, herança, polimorfismo e interfaces","CORE"],
 ["g0-05","Collections (List/Set/Map/Queue) + Generics + Optional","CORE"],["g0-06","Exceptions: checked/unchecked, try-with-resources, customizadas","CORE"],
-["g0-07","Streams em situações apropriadas","CORE"],["g0-08","3 programas de console do zero, sem tutorial","CORE"],
-["g0-09","Git: init, add, commit, push, branches, merge, conflitos, .gitignore","CORE"],["g0-10","Linux básico: cd, ls, pwd, permissões","CORE"],
-["g0-11","SQL: SELECT, INSERT, UPDATE, DELETE, JOIN, PK/FK","CORE"],["g0-12","JVM e GC — visão conceitual (sem aprofundar agora)","COMP"]],
-projeto:{id:"g0-proj",titulo:"App de console 500+ linhas (banco, biblioteca, estoque ou tarefas), sem tutorial passo a passo."},naoExige:[]},
+["g0-07","Lambdas e Streams em situações apropriadas","CORE"],["g0-08","Maven básico: estrutura de projeto, dependências, ciclo de build","CORE"],
+["g0-09","3 programas de console do zero, sem tutorial","CORE"],["g0-10","Git: init, add, commit, push, branches, merge, conflitos, .gitignore","CORE"],
+["g0-11","Linux básico: cd, ls, pwd, permissões","CORE"],["g0-12","SQL: SELECT, INSERT, UPDATE, DELETE, JOIN, PK/FK","CORE"],
+["g0-13","JVM e GC — visão conceitual (sem aprofundar agora)","COMP"]],
+projeto:{id:"g0-proj",nome:"BiblioTrack",titulo:"Sistema de biblioteca em console (500+ linhas, sem tutorial) — serve pra POO, Collections, Exceptions, Generics e Streams trabalharem juntos num problema real, não isolados."},naoExige:[]},
 {id:"G1",titulo:"Backend Foundation — primeira API real",threshold:80,ref:"~ Out/2026 · Spring Boot + primeiro backend real · CORE",
 objetivo:"Construir uma API REST funcional com Spring Boot + PostgreSQL.",
+explicar:["O que é IoC e por que o Spring existe por causa disso","Diferença entre Service, Repository e Controller — o que cada um NÃO deveria fazer","Por que usar DTO em vez de expor a entidade JPA direto"],
 criterios:[
 ["g1-01","Criar projeto Spring Boot do zero","CORE"],["g1-02","5+ endpoints com CRUD completo","CORE"],
 ["g1-03","HTTP methods + status codes (explicar 404 vs 400 vs 422 sem consultar)","CORE"],["g1-04","DTOs + Bean Validation","CORE"],
 ["g1-05","Tratamento global de erros (@ControllerAdvice)","CORE"],["g1-06","Controller + Service + Repository + DI/IoC","CORE"],
 ["g1-07","Spring Data JPA + Hibernate","CORE"],["g1-08","PostgreSQL + 4 tabelas relacionadas + CRUD via JPA","CORE"],
 ["g1-09","5 queries SQL manuais + 3 JOINs + 1 agregada","CORE"],["g1-10","application.properties / profiles p/ múltiplos ambientes","CORE"],
-["g1-11","Lombok p/ boilerplate","COMP"],["g1-12","Paginação, filtros e versionamento de API","COMP"]],
-projeto:{id:"g1-proj",titulo:"API funcional: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres, README + instruções."},naoExige:[]},
+["g1-11","Migrations versionadas com Flyway (por que não usar apenas ddl-auto)","CORE"],
+["g1-12","Lombok p/ boilerplate","COMP"],["g1-13","Paginação, filtros e versionamento de API","COMP"]],
+projeto:{id:"g1-proj",nome:"TaskFlow",titulo:"API de tarefas: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres + Flyway, README + instruções."},naoExige:[]},
 {id:"G2",titulo:"🚀 Gate de Estágio Java Backend",threshold:90,ref:"~ Nov–Dez/2026 · Security + testes + Docker → COMEÇAR A SE CANDIDATAR",
 objetivo:"Estar tecnicamente pronto para candidaturas a estágio. Não exige React, AWS, K8s, Kafka ou microservices.",
+explicar:["Como o JWT prova que um usuário está autenticado sem guardar sessão no servidor","Por que hashear senha (e por que nunca comparar senha em texto puro)","O que um teste de integração cobre que um teste unitário não cobre"],
 criterios:[
 ["g2-01","30 problemas de programação, 80% de aproveitamento","CORE"],["g2-02","Explicar POO sem consultar; Collections/Exceptions/Streams adequados","CORE"],
 ["g2-03","Ler código Java desconhecido e explicar","CORE"],["g2-04","Banco relacional do zero: 5+ tabelas, PK/FK","CORE"],
 ["g2-05","JOIN, GROUP BY, HAVING, subquery, ORDER BY, LIMIT/OFFSET","CORE"],["g2-06","20+ consultas SQL escritas à mão","CORE"],
 ["g2-07","API sem tutorial: CRUD + DTO + Validation + JPA + Postgres + paginação + filtros + exceptions + docs","CORE"],
-["g2-08","15+ testes (service + controller + 1 integração)","CORE"],["g2-09","Login + hashing + JWT + rotas protegidas + autorização básica","CORE"],
-["g2-10","Branches + merge + 3 conflitos simulados + PR + commits claros","CORE"],["g2-11","Dockerfile + app em container + Postgres em container + Compose","CORE"],
+["g2-08","15+ testes com JUnit 5 + Mockito (service + controller + 1 integração)","CORE"],["g2-09","Login + hashing + JWT + rotas protegidas + autorização básica","CORE"],
+["g2-10","Branches + merge + 3 conflitos simulados + PR + commits claros + leitura de diff","CORE"],["g2-11","Dockerfile + app em container + Postgres em container + Compose","CORE"],
 ["g2-12","Projeto final no GitHub: Spring + Postgres + JPA + REST + DTO + Validation + JWT + Tests + Docker + README","CORE"],
 ["g2-13","Swagger/OpenAPI documentando a API","COMP"],["g2-14","Consumo de API externa (base OpenFeign do bootcamp)","COMP"]],
-projeto:{id:"g2-proj",titulo:"Projeto final validado: sobe com docker-compose, CRUD persiste, erros retornam adequadamente, README completo."},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
+projeto:{id:"g2-proj",nome:"TaskFlow — versão profissional",titulo:"Evolução do TaskFlow (G1): + JWT/autorização + Docker/Compose + testes de integração. Precisa subir com docker-compose, persistir, retornar erros corretos e ter README completo."},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
 {id:"G3",titulo:"Backend Júnior — práticas profissionais",threshold:85,ref:"~ 2027 · Arquitetura, testes, CI/CD, cloud, performance",
 objetivo:"Desenvolver e manter backend de verdade, em produção.",
+explicar:["Um trade-off arquitetural que você escolheu conscientemente e por quê","Como você encontraria uma query N+1 num projeto que não é seu","O que um pipeline de CI verde garante — e o que ele NÃO garante"],
 criterios:[
 ["g3-01","SOLID aplicado + responsabilidades separadas + decisões explicadas","CORE"],["g3-02","2 padrões de projeto conscientes + 1 refatoração real","CORE"],
 ["g3-03","50+ testes (unit + integração + Testcontainers) + pipeline executa testes","CORE"],["g3-04","Dockerfile otimizado + Compose + CI GitHub Actions (build + testes)","CORE"],
 ["g3-05","Deploy: API pública + banco remoto + HTTPS + env + logs + health check","CORE"],["g3-06","Performance: corrigir N+1, query desnecessária, índice ausente, paginação","CORE"],
-["g3-07","Redis: hit/miss + invalidação","COMP"],["g3-08","Observabilidade: logs estruturados, métricas, health checks","COMP"],
-["g3-09","Cloud (EC2/RDS/S3, noção→uso) + concorrência básica (threads/virtual threads)","COMP"]],
-projeto:{id:"g3-proj",titulo:"Backend em produção: URL pública + CI verde + logs + health check."},naoExige:[]},
+["g3-07","Documentação profissional da API e do projeto","CORE"],
+["g3-08","Redis: hit/miss + invalidação","COMP"],["g3-09","Observabilidade: logs estruturados, métricas, health checks","COMP"],
+["g3-10","Cloud (EC2/RDS/S3, noção→uso) + concorrência básica (threads/virtual threads)","COMP"]],
+projeto:{id:"g3-proj",nome:"TaskFlow em produção",titulo:"TaskFlow (G2) publicado: URL pública + banco remoto + CI verde + logs + health check."},naoExige:[]},
 {id:"G4",titulo:"Backend Avançado — sistemas complexos",threshold:80,ref:"2027+ · Mensageria, cache, concorrência, arquitetura",
 objetivo:"Lidar com problemas reais distribuídos (sem lista rígida de tecnologias obrigatórias).",
+explicar:["A diferença prática entre monólito modular e microservices — quando cada um vale a pena","O que idempotência resolve em mensageria, com um exemplo concreto","Um trade-off de escalabilidade que você aceitaria conscientemente"],
 criterios:[
 ["g4-01","Mensageria async (RabbitMQ ou Kafka): retry + DLQ + idempotência","AVANC"],["g4-02","Redis: hit/miss demonstrado + invalidação","AVANC"],
 ["g4-03","Concorrência: race/deadlock/starvation + CompletableFuture ou virtual threads em projeto","AVANC"],["g4-04","Observabilidade: logs estruturados + métricas + tracing + erro via logs","AVANC"],
 ["g4-05","Explicar monólito/modular/micro/async/consistência/escalabilidade/trade-offs","AVANC"],["g4-06","System design: disponibilidade + escalabilidade","AVANC"]],
-projeto:{id:"g4-proj",titulo:"Um projeto demonstrando aplicação real (mensageria OU cache OU concorrência)."},naoExige:[]}
+projeto:{id:"g4-proj",nome:"Capstone",titulo:"Projeto aberto demonstrando UM conceito avançado com profundidade real (mensageria OU cache OU concorrência) — não é sobre acumular tecnologia, é sobre resolver um problema que só existe nessa escala."},naoExige:[]}
 ];
 const FRONT={id:"F1",titulo:"Frontend Complementar",threshold:70,ref:"Paralelo e opcional em 2027 · menor carga",
 objetivo:"Consumir e apresentar sua própria API. Nunca bloqueia G0–G4.",
@@ -344,7 +373,7 @@ criterios:[
 ["f1-01","HTML semântico + CSS Flexbox/Grid + responsivo → página estática","FRONT"],["f1-02","JS: vars, tipos, condicionais, loops, arrays, funções, callbacks, arrow","FRONT"],
 ["f1-03","DOM, eventos, fetch, async/await → app consumindo API pública","FRONT"],["f1-04","TS: types, interfaces, generics, union, narrowing → reescrever projeto JS","FRONT"],
 ["f1-05","React: componentes, JSX, props, state, hooks, Router, formulários","FRONT"],["f1-06","Axios/fetch + login JWT + protected routes + CORS + env + erros UI","FRONT"]],
-projeto:{id:"f1-proj",titulo:"Interface React consumindo sua API Spring Boot (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres."}};
+projeto:{id:"f1-proj",nome:"TaskFlow UI",titulo:"Interface React consumindo o TaskFlow (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres."}};
 const CAND=[["cand-01","GitHub organizado (perfil, pins, READMEs)"],["cand-02","Projeto backend completo no ar/documentado"],["cand-03","README que mostra COMO você pensa"],["cand-04","Currículo focado em Backend"],["cand-05","LinkedIn com palavras-chave + posts sobre projetos"],["cand-06","Perguntas técnicas ensaiadas"],["cand-07","Histórias comportamentais (STAR)"],["cand-08","Simulação de entrevista"],["cand-09","Primeira candidatura enviada"]];
 /* Diferenciais: textos V1 preservados p/ manter chaves dX-item-Y */
 const DIF=[
@@ -355,7 +384,7 @@ const DIF=[
 {categoria:"Portfólio & prova social",icone:"🌐",encaixe:"contínuo, após G2",itens:["2-3 projetos com README que mostra COMO você pensa","Contribuir com open source (mesmo docs)","Compartilhar construção no LinkedIn"]}];
 const EV_LEVELS=["ESTUDADO","PRATICADO","APLICADO","COMPROVADO"];
 /* ============ STORAGE ============ */
-const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",mig:"roadmap-v2-migrated"};
+const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",mig:"roadmap-v2-migrated",mig3:"roadmap-v3-migrated"};
 const load=(k,f)=>{try{const r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null});
@@ -372,8 +401,8 @@ function migrate(){
   if(state["m1-item-1"]){state["g2-14"]=true;practice["g2-14"]=true;delete state["m1-item-1"];}
   if(state["m1-item-2"]){["d0-item-0","d0-item-1","d0-item-2"].forEach(id=>difState[id]=true);delete state["m1-item-2"];}
   /* demais itens por posição/tema */
-  const map={"m0-item-0":"g0-09","m0-item-1":"g0-10","m0-item-2":"g0-11","m0-item-4":"g0-05","m0-item-5":"g0-06","m0-item-6":"g0-12",
-  "m1-item-3":"g1-11","m1-item-4":"g1-12","m1-item-5":"g1-05","m1-item-6":"g1-10",
+  const map={"m0-item-0":"g0-10","m0-item-1":"g0-11","m0-item-2":"g0-12","m0-item-4":"g0-05","m0-item-5":"g0-06","m0-item-6":"g0-13",
+  "m1-item-3":"g1-12","m1-item-4":"g1-13","m1-item-5":"g1-05","m1-item-6":"g1-10",
   "m2-item-0":"g2-09","m2-item-1":"g2-08","m2-item-2":"g3-01","m2-item-4":"g2-10",
   "m3-item-0":"g2-05","m3-item-1":"g2-11",
   "m4-item-0":"f1-01","m4-item-1":"f1-01","m4-item-2":"f1-01",
@@ -390,9 +419,30 @@ function migrate(){
   Object.keys(map).forEach(from=>mv(from,map[from],false));
   /* projetos V1 → evidência APLICADO (crédito parcial; 🟢 exige COMPROVADO+link) */
   const projMap={"m1-project":"g1-proj","m2-project":"g3-01","m3-project":"g2-proj","m4-project":"f1-01","m5-project":"f1-03","m6-project":"f1-05","m7-project":"f1-proj","m8-project":"g3-proj","m10-project":"g4-proj","m11-project":"g4-proj","m0-project":"g0-proj"};
-  Object.keys(projMap).forEach(from=>{if(state[from]){const pid=projMap[from];if(!evState[pid])evState[pid]={nivel:"APLICADO",link:""};if(pid.indexOf("g")===0||pid.indexOf("f")===0){/* mantém */} delete state[from];}});
+  Object.keys(projMap).forEach(from=>{if(state[from]){const pid=projMap[from];if(!evState[pid])evState[pid]={nivel:"APLICADO",link:""};delete state[from];}});
   save(K.prog,state);save(K.dif,difState);save(K.ev,evState);save(K.prac,practice);
   localStorage.setItem(K.mig,"1");
+}
+/* ============ MIGRAÇÃO V2→V3 (novos critérios g0-08 Maven / g1-11 Flyway / g3-07 Documentação) ============ */
+function migrateV3(){
+  if(localStorage.getItem(K.mig3))return;
+  const shiftG0={"g0-08":"g0-09","g0-09":"g0-10","g0-10":"g0-11","g0-11":"g0-12","g0-12":"g0-13"};
+  const tmp={};
+  Object.keys(shiftG0).forEach(oldId=>{if(state[oldId]!==undefined){tmp[shiftG0[oldId]]=state[oldId];}});
+  delete state["g0-08"]; // slot novo (Maven) — não herda valor do item antigo que ocupava esse id
+  Object.keys(tmp).forEach(id=>{state[id]=tmp[id];});
+  const shiftG1={"g1-11":"g1-12","g1-12":"g1-13"};
+  const tmp1={};
+  Object.keys(shiftG1).forEach(oldId=>{if(state[oldId]!==undefined){tmp1[shiftG1[oldId]]=state[oldId];}});
+  delete state["g1-11"]; // slot novo (Flyway) — não herda valor do item antigo que ocupava esse id
+  Object.keys(tmp1).forEach(id=>{state[id]=tmp1[id];});
+  const shiftG3={"g3-07":"g3-08","g3-08":"g3-09","g3-09":"g3-10"};
+  const tmp2={};
+  Object.keys(shiftG3).forEach(oldId=>{if(state[oldId]!==undefined){tmp2[shiftG3[oldId]]=state[oldId];}});
+  delete state["g3-07"]; // slot novo (Documentação) — não herda valor do item antigo que ocupava esse id
+  Object.keys(tmp2).forEach(id=>{state[id]=tmp2[id];});
+  save(K.prog,state);
+  localStorage.setItem(K.mig3,"1");
 }
 /* ============ STREAK ============ */
 function todayStr(){return new Date().toISOString().slice(0,10)}
@@ -420,12 +470,14 @@ function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]
   return '<li data-text="'+esc(c[1].toLowerCase())+'"><label class="item"><input type="checkbox" data-id="'+c[0]+'" '+checked+'><span class="txt">'+esc(c[1])+pr+'</span><span class="prio-pill prio-'+c[2]+'">'+c[2]+'</span></label></li>';}
 function projBox(p){const e=evState[p.id]||{nivel:"ESTUDADO",link:""};
   const segs=EV_LEVELS.map(l=>'<button type="button" class="pill-tab'+(e.nivel===l?" active":"")+'" data-ev="'+p.id+'" data-nivel="'+l+'">'+l+'</button>').join("");
-  return '<div class="proj-box" data-proj="'+p.id+'"><h4>🛠️ Projeto obrigatório</h4><p>'+esc(p.titulo)+'</p><div class="ev-seg" role="group" aria-label="Nível de evidência">'+segs+'</div><input class="ev-link" data-evlink="'+p.id+'" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" value="'+esc(e.link||"")+'"></div>';}
+  const nome=p.nome?'<span style="color:var(--primary)">'+esc(p.nome)+'</span> — ':"";
+  return '<div class="proj-box" data-proj="'+p.id+'"><h4>🛠️ Projeto obrigatório</h4><p>'+nome+esc(p.titulo)+'</p><div class="ev-seg" role="group" aria-label="Nível de evidência">'+segs+'</div><input class="ev-link" data-evlink="'+p.id+'" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" value="'+esc(e.link||"")+'"></div>';}
 function renderGates(){
   const host=document.getElementById("gates");let html="";
   GATES.forEach((g,i)=>{const s=gateStats(g);const st=gateStatus(g,s);const tile=(i%3)+1;
+    const explainHTML=(g.explicar&&g.explicar.length)?'<div class="explain-box"><h4>💬 O que você precisa conseguir explicar</h4><ul>'+g.explicar.map(t=>'<li>'+esc(t)+'</li>').join("")+'</ul></div>':"";
     html+='<section class="tile tile-'+tile+'" id="gate-'+g.id+'"><div class="wrap"><div class="tile-head"><p class="ref-time">'+esc(g.ref)+'</p><h2>'+esc(g.titulo)+'</h2><p>'+esc(g.objetivo)+' <b style="color:var(--on-dark)">Meta: '+g.threshold+'%.</b></p></div>';
-    html+='<div class="gate-card"><div class="gate-top"><span class="gate-title">'+g.id+' · Meta '+g.threshold+'%</span><span class="gate-meta">'+s.done+'/'+s.tot+' · '+s.pct+'%</span></div><div class="gate-status '+st[0]+'">'+st[1]+'</div><div class="bar-track"><div class="bar-fill" style="width:'+s.pct+'%"></div></div><p class="gate-criteria">Critérios mensuráveis</p><ul class="items">'+g.criterios.map(critLI).join("")+'</ul>'+projBox(g.projeto);
+    html+='<div class="gate-card"><div class="gate-top"><span class="gate-title">'+g.id+' · Meta '+g.threshold+'%</span><span class="gate-meta">'+s.done+'/'+s.tot+' · '+s.pct+'%</span></div><div class="gate-status '+st[0]+'">'+st[1]+'</div><div class="bar-track"><div class="bar-fill" style="width:'+s.pct+'%"></div></div><p class="gate-criteria">Critérios mensuráveis</p><ul class="items">'+g.criterios.map(critLI).join("")+'</ul><p class="indicator-note">Números (ex: "20 exercícios", "500+ linhas") são indicadores de prática, não prova sozinha — o que conta é conseguir fazer, não bater a meta numérica.</p>'+projBox(g.projeto)+explainHTML;
     if(g.naoExige&&g.naoExige.length)html+='<p class="noexige">Não exige: '+g.naoExige.join(" · ")+'</p>';
     html+='</div></div></section>';});
   host.innerHTML=html;
@@ -491,7 +543,7 @@ function bind2(){/* re-anexo não necessário (delegação), mantido p/ clareza 
 function reapplyFilter(){const input=document.getElementById("cmdk");const q=(input.value||"").trim().toLowerCase();
   document.querySelectorAll("li[data-text]").forEach(li=>li.classList.toggle("hidden",!!q&&li.getAttribute("data-text").indexOf(q)<0));}
 /* ============ INIT ============ */
-migrate();updateStreak();renderGates();renderFront();renderCand();renderDif();renderVagas();bind();updateDash();
+migrate();migrateV3();updateStreak();renderGates();renderFront();renderCand();renderDif();renderVagas();bind();updateDash();
 })();
 </script>
 </body>
