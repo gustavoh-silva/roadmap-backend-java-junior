@@ -210,6 +210,7 @@
         <p id="nextDesc">—</p>
         <p><span class="badge-pro" id="nextGate">—</span> <span class="gate-mini" id="nextRemaining"></span></p>
         <a class="btn-ghost btn-small" href="#gates" id="nextGo">Ver critério</a>
+        <button class="btn-ghost btn-small" id="copyStatusBtn" type="button" style="margin-left:8px">📋 Copiar status pra IA</button>
       </div>
     </div>
 
@@ -510,6 +511,53 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
   let done=0;GATES.forEach(g=>{if(gateStatus(g,gateStats(g))[0]==="green")done++;});if(frontStats().pct>=70)done++;
   document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";}
+/* ============ EXPORTAR STATUS PRA IA (Gemini Guided Learning etc.) ============ */
+function generateStatusText(){
+  const nb=nextBlock();
+  const lines=[];
+  const hoje=new Date().toLocaleDateString("pt-BR");
+  lines.push("📍 Meu progresso no roadmap Java Backend → Júnior (gerado em "+hoje+")");
+  lines.push("");
+  const g=nb.g, s=gateStats(g), st=gateStatus(g,s);
+  lines.push("GATE ATUAL: "+g.id+" — "+g.titulo+" ("+s.pct+"% · meta "+g.threshold+"%) — "+st[1]);
+  lines.push("Objetivo do Gate: "+g.objetivo);
+  lines.push("");
+  const pendCore=g.criterios.filter(c=>c[2]==="CORE"&&!state[c[0]]).map(c=>c[1]);
+  if(pendCore.length){
+    lines.push("Critérios CORE pendentes neste Gate:");
+    pendCore.forEach(t=>lines.push("- "+t));
+  }else{
+    lines.push("Todos os critérios CORE deste Gate já estão marcados.");
+  }
+  lines.push("");
+  if(g.projeto){
+    const e=evState[g.projeto.id]||{nivel:"ESTUDADO",link:""};
+    lines.push("Projeto do Gate ("+(g.projeto.nome||g.projeto.titulo)+"): nível atual "+e.nivel+(e.link?" — com evidência registrada":" — ainda sem link de evidência"));
+  }
+  lines.push("");
+  lines.push("🚀 Próxima missão: "+(nb.c?nb.c[1]:"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)"));
+  lines.push("");
+  lines.push("🔥 Sequência atual: "+streak.count+(streak.count===1?" dia seguido":" dias seguidos"));
+  lines.push("");
+  lines.push("Contexto: sou estudante de Ciência da Computação com foco 80–90% em Java Backend (Spring Boot + PostgreSQL); Frontend é trilha secundária e não bloqueia meu progresso. Meta: começar a buscar estágio no fim de 2026 / início de 2027. Me ajude a estudar e praticar especificamente o item pendente acima, com exercícios e explicações — não sugira tecnologias fora do Gate atual (ex: nada de React, AWS, Kubernetes ou Kafka agora).");
+  return lines.join("\n");
+}
+function bindCopyStatus(){
+  const btn=document.getElementById("copyStatusBtn");
+  if(!btn)return;
+  btn.addEventListener("click",async ()=>{
+    const text=generateStatusText();
+    const orig=btn.textContent;
+    try{
+      await navigator.clipboard.writeText(text);
+      btn.textContent="✓ Copiado!";
+    }catch(e){
+      window.prompt("Copie o texto abaixo (Ctrl+C / Cmd+C) e cole no Gemini:",text);
+      btn.textContent="✓ Pronto";
+    }
+    setTimeout(()=>{btn.textContent=orig;},2200);
+  });
+}
 /* ============ EVENTOS ============ */
 function bind(){
   document.addEventListener("change",e=>{const t=e.target;
@@ -538,6 +586,7 @@ function bind(){
     state={};difState={};evState={};candState={};vagas=[];practice={};streak={count:0,lastActive:null};
     Object.values(K).forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});save(K.prog,state);
     renderGates();renderFront();renderCand();renderDif();renderVagas();bind2();updateDash();updateStreak();});
+  bindCopyStatus();
 }
 function bind2(){/* re-anexo não necessário (delegação), mantido p/ clareza */}
 function reapplyFilter(){const input=document.getElementById("cmdk");const q=(input.value||"").trim().toLowerCase();
