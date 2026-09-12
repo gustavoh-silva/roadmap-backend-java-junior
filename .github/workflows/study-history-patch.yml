@@ -1,0 +1,117 @@
+name: Apply study history feature
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch index.html
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* ============ HISTÓRICO DE ESTUDO + REVISÃO ============ */'
+          if marker in s:
+              print('Feature already applied.')
+              raise SystemExit(0)
+
+          css_anchor = '  .hidden{display:none !important}'
+          css = '''  .study-panel{margin-top:28px;background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:22px 24px}.study-panel-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.study-panel h3{margin:0 0 6px;color:var(--on-dark);font-size:20px;font-weight:500}.study-panel h4{margin:18px 0 10px;color:var(--on-dark);font-size:14px;font-weight:600}.study-panel p{margin:0;color:var(--mute);font-size:13px}.study-review-date{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ash);text-align:right}.study-review-date b{color:var(--on-dark);font-size:13px;text-transform:none;letter-spacing:0}.study-columns{display:grid;grid-template-columns:2fr 1fr;gap:24px}.study-event{border-top:1px solid var(--hairline);padding:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.study-event:first-child{border-top:0}.study-event b{color:var(--on-dark);font-size:13px}.study-event-date,.study-event-meta{font-size:11px;color:var(--ash)}.study-event-meta{display:block;margin-top:2px}.review-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.review-btn{background:transparent;color:var(--body);border:1px solid var(--hairline);border-radius:9999px;padding:5px 9px;font-size:11px;cursor:pointer}.review-btn.active{color:var(--on-dark);background:var(--tile-3);border-color:var(--hairline-strong)}.review-list{display:grid;gap:8px}.review-list>div{display:flex;justify-content:space-between;padding:10px 12px;background:var(--tile-2);border:1px solid var(--hairline);border-radius:8px;font-size:12px}.review-list span{color:var(--on-dark);font-weight:600}.study-empty{padding:12px 0}@media(max-width:760px){.study-panel-head,.study-event{flex-direction:column;align-items:flex-start}.study-review-date{text-align:left}.study-columns{grid-template-columns:1fr}.review-actions{justify-content:flex-start}}
+'''
+          if css_anchor not in s:
+              raise SystemExit('CSS anchor not found')
+          s = s.replace(css_anchor, css + css_anchor, 1)
+
+          storage_old = 'const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",mig:"roadmap-v2-migrated",mig3:"roadmap-v3-migrated"};'
+          storage_new = 'const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",history:"roadmap-study-history-v1",review:"roadmap-study-review-v1",mig:"roadmap-v2-migrated",mig3:"roadmap-v3-migrated"};'
+          if storage_old in s:
+              s=s.replace(storage_old,storage_new,1)
+          else:
+              raise SystemExit('Storage anchor not found')
+
+          state_old='let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null});'
+          state_new='let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null}),studyHistory=load(K.history,[]),reviewState=load(K.review,{date:null,items:{}});'
+          if state_old in s:s=s.replace(state_old,state_new,1)
+          else: raise SystemExit('State anchor not found')
+
+          anchor='function renderCand(){'
+          feature=r'''/* ============ HISTÓRICO DE ESTUDO + REVISÃO ============ */
+const STUDY_HISTORY_LIMIT=80;
+function saveStudyMeta(){save(K.history,studyHistory);save(K.review,reviewState);}
+function recentStudyEvents(days=14){const since=Date.now()-days*864e5;return studyHistory.filter(e=>e.ts>=since).sort((a,b)=>b.ts-a.ts);}
+function criterionLabel(id){for(const g of GATES)for(const c of g.criterios)if(c[0]===id)return{label:c[1],gate:g.id};for(const c of FRONT.criterios)if(c[0]===id)return{label:c[1],gate:FRONT.id};return{label:id,gate:""};}
+function projectLabel(id){for(const g of GATES)if(g.projeto&&g.projeto.id===id)return{label:g.projeto.nome||g.projeto.titulo,gate:g.id};if(FRONT.projeto&&FRONT.projeto.id===id)return{label:FRONT.projeto.nome||FRONT.projeto.titulo,gate:FRONT.id};return{label:id,gate:""};}
+function recordStudyEvent(type,id,status,label,gate){if(!id)return;const now=Date.now(),last=studyHistory[0];if(last&&last.id===id&&last.status===status&&now-last.ts<2*60*1000)return;studyHistory.unshift({ts:now,type,id,status,label,gate});studyHistory=studyHistory.slice(0,STUDY_HISTORY_LIMIT);saveStudyMeta();renderStudyPanel();}
+function markReview(id,status){reviewState.date=Date.now();reviewState.items[id]=status;saveStudyMeta();renderStudyPanel();}
+function reviewSummary(){const out={consolidated:[],reinforce:[],unproven:[]};Object.keys(reviewState.items||{}).forEach(id=>{const r=reviewState.items[id],item=studyHistory.find(e=>e.id===id);if(!item)return;const bucket=r==="CONSOLIDADO"?"consolidated":r==="REFORCAR"?"reinforce":"unproven";if(!out[bucket].some(x=>x.label===item.label))out[bucket].push(item);});return out;}
+function fmtStudyDate(ts){return new Date(ts).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});}
+function reviewButton(id,text,status){const active=(reviewState.items||{})[id]===status?" active":"";return '<button type="button" class="review-btn'+active+'" data-review="'+esc(id)+'" data-review-status="'+status+'">'+text+'</button>';}
+function renderStudyPanel(){let panel=document.getElementById("studyHistoryPanel");if(!panel){const anchor=document.querySelector(".hierarchy");if(!anchor||!anchor.parentNode)return;panel=document.createElement("section");panel.id="studyHistoryPanel";panel.className="study-panel";anchor.parentNode.insertBefore(panel,anchor.nextSibling);}const events=recentStudyEvents(14).filter(e=>e.type==="criterio"||e.type==="projeto").slice(0,10),reviewed=reviewSummary(),reviewDate=reviewState.date?new Date(reviewState.date).toLocaleDateString("pt-BR"):"Ainda não registrada";panel.innerHTML='<div class="study-panel-head"><div><p class="ref-time">Acompanhamento de estudo</p><h3>📚 Atividade recente</h3><p>Histórico dos últimos 14 dias e revisão rápida. Isso alimenta o contexto enviado para a IA.</p></div><div class="study-review-date">Última revisão<br><b>'+reviewDate+'</b></div></div><div class="study-columns"><div><h4>Trabalhado recentemente</h4>'+(events.length?events.map(e=>'<div class="study-event"><div><span class="study-event-date">'+fmtStudyDate(e.ts)+'</span> <b>'+esc(e.label)+'</b><span class="study-event-meta">'+esc(e.gate||"")+' · '+esc(e.status)+'</span></div><div class="review-actions">'+reviewButton(e.id,"✓ Consolidado","CONSOLIDADO")+reviewButton(e.id,"⚠ Reforçar","REFORCAR")+reviewButton(e.id,"○ Não comprovado","NAO_COMPROVADO")+'</div></div>').join(""):'<p class="study-empty">Nenhuma atividade recente registrada ainda. Marque um critério, pratique ou avance uma evidência para começar.</p>')+'</div><div><h4>Resultado da última revisão</h4><div class="review-list"><div><b>Consolidado</b><span>'+reviewed.consolidated.length+'</span></div><div><b>Precisa de reforço</b><span>'+reviewed.reinforce.length+'</span></div><div><b>Não comprovado</b><span>'+reviewed.unproven.length+'</span></div></div></div></div>';}
+'''
+          if anchor not in s: raise SystemExit('Render anchor not found')
+          s=s.replace(anchor,feature+'\n'+anchor,1)
+
+          # Add history to generated AI status immediately before the existing Contexto line.
+          ctx='  lines.push("Contexto: sou estudante de Ciência da Computação'
+          pos=s.find(ctx)
+          if pos<0: raise SystemExit('Context anchor not found')
+          ai=r'''  const events=recentStudyEvents(14).filter(e=>e.type==="criterio"||e.type==="projeto"),studied=[],practiced=[];events.forEach(e=>{const bucket=["PRATICADO","APLICADO","COMPROVADO"].includes(e.status)?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});const rs=reviewSummary();
+  lines.push("","📚 ESTUDADO RECENTEMENTE (últimos 14 dias):");if(studied.length)studied.slice(0,8).forEach(e=>lines.push("- ["+fmtStudyDate(e.ts)+"] "+e.label+(e.gate?" · "+e.gate:"")));else lines.push("- Nenhum item registrado como estudado neste período.");
+  lines.push("","🧪 PRATICADO / APLICADO RECENTEMENTE:");if(practiced.length)practiced.slice(0,8).forEach(e=>lines.push("- ["+fmtStudyDate(e.ts)+"] "+e.label+" — "+e.status+(e.gate?" · "+e.gate:"")));else lines.push("- Nenhuma prática/evidência registrada neste período.");
+  lines.push("","📝 ÚLTIMA REVISÃO: "+(reviewState.date?new Date(reviewState.date).toLocaleDateString("pt-BR"):"Ainda não registrada"));lines.push("- Consolidado: "+(rs.consolidated.length?rs.consolidated.map(e=>e.label).slice(0,8).join("; "):"nenhum item marcado"));lines.push("- Precisa de reforço: "+(rs.reinforce.length?rs.reinforce.map(e=>e.label).slice(0,8).join("; "):"nenhum item marcado"));lines.push("- Não comprovado: "+(rs.unproven.length?rs.unproven.map(e=>e.label).slice(0,8).join("; "):"nenhum item marcado"));
+'''
+          s=s[:pos]+ai+s[pos:]
+
+          # Record checkbox/practice/evidence events and review actions using the existing delegated listeners.
+          old='if(t.matches("input[data-id]")){state[t.getAttribute("data-id")]=t.checked;save(K.prog,state);if(t.checked)registerActivity();'
+          new='if(t.matches("input[data-id]")){const id=t.getAttribute("data-id");state[id]=t.checked;save(K.prog,state);if(t.checked){registerActivity();const x=criterionLabel(id);recordStudyEvent("criterio",id,"ESTUDADO",x.label,x.gate);}'
+          if old not in s: raise SystemExit('Checkbox listener anchor not found')
+          s=s.replace(old,new,1)
+
+          old='if(t.matches("[data-prac]")){e.preventDefault();const id=t.getAttribute("data-prac");delete practice[id];save(K.prac,practice);registerActivity();'
+          new='if(t.matches("[data-prac]")){e.preventDefault();const id=t.getAttribute("data-prac"),x=criterionLabel(id);delete practice[id];save(K.prac,practice);registerActivity();recordStudyEvent("criterio",id,"PRATICADO",x.label,x.gate);'
+          if old not in s: raise SystemExit('Practice listener anchor not found')
+          s=s.replace(old,new,1)
+
+          old='if(t.matches("[data-ev]")){const pid=t.getAttribute("data-ev");const cur=evState[pid]||{nivel:"ESTUDADO",link:""};cur.nivel=t.getAttribute("data-nivel");evState[pid]=cur;save(K.ev,evState);registerActivity();'
+          new='if(t.matches("[data-ev]")){const pid=t.getAttribute("data-ev"),level=t.getAttribute("data-nivel"),cur=evState[pid]||{nivel:"ESTUDADO",link:""};cur.nivel=level;evState[pid]=cur;save(K.ev,evState);registerActivity();const x=projectLabel(pid);recordStudyEvent("projeto",pid,level,x.label,x.gate);'
+          if old not in s: raise SystemExit('Evidence listener anchor not found')
+          s=s.replace(old,new,1)
+
+          # Insert review click handling before the existing delete-vaga handler.
+          anchor='    if(t.matches("[data-del]"))'
+          if anchor not in s: raise SystemExit('Click handler anchor not found')
+          s=s.replace(anchor,'    if(t.matches("[data-review]")){e.preventDefault();markReview(t.getAttribute("data-review"),t.getAttribute("data-review-status"));}\n'+anchor,1)
+
+          # Reset should also clear the two new stores; existing Object.values(K) removal handles persistence.
+          old='state={};difState={};evState={};candState={};vagas=[];practice={};streak={count:0,lastActive:null};'
+          new='state={};difState={};evState={};candState={};vagas=[];practice={};streak={count:0,lastActive:null};studyHistory=[];reviewState={date:null,items:{}};'
+          if old in s:s=s.replace(old,new,1)
+
+          # Render after initialization.
+          init='bind();updateDash();'
+          if init not in s: raise SystemExit('Init anchor not found')
+          s=s.replace(init,'bind();updateDash();renderStudyPanel();',1)
+          p.write_text(s,encoding='utf-8')
+          print('Study history feature applied.')
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No index changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "feat: add study history and review context"
+          git push
