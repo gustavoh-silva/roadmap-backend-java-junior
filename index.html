@@ -540,6 +540,11 @@ function generateStatusText(){
   lines.push("🔥 Sequência atual: "+streak.count+(streak.count===1?" dia seguido":" dias seguidos"));
   lines.push("");
   lines.push("Contexto: sou estudante de Ciência da Computação com foco 80–90% em Java Backend (Spring Boot + PostgreSQL); Frontend é trilha secundária e não bloqueia meu progresso. Meta: começar a buscar estágio no fim de 2026 / início de 2027. Me ajude a estudar e praticar especificamente o item pendente acima, com exercícios e explicações — não sugira tecnologias fora do Gate atual (ex: nada de React, AWS, Kubernetes ou Kafka agora).");
+  lines.push("");
+  lines.push("🧭 Diretriz de uso de IA (vale pra todos os Gates): usar IA pra acelerar não é trapaça — depender dela pra pensar por mim é que seria o risco.");
+  lines.push("Pode me ajudar com: boilerplate (getters, DTOs repetitivos, configs); explicar uma mensagem de erro; rascunhar documentação (README, comentários); gerar massa de dados de teste; sugerir uma refatoração pra eu avaliar.");
+  lines.push("Preciso continuar conseguindo sozinho: explicar meu próprio código linha por linha se for perguntado; escolher entre duas soluções e justificar por quê; debugar sem colar o erro inteiro numa IA; explicar decisões de arquitetura numa entrevista; resolver o núcleo do problema — me ajude na borda, não no centro.");
+  lines.push("Por favor: me guie com perguntas e pistas em vez de entregar pronta a solução do núcleo do problema pendente acima.");
   return lines.join("\n");
 }
 function bindCopyStatus(){
