@@ -402,10 +402,10 @@ const DIF=[
 {categoria:"Portfólio & prova social",icone:"🌐",encaixe:"contínuo, após G2",itens:["2-3 projetos com README que mostra COMO você pensa","Contribuir com open source (mesmo docs)","Compartilhar construção no LinkedIn"]}];
 const EV_LEVELS=["ESTUDADO","PRATICADO","APLICADO","COMPROVADO"];
 /* ============ STORAGE ============ */
-const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",history:"roadmap-study-history-v1",review:"roadmap-study-review-v1",mig:"roadmap-v2-migrated",mig3:"roadmap-v3-migrated"};
+const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",history:"roadmap-study-history-v1",review:"roadmap-study-review-v1",mig:"roadmap-v2-migrated",mig3:"roadmap-v3-migrated",comp:"roadmap-competence-v1",mig42:"roadmap-v4-2-migrated"};
 const load=(k,f)=>{try{const r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null}),studyHistory=load(K.history,[]),reviewState=load(K.review,{date:null,items:{}});
+let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null}),studyHistory=load(K.history,[]),reviewState=load(K.review,{date:null,items:{}}),compState=load(K.comp,{});
 /* ============ MIGRAÇÃO V1→V2 ============ */
 function migrate(){
   if(localStorage.getItem(K.mig))return;
@@ -461,6 +461,29 @@ function migrateV3(){
   Object.keys(tmp2).forEach(id=>{state[id]=tmp2[id];});
   save(K.prog,state);
   localStorage.setItem(K.mig3,"1");
+}
+function migrateV42(){
+  if(localStorage.getItem(K.mig42))return;
+  try{
+    GATES.forEach(g => g.criterios.forEach(c => {
+      const id = c[0];
+      if(!compState[id]) compState[id] = {
+        studied: state[id] ? Date.now() : null,
+        practiced: (state[id] && !practice[id]) ? Date.now() : null,
+        proven: false
+      };
+    }));
+    FRONT.criterios.forEach(c => {
+      const id = c[0];
+      if(!compState[id]) compState[id] = {
+        studied: state[id] ? Date.now() : null,
+        practiced: (state[id] && !practice[id]) ? Date.now() : null,
+        proven: false
+      };
+    });
+  }catch(e){}
+  save(K.comp,compState);
+  try{localStorage.setItem(K.mig42,"1")}catch(e){}
 }
 /* ============ STREAK ============ */
 function todayStr(){return new Date().toISOString().slice(0,10)}
@@ -655,7 +678,7 @@ function bind2(){/* re-anexo não necessário (delegação), mantido p/ clareza 
 function reapplyFilter(){const input=document.getElementById("cmdk");const q=(input.value||"").trim().toLowerCase();
   document.querySelectorAll("li[data-text]").forEach(li=>li.classList.toggle("hidden",!!q&&li.getAttribute("data-text").indexOf(q)<0));}
 /* ============ INIT ============ */
-migrate();migrateV3();updateStreak();renderGates();renderFront();renderCand();renderDif();renderVagas();bind();updateDash();renderStudyPanel();
+migrate();migrateV3();migrateV42();updateStreak();renderGates();renderFront();renderCand();renderDif();renderVagas();bind();updateDash();renderStudyPanel();
 })();
 </script>
 </body>
