@@ -573,7 +573,7 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   if(nb.c){document.getElementById("nextTitle").textContent=nb.c[1];document.getElementById("nextDesc").textContent="Implemente e marque o critério. Competência > calendário.";
     document.getElementById("nextGate").textContent=nb.g.id+" · "+nb.c[2]+" · restante: "+nb.g.criterios.filter(c=>!state[c[0]]).length;document.getElementById("nextRemaining").textContent=nb.g.titulo;
     document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
-  else{document.getElementById("nextTitle").textContent=nb.g.projeto.titulo;document.getElementById("nextDesc").textContent="Critérios prontos — falta comprovar o projeto com link de evidência.";
+  else{document.getElementById("nextTitle").textContent=nb.label||((nb.g.projeto&&nb.g.projeto.titulo)||nb.g.titulo);document.getElementById("nextDesc").textContent=nb.kind==="review"?"Reforce o item marcado para revisão. Explicar sem consultar.":"Critérios prontos — falta comprovar o projeto com link de evidência.";
     document.getElementById("nextGate").textContent=nb.g.id+" · "+nb.kind;document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
   const trail=document.getElementById("gateTrail");
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
