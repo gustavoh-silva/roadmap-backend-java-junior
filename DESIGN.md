@@ -560,9 +560,9 @@ There is no photography or product imagery. The only visuals are CSS-native: the
 
 **`current-location-card`** — localização explícita (spec V4 §6): tile-1, 18px, `ref-time` “Você está aqui”, título 20px on-dark `Gx — título · pct%`, linha `n/m CORE`, status 13px semibold texto+cor (red/yellow/green via accent-*). `role=status`, `aria-label="Você está aqui"`.
 
-**`competence-state` (stub V4.2)** — `state-studied` blue / `state-practiced` yellow / `state-proven` green / `state-reinforce` red / `state-unverified` neutro; texto+cor, nunca só cor. V4.1 usa proxy em `competenceStats()`; estados de primeira classe vêm na V4.2.
+**`competence-state`** — per-criterion Estudado → Praticado → Comprovado (spec V4 §§8–12): `.comp-states` flex-wrap group + `.comp-state` 11px semibold pills; studied blue-wash, practiced yellow-wash, proven green-wash + ✓, only when `aria-pressed="true"`; rest transparent/mute. Toggle semantics: studied/practiced store timestamps (null when off), proven flips boolean, no link required (links stay project-level). `aria-pressed` + `aria-label` on every button; `role="group"` + `aria-label="Estados de competência"`. Store `roadmap-competence-v1` (`{studied: ts|null, practiced: ts|null, proven: bool}`), one-shot `migrateV42()` from `state/practice`, flag `roadmap-v4-2-migrated`, old keys kept for rollback.
 
-**`review-panel` / `history-panel` / `ai-context-panel` / `export-panel` / `readiness-panel` (stubs V4.2–V4.5)** — reutilizar `section-card`, ladder tile-1/2/3, pills existentes.
+**`review-panel` / `history-panel`** — revisão datada + atividade recente (spec V4 §§17–18): counters Consolidado/Reforço/Não-comprovado resolvem labels via criterion/project lookup mesmo sem evento recente; até 3 atalhos ⚠ Reforçar alimentam o filtro ⌘K (`data-goto-filter`, valor fatiado em 40 chars); bloco de atalho omitido quando vazio. `ai-context-panel` / `export-panel` / `readiness-panel` seguem stubs V4.4–V4.5. comprovado% do dashboard é fração de critérios `proven` (+ projetos contam em seus próprios cards); após migração pode cair até o usuário marcar ✅ — comportamento esperado, não bug.
 
 ### Secondary Sections
 
