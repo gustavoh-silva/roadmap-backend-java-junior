@@ -345,7 +345,7 @@ criterios:[
 ["g0-09","3 programas de console do zero, sem tutorial","CORE"],["g0-10","Git: init, add, commit, push, branches, merge, conflitos, .gitignore","CORE"],
 ["g0-11","Linux básico: cd, ls, pwd, permissões","CORE"],["g0-12","SQL: SELECT, INSERT, UPDATE, DELETE, JOIN, PK/FK","CORE"],
 ["g0-13","JVM e GC — visão conceitual (sem aprofundar agora)","COMP"]],
-projeto:{id:"g0-proj",nome:"BiblioTrack",titulo:"Sistema de biblioteca em console (500+ linhas, sem tutorial) — serve pra POO, Collections, Exceptions, Generics e Streams trabalharem juntos num problema real, não isolados."},naoExige:[]},
+projeto:{id:"g0-proj",nome:"BiblioTrack",titulo:"Sistema de biblioteca em console (500+ linhas, sem tutorial) — serve pra POO, Collections, Exceptions, Generics e Streams trabalharem juntos num problema real, não isolados.",tech:["Java 17","Maven","Git"],comps:["g0-03","g0-04","g0-05","g0-06","g0-07","g0-09"],next:["500+ linhas sem tutorial","README com execução"],evidence:["Código no GitHub","README","Execução documentada"],base:null},naoExige:[]},
 {id:"G1",titulo:"Backend Foundation — primeira API real",threshold:80,ref:"~ Out/2026 · Spring Boot + primeiro backend real · CORE",
 objetivo:"Construir uma API REST funcional com Spring Boot + PostgreSQL.",
 explicar:["O que é IoC e por que o Spring existe por causa disso","Diferença entre Service, Repository e Controller — o que cada um NÃO deveria fazer","Por que usar DTO em vez de expor a entidade JPA direto"],
@@ -357,7 +357,7 @@ criterios:[
 ["g1-09","5 queries SQL manuais + 3 JOINs + 1 agregada","CORE"],["g1-10","application.properties / profiles p/ múltiplos ambientes","CORE"],
 ["g1-11","Migrations versionadas com Flyway (por que não usar apenas ddl-auto)","CORE"],
 ["g1-12","Lombok p/ boilerplate","COMP"],["g1-13","Paginação, filtros e versionamento de API","COMP"]],
-projeto:{id:"g1-proj",nome:"TaskFlow",titulo:"API de tarefas: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres + Flyway, README + instruções."},naoExige:[]},
+projeto:{id:"g1-proj",nome:"TaskFlow",titulo:"API de tarefas: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres + Flyway, README + instruções.",tech:["Java 17","Spring Boot","PostgreSQL","Flyway","JPA / Hibernate"],comps:["g1-02","g1-03","g1-04","g1-05","g1-06","g1-07","g1-08","g1-11"],next:["5+ endpoints no ar","4+ entidades relacionadas","README com instruções"],evidence:["Código no GitHub","README","Testes","API local"],base:null},naoExige:[]},
 {id:"G2",titulo:"🚀 Gate de Estágio Java Backend",threshold:90,ref:"~ Nov–Dez/2026 · Security + testes + Docker → COMEÇAR A SE CANDIDATAR",
 objetivo:"Estar tecnicamente pronto para candidaturas a estágio. Não exige React, AWS, K8s, Kafka ou microservices.",
 explicar:["Como o JWT prova que um usuário está autenticado sem guardar sessão no servidor","Por que hashear senha (e por que nunca comparar senha em texto puro)","O que um teste de integração cobre que um teste unitário não cobre"],
@@ -370,7 +370,7 @@ criterios:[
 ["g2-10","Branches + merge + 3 conflitos simulados + PR + commits claros + leitura de diff","CORE"],["g2-11","Dockerfile + app em container + Postgres em container + Compose","CORE"],
 ["g2-12","Projeto final no GitHub: Spring + Postgres + JPA + REST + DTO + Validation + JWT + Tests + Docker + README","CORE"],
 ["g2-13","Swagger/OpenAPI documentando a API","COMP"],["g2-14","Consumo de API externa (base OpenFeign do bootcamp)","COMP"]],
-projeto:{id:"g2-proj",nome:"TaskFlow — versão profissional",titulo:"Evolução do TaskFlow (G1): + JWT/autorização + Docker/Compose + testes de integração. Precisa subir com docker-compose, persistir, retornar erros corretos e ter README completo."},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
+projeto:{id:"g2-proj",nome:"TaskFlow — versão profissional",titulo:"Evolução do TaskFlow (G1): + JWT/autorização + Docker/Compose + testes de integração. Precisa subir com docker-compose, persistir, retornar erros corretos e ter README completo.",tech:["Spring Boot","JWT","Docker / Compose","JUnit 5 + Mockito","Swagger / OpenAPI"],comps:["g2-07","g2-08","g2-09","g2-10","g2-11","g2-12"],next:["JWT + rotas protegidas","Subir com docker-compose","Testes de integração"],evidence:["Código no GitHub","README completo","Testes","Docker Compose"],base:"g1-proj"},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
 {id:"G3",titulo:"Backend Júnior — práticas profissionais",threshold:85,ref:"~ 2027 · Arquitetura, testes, CI/CD, cloud, performance",
 objetivo:"Desenvolver e manter backend de verdade, em produção.",
 explicar:["Um trade-off arquitetural que você escolheu conscientemente e por quê","Como você encontraria uma query N+1 num projeto que não é seu","O que um pipeline de CI verde garante — e o que ele NÃO garante"],
@@ -381,7 +381,7 @@ criterios:[
 ["g3-07","Documentação profissional da API e do projeto","CORE"],
 ["g3-08","Redis: hit/miss + invalidação","COMP"],["g3-09","Observabilidade: logs estruturados, métricas, health checks","COMP"],
 ["g3-10","Cloud (EC2/RDS/S3, noção→uso) + concorrência básica (threads/virtual threads)","COMP"]],
-projeto:{id:"g3-proj",nome:"TaskFlow em produção",titulo:"TaskFlow (G2) publicado: URL pública + banco remoto + CI verde + logs + health check."},naoExige:[]},
+projeto:{id:"g3-proj",nome:"TaskFlow em produção",titulo:"TaskFlow (G2) publicado: URL pública + banco remoto + CI verde + logs + health check.",tech:["Docker","GitHub Actions","Redis","Cloud (EC2/RDS/S3)"],comps:["g3-03","g3-04","g3-05","g3-06","g3-07"],next:["Deploy com URL pública","CI verde","Logs + health check"],evidence:["Código no GitHub","CI verde","URL pública","Logs + health"],base:"g2-proj"},naoExige:[]},
 {id:"G4",titulo:"Backend Avançado — sistemas complexos",threshold:80,ref:"2027+ · Mensageria, cache, concorrência, arquitetura",
 objetivo:"Lidar com problemas reais distribuídos (sem lista rígida de tecnologias obrigatórias).",
 explicar:["A diferença prática entre monólito modular e microservices — quando cada um vale a pena","O que idempotência resolve em mensageria, com um exemplo concreto","Um trade-off de escalabilidade que você aceitaria conscientemente"],
@@ -389,7 +389,7 @@ criterios:[
 ["g4-01","Mensageria async (RabbitMQ ou Kafka): retry + DLQ + idempotência","AVANC"],["g4-02","Redis: hit/miss demonstrado + invalidação","AVANC"],
 ["g4-03","Concorrência: race/deadlock/starvation + CompletableFuture ou virtual threads em projeto","AVANC"],["g4-04","Observabilidade: logs estruturados + métricas + tracing + erro via logs","AVANC"],
 ["g4-05","Explicar monólito/modular/micro/async/consistência/escalabilidade/trade-offs","AVANC"],["g4-06","System design: disponibilidade + escalabilidade","AVANC"]],
-projeto:{id:"g4-proj",nome:"Capstone",titulo:"Projeto aberto demonstrando UM conceito avançado com profundidade real (mensageria OU cache OU concorrência) — não é sobre acumular tecnologia, é sobre resolver um problema que só existe nessa escala."},naoExige:[]}
+projeto:{id:"g4-proj",nome:"Capstone",titulo:"Projeto aberto demonstrando UM conceito avançado com profundidade real (mensageria OU cache OU concorrência) — não é sobre acumular tecnologia, é sobre resolver um problema que só existe nessa escala.",tech:["A definir pelo conceito"],comps:["g4-01","g4-02","g4-03","g4-04","g4-05","g4-06"],next:["Escolher UM conceito avançado","README com trade-offs"],evidence:["Código no GitHub","README de trade-offs","Demonstração"],base:null},naoExige:[]}
 ];
 const FRONT={id:"F1",titulo:"Frontend Complementar",threshold:70,ref:"Paralelo e opcional em 2027 · menor carga",
 objetivo:"Consumir e apresentar sua própria API. Nunca bloqueia G0–G4.",
@@ -397,7 +397,7 @@ criterios:[
 ["f1-01","HTML semântico + CSS Flexbox/Grid + responsivo → página estática","FRONT"],["f1-02","JS: vars, tipos, condicionais, loops, arrays, funções, callbacks, arrow","FRONT"],
 ["f1-03","DOM, eventos, fetch, async/await → app consumindo API pública","FRONT"],["f1-04","TS: types, interfaces, generics, union, narrowing → reescrever projeto JS","FRONT"],
 ["f1-05","React: componentes, JSX, props, state, hooks, Router, formulários","FRONT"],["f1-06","Axios/fetch + login JWT + protected routes + CORS + env + erros UI","FRONT"]],
-projeto:{id:"f1-proj",nome:"TaskFlow UI",titulo:"Interface React consumindo o TaskFlow (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres."}};
+projeto:{id:"f1-proj",nome:"TaskFlow UI",titulo:"Interface React consumindo o TaskFlow (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres.",tech:["React","TypeScript","Axios"],comps:["f1-05","f1-06"],next:["Login JWT na UI","CRUD completo consumindo a API"],evidence:["Código no GitHub","README","App consumindo a API"],base:"g2-proj"}};
 const CAND=[["cand-01","GitHub organizado (perfil, pins, READMEs)"],["cand-02","Projeto backend completo no ar/documentado"],["cand-03","README que mostra COMO você pensa"],["cand-04","Currículo focado em Backend"],["cand-05","LinkedIn com palavras-chave + posts sobre projetos"],["cand-06","Perguntas técnicas ensaiadas"],["cand-07","Histórias comportamentais (STAR)"],["cand-08","Simulação de entrevista"],["cand-09","Primeira candidatura enviada"]];
 /* Diferenciais: textos V1 preservados p/ manter chaves dX-item-Y */
 const DIF=[
