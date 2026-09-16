@@ -556,6 +556,14 @@ There is no photography or product imagery. The only visuals are CSS-native: the
 
 **`evidence-link-input`** — Full-width pill input for the proof link (commit/PR/API/deploy). No link + below-COMPROVADO = project doesn't count, and the gate header says so.
 
+**`mission-card`** — evolução do next-blocker (spec V4 §7): tile-1, 18px, título 24px (`card-big`), badge `Gx · CORE/COMP/kind`, CTA primário único “Começar missão →” (`button-primary btn-small`); secundário “Copiar status” permanece ghost. Prioridade: CORE gate atual → prática → evidência → revisão → comp.
+
+**`current-location-card`** — localização explícita (spec V4 §6): tile-1, 18px, `ref-time` “Você está aqui”, título 20px on-dark `Gx — título · pct%`, linha `n/m CORE`, status 13px semibold texto+cor (red/yellow/green via accent-*). `role=status`, `aria-label="Você está aqui"`.
+
+**`competence-state` (stub V4.2)** — `state-studied` blue / `state-practiced` yellow / `state-proven` green / `state-reinforce` red / `state-unverified` neutro; texto+cor, nunca só cor. V4.1 usa proxy em `competenceStats()`; estados de primeira classe vêm na V4.2.
+
+**`review-panel` / `history-panel` / `ai-context-panel` / `export-panel` / `readiness-panel` (stubs V4.2–V4.5)** — reutilizar `section-card`, ladder tile-1/2/3, pills existentes.
+
 ### Secondary Sections
 
 **`section-card`** — Generic tile-2 rounded-18px container for candidatura, vaga registration, and informational notes.
