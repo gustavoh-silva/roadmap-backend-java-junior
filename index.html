@@ -557,7 +557,8 @@ function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]
 function projBox(p){const e=evState[p.id]||{nivel:"ESTUDADO",link:""};
   const segs=EV_LEVELS.map(l=>'<button type="button" class="pill-tab'+(e.nivel===l?" active":"")+'" data-ev="'+p.id+'" data-nivel="'+l+'">'+l+'</button>').join("");
   const nome=p.nome?'<span style="color:var(--primary)">'+esc(p.nome)+'</span> — ':"";
-  return '<div class="proj-box" data-proj="'+p.id+'"><h4>🛠️ Projeto obrigatório</h4><p>'+nome+esc(p.titulo)+'</p><div class="ev-seg" role="group" aria-label="Nível de evidência">'+segs+'</div><input class="ev-link" data-evlink="'+p.id+'" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" value="'+esc(e.link||"")+'"></div>';}
+  const pr=projProgress(p);
+  return '<div class="proj-box" data-proj="'+p.id+'"><h4>🛠️ Projeto obrigatório</h4><p>'+nome+esc(p.titulo)+'</p><div class="ev-seg" role="group" aria-label="Nível de evidência">'+segs+'</div><input class="ev-link" data-evlink="'+p.id+'" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" value="'+esc(e.link||"")+'"><p class="indicator-note">Progresso do projeto: '+pr.pct+'% · '+pr.done+'/'+pr.tot+' competências praticadas · <a class="inline-link" href="#proj-'+p.id+'">Ver em Projetos →</a></p></div>';}
 function renderGates(){
   const host=document.getElementById("gates");let html="";
   GATES.forEach((g,i)=>{const s=gateStats(g);const st=gateStatus(g,s);const tile=(i%3)+1;
