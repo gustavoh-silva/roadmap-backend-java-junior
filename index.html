@@ -465,6 +465,11 @@ function nextBlock(){for(const g of GATES.slice(0,4)){for(const c of g.criterios
   for(const g of GATES.slice(0,4)){if(g.projeto&&!projOk(g.projeto.id))return{g,c:null,proj:true};}
   const g3=GATES[3],s3=gateStats(g3);if(s3.pct<85)return{g:g3,c:null};
   return{g:GATES[4],c:GATES[4].criterios.find(c=>!state[c[0]])};}
+function getCurrentGate(){
+  const nb = nextBlock();
+  const g = nb.g, s = gateStats(g);
+  return { g, s, st: gateStatus(g, s), nb };
+}
 /* ============ RENDER ============ */
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]]?' <button class="practice-tag" data-prac="'+c[0]+'" title="Marcar como consolidado">conheço → praticar</button>':"";
@@ -514,15 +519,15 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   document.getElementById("backendBar").style.width=b.pct+"%";document.getElementById("backendCount").textContent=b.d+"/"+b.t+" ("+b.pct+"%)";
   document.getElementById("g2Bar").style.width=g2.pct+"%";document.getElementById("g2Count").textContent=g2.done+"/"+g2.tot+" ("+g2.pct+"%)";
   document.getElementById("frontBar").style.width=f.pct+"%";document.getElementById("frontCount").textContent=f.d+"/"+f.t+" ("+f.pct+"%)";
-  document.getElementById("gateMini").textContent="G2 — Gate de Estágio · "+g2.pct+"%";
+  const { g, s } = getCurrentGate();
+  document.getElementById("hereText").textContent = g.id + " — " + g.titulo + " · " + s.pct + "% — " + g.objetivo;
+  document.getElementById("gateMini").textContent = g.id + " — " + g.titulo + " · " + s.pct + "%";
   const nb=nextBlock();
   if(nb.c){document.getElementById("nextTitle").textContent=nb.c[1];document.getElementById("nextDesc").textContent="Implemente e marque o critério. Competência > calendário.";
     document.getElementById("nextGate").textContent=nb.g.id+" · restante: "+nb.g.criterios.filter(c=>!state[c[0]]).length;document.getElementById("nextRemaining").textContent=nb.g.titulo;
-    document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;
-    document.getElementById("hereText").textContent="Você está em: "+nb.g.id+" · "+nb.g.titulo+" — próximo: "+nb.c[1];}
+    document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
   else{document.getElementById("nextTitle").textContent=nb.g.projeto.titulo;document.getElementById("nextDesc").textContent="Critérios prontos — falta comprovar o projeto com link de evidência.";
-    document.getElementById("nextGate").textContent=nb.g.id+" · comprovar projeto";document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;
-    document.getElementById("hereText").textContent="Você está em: "+nb.g.id+" · "+nb.g.titulo;}
+    document.getElementById("nextGate").textContent=nb.g.id+" · comprovar projeto";document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
   const trail=document.getElementById("gateTrail");
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
