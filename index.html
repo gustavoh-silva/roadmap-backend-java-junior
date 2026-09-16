@@ -625,7 +625,7 @@ function generateStatusText(){
   if(g.projeto){const e=evState[g.projeto.id]||{nivel:"ESTUDADO",link:""};lines.push("Projeto do Gate ("+(g.projeto.nome||g.projeto.titulo)+"): nível atual "+e.nivel+(e.link?" — com evidência registrada":" — ainda sem link de evidência"));}
   lines.push("","🚀 Próxima missão: "+(nb.c?nb.c[1]:"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)"),"","🔥 Sequência atual: "+streak.count+(streak.count===1?" dia seguido":" dias seguidos"));
   const events=recentStudyEvents(14).filter(e=>e.type==="criterio"||e.type==="projeto"),studied=[],practiced=[];
-  events.forEach(e=>{const off = e.status.endsWith("_OFF"); if(off) return;const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
+  events.forEach(e=>{const off = (e.status||"").endsWith("_OFF"); if(off) return;const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
   const rs=reviewSummary();
   lines.push("","📚 ESTUDADO RECENTEMENTE (últimos 14 dias):");
   if(studied.length)studied.slice(0,8).forEach(e=>lines.push("- ["+fmtStudyDate(e.ts)+"] "+e.label+(e.gate?" · "+e.gate:"")));else lines.push("- Nenhum item registrado como estudado neste período.");
