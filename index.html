@@ -481,7 +481,7 @@ function migrateV42(){
         proven: false
       };
     });
-  }catch(e){}
+  }catch(e){ save(K.comp,compState); return; }
   save(K.comp,compState);
   try{localStorage.setItem(K.mig42,"1")}catch(e){}
 }
