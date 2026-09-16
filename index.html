@@ -166,6 +166,12 @@
 .current-location-card .loc-status.red{color:var(--accent-red)}
 .current-location-card .loc-status.yellow{color:var(--accent-yellow)}
 .current-location-card .loc-status.green{color:var(--accent-green)}
+.comp-states{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.comp-state{font-size:11px;font-weight:600;letter-spacing:0.04em;border-radius:9999px;padding:2px 10px;border:1px solid var(--hairline);background:transparent;color:var(--mute);cursor:pointer;font-family:var(--sans)}
+.comp-state[aria-pressed="true"].cs-studied{color:var(--accent-blue);background:var(--accent-blue-soft);border-color:var(--accent-blue)}
+.comp-state[aria-pressed="true"].cs-practiced{color:var(--accent-yellow);background:var(--accent-yellow-soft);border-color:var(--accent-yellow)}
+.comp-state[aria-pressed="true"].cs-proven{color:var(--accent-green);background:var(--accent-green-soft);border-color:var(--accent-green)}
+.comp-state:focus-visible{outline:2px solid var(--primary-focus);outline-offset:2px}
 .hidden{display:none !important}
   a.inline-link{color:var(--primary);text-decoration:none}
   @media (max-width:1023px){.hero-grid{grid-template-columns:1fr}.global-nav .links{display:none}}
@@ -534,8 +540,11 @@ function nextMission(){
 }
 /* ============ RENDER ============ */
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+function compOf(id){ return compState[id] || { studied:null, practiced:null, proven:false }; }
 function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]]?' <button class="practice-tag" data-prac="'+c[0]+'" title="Marcar como consolidado">conheço → praticar</button>':"";
-  return '<li data-text="'+esc(c[1].toLowerCase())+'"><label class="item"><input type="checkbox" data-id="'+c[0]+'" '+checked+'><span class="txt">'+esc(c[1])+pr+'</span><span class="prio-pill prio-'+c[2]+'">'+c[2]+'</span></label></li>';}
+  const cs=compOf(c[0]);
+  const btn=(k,lbl)=>'<button type="button" class="comp-state cs-'+k+'" data-comp="'+c[0]+'" data-cstate="'+k+'" aria-pressed="'+(!!(k==="proven"?cs.proven:cs[k]))+'" aria-label="'+lbl+' — '+esc(c[1])+'">'+lbl+'</button>';
+  return '<li data-text="'+esc(c[1].toLowerCase())+'"><label class="item"><input type="checkbox" data-id="'+c[0]+'" '+checked+'><span class="txt">'+esc(c[1])+pr+'</span><span class="prio-pill prio-'+c[2]+'">'+c[2]+'</span></label><div class="comp-states" role="group" aria-label="Estados de competência">'+btn("studied","📚 Estudado")+btn("practiced","🧪 Praticado")+btn("proven","✅ Comprovado")+'</div></li>';}
 function projBox(p){const e=evState[p.id]||{nivel:"ESTUDADO",link:""};
   const segs=EV_LEVELS.map(l=>'<button type="button" class="pill-tab'+(e.nivel===l?" active":"")+'" data-ev="'+p.id+'" data-nivel="'+l+'">'+l+'</button>').join("");
   const nome=p.nome?'<span style="color:var(--primary)">'+esc(p.nome)+'</span> — ':"";
@@ -654,6 +663,7 @@ function bind(){
     if(t.matches("input[data-cand]")){candState[t.getAttribute("data-cand")]=t.checked;save(K.cand,candState);if(t.checked)registerActivity();renderCand();}
   });
   document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;
+    if(t.matches("[data-comp]")){e.preventDefault();const id=t.getAttribute("data-comp"),k=t.getAttribute("data-cstate");if(!compState[id])compState[id]={studied:null,practiced:null,proven:false};const cur=compState[id];if(k==="proven"){cur.proven=!cur.proven;}else{cur[k]=cur[k]?null:Date.now();}save(K.comp,compState);registerActivity();const x=criterionLabel(id);recordStudyEvent("criterio",id,k==="proven"?(cur.proven?"COMPROVADO":"COMPROVADO_OFF"):((k==="studied"?"ESTUDADO":"PRATICADO")+(cur[k]?"":"_OFF")),x.label,x.gate);renderGates();renderFront();bind2();updateDash();reapplyFilter();return;}
     if(t.matches("[data-ev]")){const pid=t.getAttribute("data-ev"),level=t.getAttribute("data-nivel"),cur=evState[pid]||{nivel:"ESTUDADO",link:""};cur.nivel=level;evState[pid]=cur;save(K.ev,evState);registerActivity();const x=projectLabel(pid);recordStudyEvent("projeto",pid,level,x.label,x.gate);renderGates();renderFront();bind2();updateDash();}
     if(t.matches("[data-prac]")){e.preventDefault();const id=t.getAttribute("data-prac"),x=criterionLabel(id);delete practice[id];save(K.prac,practice);registerActivity();recordStudyEvent("criterio",id,"PRATICADO",x.label,x.gate);renderGates();renderFront();bind2();updateDash();}
     if(t.matches("[data-review]")){e.preventDefault();markReview(t.getAttribute("data-review"),t.getAttribute("data-review-status"));}
