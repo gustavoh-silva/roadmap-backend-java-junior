@@ -161,7 +161,12 @@
   #resetBtn:hover{border-color:var(--accent-red);color:var(--accent-red)}
   .sources{max-width:1240px;margin:0 auto;line-height:1.7;color:var(--stone)}
   .storage-warning{max-width:1240px;margin:14px auto 0;color:var(--accent-yellow);background:var(--accent-yellow-soft);border:1px solid var(--accent-yellow);padding:9px 12px;border-radius:8px;font-size:12.5px}
-  .study-panel{margin-top:28px;background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:22px 24px}.study-panel-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.study-panel h3{margin:0 0 6px;color:var(--on-dark);font-size:20px;font-weight:500}.study-panel h4{margin:18px 0 10px;color:var(--on-dark);font-size:14px;font-weight:600}.study-panel p{margin:0;color:var(--mute);font-size:13px}.study-review-date{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ash);text-align:right}.study-review-date b{color:var(--on-dark);font-size:13px;text-transform:none;letter-spacing:0}.study-columns{display:grid;grid-template-columns:2fr 1fr;gap:24px}.study-event{border-top:1px solid var(--hairline);padding:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.study-event:first-child{border-top:0}.study-event b{color:var(--on-dark);font-size:13px}.study-event-date,.study-event-meta{font-size:11px;color:var(--ash)}.study-event-meta{display:block;margin-top:2px}.review-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.review-btn{background:transparent;color:var(--body);border:1px solid var(--hairline);border-radius:9999px;padding:5px 9px;font-size:11px;cursor:pointer}.review-btn.active{color:var(--on-dark);background:var(--tile-3);border-color:var(--hairline-strong)}.review-list{display:grid;gap:8px}.review-list>div{display:flex;justify-content:space-between;padding:10px 12px;background:var(--tile-2);border:1px solid var(--hairline);border-radius:8px;font-size:12px}.review-list span{color:var(--on-dark);font-weight:600}.study-empty{padding:12px 0}@media(max-width:760px){.study-panel-head,.study-event{flex-direction:column;align-items:flex-start}.study-review-date{text-align:left}.study-columns{grid-template-columns:1fr}.review-actions{justify-content:flex-start}}\n  .hidden{display:none !important}
+  .study-panel{margin-top:28px;background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:22px 24px}.study-panel-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.study-panel h3{margin:0 0 6px;color:var(--on-dark);font-size:20px;font-weight:500}.study-panel h4{margin:18px 0 10px;color:var(--on-dark);font-size:14px;font-weight:600}.study-panel p{margin:0;color:var(--mute);font-size:13px}.study-review-date{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ash);text-align:right}.study-review-date b{color:var(--on-dark);font-size:13px;text-transform:none;letter-spacing:0}.study-columns{display:grid;grid-template-columns:2fr 1fr;gap:24px}.study-event{border-top:1px solid var(--hairline);padding:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.study-event:first-child{border-top:0}.study-event b{color:var(--on-dark);font-size:13px}.study-event-date,.study-event-meta{font-size:11px;color:var(--ash)}.study-event-meta{display:block;margin-top:2px}.review-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.review-btn{background:transparent;color:var(--body);border:1px solid var(--hairline);border-radius:9999px;padding:5px 9px;font-size:11px;cursor:pointer}.review-btn.active{color:var(--on-dark);background:var(--tile-3);border-color:var(--hairline-strong)}.review-list{display:grid;gap:8px}.review-list>div{display:flex;justify-content:space-between;padding:10px 12px;background:var(--tile-2);border:1px solid var(--hairline);border-radius:8px;font-size:12px}.review-list span{color:var(--on-dark);font-weight:600}.study-empty{padding:12px 0}@media(max-width:760px){.study-panel-head,.study-event{flex-direction:column;align-items:flex-start}.study-review-date{text-align:left}.study-columns{grid-template-columns:1fr}.review-actions{justify-content:flex-start}}\n  .current-location-card{background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:24px}
+.current-location-card .loc-status{font-size:13px;font-weight:600}
+.current-location-card .loc-status.red{color:var(--accent-red)}
+.current-location-card .loc-status.yellow{color:var(--accent-yellow)}
+.current-location-card .loc-status.green{color:var(--accent-green)}
+.hidden{display:none !important}
   a.inline-link{color:var(--primary);text-decoration:none}
   @media (max-width:1023px){.hero-grid{grid-template-columns:1fr}.global-nav .links{display:none}}
   @media (max-width:640px){h1{font-size:34px}.tile-head h2{font-size:28px}.hero-tile,.tile{padding:48px 16px}.palette-search{max-width:100%}.global-nav{position:static}.sub-nav{top:0}}
@@ -198,18 +203,21 @@
         <h3>🎯 Objetivo</h3>
         <p class="big">Java Backend</p>
         <p id="hereText">Calculando sua posição…</p>
+        <!-- V4.1: sem % empregabilidade, sem horas — só registrado real -->
         <div class="bars">
           <div class="bar-row"><div class="bar-top"><span>BACKEND Core</span><span class="count" id="backendCount">0%</span></div><div class="bar-track"><div class="bar-fill" id="backendBar"></div></div></div>
           <div class="bar-row"><div class="bar-top"><span>G2 — GATE ESTÁGIO</span><span class="count" id="g2Count">0%</span></div><div class="bar-track"><div class="bar-fill yellow" id="g2Bar"></div></div></div>
           <div class="bar-row"><div class="bar-top"><span>FRONTEND — secundário</span><span class="count" id="frontCount">0%</span></div><div class="bar-track"><div class="bar-fill green" id="frontBar"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span>COMPETÊNCIAS · estudado / praticado / comprovado</span><span class="count" id="compCount">—</span></div><div class="bar-track"><div class="bar-fill" id="compBar"></div></div></div>
+          <p class="indicator-note">Checkbox = progresso. Comprovado exige projeto + link.</p>
         </div>
       </div>
       <div class="palette-card" id="proximo">
-        <h3>🚀 Próximo bloqueio</h3>
+        <h3>🎯 Próxima missão</h3>
         <p class="big" id="nextTitle">—</p>
         <p id="nextDesc">—</p>
         <p><span class="badge-pro" id="nextGate">—</span> <span class="gate-mini" id="nextRemaining"></span></p>
-        <a class="btn-ghost btn-small" href="#gates" id="nextGo">Ver critério</a>
+        <a class="btn-primary btn-small" href="#gates" id="nextGo">Começar missão →</a>
         <button class="btn-ghost btn-small" id="copyStatusBtn" type="button" style="margin-left:8px">📋 Copiar status pra IA</button>
       </div>
     </div>
@@ -230,6 +238,15 @@
     <div class="gate-trail" id="gateTrail"></div>
   </div>
 </header>
+
+<section class="tile tile-1" id="voce-esta-aqui" aria-label="Você está aqui">
+  <div class="wrap"><div class="current-location-card">
+    <p class="ref-time">Você está aqui</p>
+    <h2 id="currentGateTitle" style="font-size:20px;color:var(--on-dark);margin:0 0 6px">—</h2>
+    <p id="currentGateCore" style="font-size:14px;margin:0 0 8px">—</p>
+    <p class="loc-status" id="currentGateStatus" role="status">—</p>
+  </div></div>
+</section>
 
 <main id="gates"></main>
 
@@ -302,7 +319,7 @@
     <span id="doneGates">0 de 6 gates concluídos</span>
     <button id="resetBtn" type="button">Zerar progresso</button>
   </div>
-  <p class="storage-warning">💾 Progresso salvo neste navegador (inclui evidências e vagas). Em outro dispositivo, use o GitHub como referência.</p>
+  <p class="storage-warning">💾 Progresso salvo neste navegador (inclui evidências e vagas). Em outro dispositivo, use o GitHub como referência. Métricas mostram apenas o registrado neste navegador.</p>
   <p class="sources">Fontes: bootcamp Santander/DIO AI Java Back-end; Roadmap Java 2026; Javanauta; roadmap.sh; vagas reais (Gupy, LinkedIn, Vagas.com.br, Indeed, Glassdoor); relatório Alura 2026 (IA aplicada, DevSecOps, performance); versões conferidas em set/2026 (Spring Boot 4.1 sobre Spring Framework 7, Java 17+ mínimo).</p>
 </footer>
 
@@ -461,10 +478,37 @@ function gateStatus(g,s){if(g.criterios.length&&s.done===g.criterios.length&&(!g
   return["red","🔴 Não pronto"];}
 function backendCore(){let t=0,d=0;GATES.slice(0,4).forEach(g=>g.criterios.forEach(c=>{if(c[2]==="CORE"){t++;if(state[c[0]])d++;}}));return{t,d,pct:t?Math.round(d/t*100):0};}
 function frontStats(){const t=FRONT.criterios.length,d=FRONT.criterios.filter(c=>state[c[0]]).length;return{t,d,pct:t?Math.round(d/t*100):0};}
+// V4.1 proxy: praticado = checked sem tag prática; estados plenos vêm na V4.2
+function competenceStats(){
+  let tot=0, est=0, pra=0;
+  GATES.slice(0,4).forEach(g => g.criterios.forEach(c => {
+    tot++; if(state[c[0]]) est++;
+    if(state[c[0]] && !practice[c[0]]) pra++;
+  }));
+  const projs = GATES.slice(0,4).map(g=>g.projeto.id);
+  const comp = projs.filter(pid => projOk(pid)).length;
+  return { estudadoPct: tot?Math.round(est/tot*100):0, praticadoPct: tot?Math.round(pra/tot*100):0, comprovadoPct: Math.round(comp/projs.length*100) };
+}
 function nextBlock(){for(const g of GATES.slice(0,4)){for(const c of g.criterios){if(c[2]==="CORE"&&!state[c[0]])return{g,c};}}
   for(const g of GATES.slice(0,4)){if(g.projeto&&!projOk(g.projeto.id))return{g,c:null,proj:true};}
   const g3=GATES[3],s3=gateStats(g3);if(s3.pct<85)return{g:g3,c:null};
   return{g:GATES[4],c:GATES[4].criterios.find(c=>!state[c[0]])};}
+function getCurrentGate(){
+  const nb = nextBlock();
+  const g = nb.g, s = gateStats(g);
+  return { g, s, st: gateStatus(g, s), nb };
+}
+function nextMission(){
+  const cur = getCurrentGate().g;
+  const corePend = cur.criterios.find(c => c[2]==="CORE" && !state[c[0]]);
+  if(corePend) return { kind:"core", g:cur, c:corePend, label:corePend[1] };
+  const pracPend = cur.criterios.find(c => practice[c[0]] && !state[c[0]]);
+  if(pracPend) return { kind:"practice", g:cur, c:pracPend, label:pracPend[1] };
+  if(cur.projeto && !projOk(cur.projeto.id)) return { kind:"evidence", g:cur, c:null, label:"Comprovar projeto " + (cur.projeto.nome||cur.projeto.titulo) };
+  const reinf = Object.keys(reviewState.items||{}).find(id => reviewState.items[id]==="REFORCAR");
+  if(reinf){ try{ const x = criterionLabel(reinf); return { kind:"review", g:cur, c:null, label:"Revisar: "+x.label }; }catch(e){} }
+  const fb = nextBlock(); return { kind:"comp", g:fb.g, c:fb.c||null, label: fb.c?fb.c[1]:(fb.g.projeto?fb.g.projeto.titulo:fb.g.titulo) };
+}
 /* ============ RENDER ============ */
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]]?' <button class="practice-tag" data-prac="'+c[0]+'" title="Marcar como consolidado">conheço → praticar</button>':"";
@@ -514,15 +558,23 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   document.getElementById("backendBar").style.width=b.pct+"%";document.getElementById("backendCount").textContent=b.d+"/"+b.t+" ("+b.pct+"%)";
   document.getElementById("g2Bar").style.width=g2.pct+"%";document.getElementById("g2Count").textContent=g2.done+"/"+g2.tot+" ("+g2.pct+"%)";
   document.getElementById("frontBar").style.width=f.pct+"%";document.getElementById("frontCount").textContent=f.d+"/"+f.t+" ("+f.pct+"%)";
-  document.getElementById("gateMini").textContent="G2 — Gate de Estágio · "+g2.pct+"%";
-  const nb=nextBlock();
+  const cs = competenceStats();
+  const cc = document.getElementById("compCount"), cb = document.getElementById("compBar");
+  if(cc) cc.textContent = cs.estudadoPct + "% est · " + cs.praticadoPct + "% pra · " + cs.comprovadoPct + "% comp";
+  if(cb) cb.style.width = cs.estudadoPct + "%";
+  const { g, s } = getCurrentGate();
+  const cgT = document.getElementById("currentGateTitle"), cgC = document.getElementById("currentGateCore"), cgS = document.getElementById("currentGateStatus");
+  if(cgT) cgT.textContent = g.id + " — " + g.titulo + " · " + s.pct + "% do Gate";
+  if(cgC) cgC.textContent = s.coreDone + "/" + s.coreTot + " critérios CORE";
+  if(cgS){ const _st = gateStatus(g, s); cgS.textContent = _st[1]; cgS.className = "loc-status " + _st[0]; }
+  document.getElementById("hereText").textContent = g.id + " — " + g.titulo + " · " + s.pct + "% — " + g.objetivo;
+  document.getElementById("gateMini").textContent = g.id + " — " + g.titulo + " · " + s.pct + "%";
+  const nb=nextMission();
   if(nb.c){document.getElementById("nextTitle").textContent=nb.c[1];document.getElementById("nextDesc").textContent="Implemente e marque o critério. Competência > calendário.";
-    document.getElementById("nextGate").textContent=nb.g.id+" · restante: "+nb.g.criterios.filter(c=>!state[c[0]]).length;document.getElementById("nextRemaining").textContent=nb.g.titulo;
-    document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;
-    document.getElementById("hereText").textContent="Você está em: "+nb.g.id+" · "+nb.g.titulo+" — próximo: "+nb.c[1];}
-  else{document.getElementById("nextTitle").textContent=nb.g.projeto.titulo;document.getElementById("nextDesc").textContent="Critérios prontos — falta comprovar o projeto com link de evidência.";
-    document.getElementById("nextGate").textContent=nb.g.id+" · comprovar projeto";document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;
-    document.getElementById("hereText").textContent="Você está em: "+nb.g.id+" · "+nb.g.titulo;}
+    document.getElementById("nextGate").textContent=nb.g.id+" · "+nb.c[2]+" · restante: "+nb.g.criterios.filter(c=>!state[c[0]]).length;document.getElementById("nextRemaining").textContent=nb.g.titulo;
+    document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
+  else{document.getElementById("nextTitle").textContent=nb.label||((nb.g.projeto&&nb.g.projeto.titulo)||nb.g.titulo);document.getElementById("nextDesc").textContent=nb.kind==="review"?"Reforce o item marcado para revisão. Explicar sem consultar.":"Critérios prontos — falta comprovar o projeto com link de evidência.";
+    document.getElementById("nextGate").textContent=nb.g.id+" · "+nb.kind;document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
   const trail=document.getElementById("gateTrail");
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
