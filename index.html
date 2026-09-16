@@ -680,8 +680,8 @@ function bind(){
   const input=document.getElementById("cmdk");
   input.addEventListener("input",()=>{const q=input.value.trim().toLowerCase();document.querySelectorAll("li[data-text]").forEach(li=>li.classList.toggle("hidden",q&&li.getAttribute("data-text").indexOf(q)<0));});
   document.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();input.focus();}if(e.key==="/"&&document.activeElement!==input){e.preventDefault();input.focus();}});
-  document.getElementById("resetBtn").addEventListener("click",()=>{if(!confirm("Zerar todo o progresso (gates, frontend, diferenciais, evidências, vagas, candidatura, histórico de estudo, revisão e streak)?"))return;
-    state={};difState={};evState={};candState={};vagas=[];practice={};streak={count:0,lastActive:null};studyHistory=[];reviewState={date:null,items:{}};
+  document.getElementById("resetBtn").addEventListener("click",()=>{if(!confirm("Zerar todo o progresso (gates, frontend, diferenciais, evidências, vagas, candidatura, histórico de estudo, revisão, competências e streak)?"))return;
+    state={};difState={};evState={};candState={};vagas=[];practice={};streak={count:0,lastActive:null};studyHistory=[];reviewState={date:null,items:{}};compState={};
     Object.values(K).forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});save(K.prog,state);renderGates();renderFront();renderCand();renderDif();renderVagas();bind2();updateDash();updateStreak();renderStudyPanel();});
   bindCopyStatus();
 }
