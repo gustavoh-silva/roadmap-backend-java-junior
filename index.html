@@ -186,7 +186,7 @@
 <nav class="global-nav" aria-label="Navegação principal">
   <span class="wordmark">Roadmap Java Backend → Júnior</span>
   <div class="links">
-    <a href="#gates">Gates</a><a href="#frontend">Frontend</a><a href="#vagas">Vagas</a><a href="#candidatura">Estágio</a><a href="#diferenciais">Diferenciais</a>
+    <a href="#gates">Gates</a><a href="#projetos">Projetos</a><a href="#frontend">Frontend</a><a href="#vagas">Vagas</a><a href="#candidatura">Estágio</a><a href="#diferenciais">Diferenciais</a>
   </div>
   <span class="streak-pill" id="streakPill">🔥 0 dias seguidos</span>
 </nav>
@@ -255,6 +255,13 @@
 </section>
 
 <main id="gates"></main>
+
+<section class="tile tile-2" id="projetos">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Linha de evolução</p><h2>🛠️ Projetos</h2><p>Cada projeto transforma competência em evidência. O progresso combina nível de evidência com competências praticadas.</p></div>
+    <div id="projList"></div>
+  </div>
+</section>
 
 <section class="tile tile-1" id="ia">
   <div class="wrap">
@@ -563,6 +570,22 @@ function renderGates(){
 }
 function renderFront(){const s=frontStats();
   document.getElementById("frontList").innerHTML='<div class="gate-card"><div class="gate-top"><span class="gate-title">F1 · Trilha opcional</span><span class="gate-meta">'+s.d+'/'+s.t+' · '+s.pct+'% — meta 70%, nunca bloqueia Backend</span></div><p class="gate-obj">'+esc(FRONT.objetivo)+'</p><div class="bar-track"><div class="bar-fill green" style="width:'+s.pct+'%"></div></div><p class="gate-criteria">Critérios</p><ul class="items">'+FRONT.criterios.map(critLI).join("")+'</ul>'+projBox(FRONT.projeto)+'</div>';}
+function projById(pid){for(const g of GATES){if(g.projeto&&g.projeto.id===pid)return{proj:g.projeto,gate:g};}if(FRONT.projeto&&FRONT.projeto.id===pid)return{proj:FRONT.projeto,gate:FRONT};return null;}
+function compStatusIcon(id){const c=compOf(id);if(c.proven)return '<span style="color:var(--accent-green)">✓</span>';if(c.practiced)return '<span style="color:var(--accent-yellow)">🧪</span>';if(c.studied)return '<span style="color:var(--accent-blue)">📚</span>';return '<span style="color:var(--mute)">○</span>';}
+function renderProjects(){
+  const host=document.getElementById("projList");if(!host)return;
+  const all=[];GATES.forEach(g=>{if(g.projeto)all.push({proj:g.projeto,gate:g});});if(FRONT.projeto)all.push({proj:FRONT.projeto,gate:FRONT});
+  host.innerHTML=all.map(({proj:p,gate:g})=>{
+    const pr=projProgress(p);const e=evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const checks=e.checks||{};
+    const baseLine=p.base?(()=>{const b=projById(p.base);return b?'<p class="dif-encaixe">evolução de '+esc(b.proj.nome||b.proj.id)+' ('+b.gate.id+')</p>':'';})():'';
+    const techs=(p.tech||[]).map(t=>'<li>'+esc(t)+'</li>').join("");
+    const comps=(p.comps||[]).map(id=>{let lab=id,gt="";try{const c=criterionLabel(id);lab=c.label;gt=c.gate;}catch(_){};return '<li data-text="'+esc(lab.toLowerCase())+'"><div class="study-event"><div>'+compStatusIcon(id)+' <b>'+esc(lab)+'</b><span class="study-event-meta">'+esc(gt)+'</span></div></div></li>';}).join("");
+    const evs=(p.evidence||[]).map((lbl,i)=>{const on=!!checks[i];return '<button type="button" class="review-btn'+(on?" active":"")+'" data-pcheck="'+p.id+'" data-pcheck-idx="'+i+'" aria-pressed="'+on+'" aria-label="Evidência: '+esc(lbl)+'">'+(on?"✓ ":"○ ")+esc(lbl)+'</button>';}).join("");
+    const steps=(p.next||[]).map(s=>'<li>'+esc(s)+'</li>').join("");
+    const open=e.link?'<a class="btn-ghost btn-small" href="'+esc(e.link)+'" target="_blank" rel="noopener">Abrir evidência →</a>':'<a class="btn-ghost btn-small" href="#gate-'+g.id+'">Ver no gate →</a>';
+    return '<div class="gate-card" id="proj-'+p.id+'"><div class="gate-top"><span class="gate-title">'+esc(p.nome||p.id)+'</span><span class="gate-meta">'+g.id+' · '+(e.nivel||"ESTUDADO")+' · '+pr.pct+'%</span></div>'+baseLine+'<p class="gate-obj">'+esc(p.titulo)+'</p><div class="bar-track"><div class="bar-fill" style="width:'+pr.pct+'%"></div></div><p class="gate-criteria">Tecnologias</p><ul class="dont-list">'+techs+'</ul><p class="gate-criteria">Competências relacionadas · '+pr.done+'/'+pr.tot+' praticadas</p><ul class="items">'+comps+'</ul><p class="gate-criteria">Evidências</p><div class="review-actions" style="justify-content:flex-start">'+evs+'</div><div class="explain-box"><h4>Próximos passos</h4><ul>'+steps+'</ul></div><p style="margin-top:12px">'+open+'</p></div>';
+  }).join("");
+}
 /* ============ HISTÓRICO DE ESTUDO + REVISÃO ============ */
 const STUDY_HISTORY_LIMIT=80;
 function saveStudyMeta(){save(K.history,studyHistory);save(K.review,reviewState);}
@@ -613,7 +636,7 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
   let done=0;GATES.forEach(g=>{if(gateStatus(g,gateStats(g))[0]==="green")done++;});if(frontStats().pct>=70)done++;
-  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";}
+  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";renderProjects();}
 /* ============ EXPORTAR STATUS PRA IA (Gemini Guided Learning etc.) ============ */
 function generateStatusText(){
   const nb=nextBlock(),lines=[],hoje=new Date().toLocaleDateString("pt-BR");
