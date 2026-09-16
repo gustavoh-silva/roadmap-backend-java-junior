@@ -207,6 +207,8 @@
           <div class="bar-row"><div class="bar-top"><span>BACKEND Core</span><span class="count" id="backendCount">0%</span></div><div class="bar-track"><div class="bar-fill" id="backendBar"></div></div></div>
           <div class="bar-row"><div class="bar-top"><span>G2 — GATE ESTÁGIO</span><span class="count" id="g2Count">0%</span></div><div class="bar-track"><div class="bar-fill yellow" id="g2Bar"></div></div></div>
           <div class="bar-row"><div class="bar-top"><span>FRONTEND — secundário</span><span class="count" id="frontCount">0%</span></div><div class="bar-track"><div class="bar-fill green" id="frontBar"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span>COMPETÊNCIAS · estudado / praticado / comprovado</span><span class="count" id="compCount">—</span></div><div class="bar-track"><div class="bar-fill" id="compBar"></div></div></div>
+          <p class="indicator-note">Checkbox = progresso. Comprovado exige projeto + link.</p>
         </div>
       </div>
       <div class="palette-card" id="proximo">
@@ -475,6 +477,17 @@ function gateStatus(g,s){if(g.criterios.length&&s.done===g.criterios.length&&(!g
   return["red","🔴 Não pronto"];}
 function backendCore(){let t=0,d=0;GATES.slice(0,4).forEach(g=>g.criterios.forEach(c=>{if(c[2]==="CORE"){t++;if(state[c[0]])d++;}}));return{t,d,pct:t?Math.round(d/t*100):0};}
 function frontStats(){const t=FRONT.criterios.length,d=FRONT.criterios.filter(c=>state[c[0]]).length;return{t,d,pct:t?Math.round(d/t*100):0};}
+// V4.1 proxy: praticado = checked sem tag prática; estados plenos vêm na V4.2
+function competenceStats(){
+  let tot=0, est=0, pra=0;
+  GATES.slice(0,4).forEach(g => g.criterios.forEach(c => {
+    tot++; if(state[c[0]]) est++;
+    if(state[c[0]] && !practice[c[0]]) pra++;
+  }));
+  const projs = GATES.slice(0,4).map(g=>g.projeto.id);
+  const comp = projs.filter(pid => projOk(pid)).length;
+  return { estudadoPct: tot?Math.round(est/tot*100):0, praticadoPct: tot?Math.round(pra/tot*100):0, comprovadoPct: Math.round(comp/projs.length*100) };
+}
 function nextBlock(){for(const g of GATES.slice(0,4)){for(const c of g.criterios){if(c[2]==="CORE"&&!state[c[0]])return{g,c};}}
   for(const g of GATES.slice(0,4)){if(g.projeto&&!projOk(g.projeto.id))return{g,c:null,proj:true};}
   const g3=GATES[3],s3=gateStats(g3);if(s3.pct<85)return{g:g3,c:null};
@@ -544,6 +557,10 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   document.getElementById("backendBar").style.width=b.pct+"%";document.getElementById("backendCount").textContent=b.d+"/"+b.t+" ("+b.pct+"%)";
   document.getElementById("g2Bar").style.width=g2.pct+"%";document.getElementById("g2Count").textContent=g2.done+"/"+g2.tot+" ("+g2.pct+"%)";
   document.getElementById("frontBar").style.width=f.pct+"%";document.getElementById("frontCount").textContent=f.d+"/"+f.t+" ("+f.pct+"%)";
+  const cs = competenceStats();
+  const cc = document.getElementById("compCount"), cb = document.getElementById("compBar");
+  if(cc) cc.textContent = cs.estudadoPct + "% est · " + cs.praticadoPct + "% pra · " + cs.comprovadoPct + "% comp";
+  if(cb) cb.style.width = cs.estudadoPct + "%";
   const { g, s } = getCurrentGate();
   const cgT = document.getElementById("currentGateTitle"), cgC = document.getElementById("currentGateCore"), cgS = document.getElementById("currentGateStatus");
   if(cgT) cgT.textContent = g.id + " — " + g.titulo + " · " + s.pct + "% do Gate";
