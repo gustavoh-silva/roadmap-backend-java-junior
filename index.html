@@ -507,16 +507,17 @@ function gateStatus(g,s){if(g.criterios.length&&s.done===g.criterios.length&&(!g
   return["red","🔴 Não pronto"];}
 function backendCore(){let t=0,d=0;GATES.slice(0,4).forEach(g=>g.criterios.forEach(c=>{if(c[2]==="CORE"){t++;if(state[c[0]])d++;}}));return{t,d,pct:t?Math.round(d/t*100):0};}
 function frontStats(){const t=FRONT.criterios.length,d=FRONT.criterios.filter(c=>state[c[0]]).length;return{t,d,pct:t?Math.round(d/t*100):0};}
-// V4.1 proxy: praticado = checked sem tag prática; estados plenos vêm na V4.2
 function competenceStats(){
-  let tot=0, est=0, pra=0;
+  let tot=0, est=0, pra=0, cp=0;
   GATES.slice(0,4).forEach(g => g.criterios.forEach(c => {
-    tot++; if(state[c[0]]) est++;
-    if(state[c[0]] && !practice[c[0]]) pra++;
+    tot++; const cs = compOf(c[0]);
+    if(cs.studied) est++;
+    if(cs.practiced) pra++;
+    if(cs.proven) cp++;
   }));
   const projs = GATES.slice(0,4).map(g=>g.projeto.id);
-  const comp = projs.filter(pid => projOk(pid)).length;
-  return { estudadoPct: tot?Math.round(est/tot*100):0, praticadoPct: tot?Math.round(pra/tot*100):0, comprovadoPct: Math.round(comp/projs.length*100) };
+  const projComp = projs.filter(pid => projOk(pid)).length;
+  return { estudadoPct: tot?Math.round(est/tot*100):0, praticadoPct: tot?Math.round(pra/tot*100):0, comprovadoPct: tot?Math.round(cp/tot*100):projComp?100:0 };
 }
 function nextBlock(){for(const g of GATES.slice(0,4)){for(const c of g.criterios){if(c[2]==="CORE"&&!state[c[0]])return{g,c};}}
   for(const g of GATES.slice(0,4)){if(g.projeto&&!projOk(g.projeto.id))return{g,c:null,proj:true};}
@@ -531,7 +532,7 @@ function nextMission(){
   const cur = getCurrentGate().g;
   const corePend = cur.criterios.find(c => c[2]==="CORE" && !state[c[0]]);
   if(corePend) return { kind:"core", g:cur, c:corePend, label:corePend[1] };
-  const pracPend = cur.criterios.find(c => practice[c[0]] && !state[c[0]]);
+  const pracPend = cur.criterios.find(c => { const cs = compOf(c[0]); return cs.studied && !cs.practiced; }) || cur.criterios.find(c => practice[c[0]] && !state[c[0]]);
   if(pracPend) return { kind:"practice", g:cur, c:pracPend, label:pracPend[1] };
   if(cur.projeto && !projOk(cur.projeto.id)) return { kind:"evidence", g:cur, c:null, label:"Comprovar projeto " + (cur.projeto.nome||cur.projeto.titulo) };
   const reinf = Object.keys(reviewState.items||{}).find(id => reviewState.items[id]==="REFORCAR");
@@ -624,7 +625,7 @@ function generateStatusText(){
   if(g.projeto){const e=evState[g.projeto.id]||{nivel:"ESTUDADO",link:""};lines.push("Projeto do Gate ("+(g.projeto.nome||g.projeto.titulo)+"): nível atual "+e.nivel+(e.link?" — com evidência registrada":" — ainda sem link de evidência"));}
   lines.push("","🚀 Próxima missão: "+(nb.c?nb.c[1]:"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)"),"","🔥 Sequência atual: "+streak.count+(streak.count===1?" dia seguido":" dias seguidos"));
   const events=recentStudyEvents(14).filter(e=>e.type==="criterio"||e.type==="projeto"),studied=[],practiced=[];
-  events.forEach(e=>{const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
+  events.forEach(e=>{const off = e.status.endsWith("_OFF"); if(off) return;const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
   const rs=reviewSummary();
   lines.push("","📚 ESTUDADO RECENTEMENTE (últimos 14 dias):");
   if(studied.length)studied.slice(0,8).forEach(e=>lines.push("- ["+fmtStudyDate(e.ts)+"] "+e.label+(e.gate?" · "+e.gate:"")));else lines.push("- Nenhum item registrado como estudado neste período.");
