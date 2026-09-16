@@ -210,11 +210,11 @@
         </div>
       </div>
       <div class="palette-card" id="proximo">
-        <h3>🚀 Próximo bloqueio</h3>
+        <h3>🎯 Próxima missão</h3>
         <p class="big" id="nextTitle">—</p>
         <p id="nextDesc">—</p>
         <p><span class="badge-pro" id="nextGate">—</span> <span class="gate-mini" id="nextRemaining"></span></p>
-        <a class="btn-ghost btn-small" href="#gates" id="nextGo">Ver critério</a>
+        <a class="btn-primary btn-small" href="#gates" id="nextGo">Começar missão →</a>
         <button class="btn-ghost btn-small" id="copyStatusBtn" type="button" style="margin-left:8px">📋 Copiar status pra IA</button>
       </div>
     </div>
@@ -484,6 +484,17 @@ function getCurrentGate(){
   const g = nb.g, s = gateStats(g);
   return { g, s, st: gateStatus(g, s), nb };
 }
+function nextMission(){
+  const cur = getCurrentGate().g;
+  const corePend = cur.criterios.find(c => c[2]==="CORE" && !state[c[0]]);
+  if(corePend) return { kind:"core", g:cur, c:corePend, label:corePend[1] };
+  const pracPend = cur.criterios.find(c => practice[c[0]] && !state[c[0]]);
+  if(pracPend) return { kind:"practice", g:cur, c:pracPend, label:pracPend[1] };
+  if(cur.projeto && !projOk(cur.projeto.id)) return { kind:"evidence", g:cur, c:null, label:"Comprovar projeto " + (cur.projeto.nome||cur.projeto.titulo) };
+  const reinf = Object.keys(reviewState.items||{}).find(id => reviewState.items[id]==="REFORCAR");
+  if(reinf){ try{ const x = criterionLabel(reinf); return { kind:"review", g:cur, c:null, label:"Revisar: "+x.label }; }catch(e){} }
+  const fb = nextBlock(); return { kind:"comp", g:fb.g, c:fb.c||null, label: fb.c?fb.c[1]:(fb.g.projeto?fb.g.projeto.titulo:fb.g.titulo) };
+}
 /* ============ RENDER ============ */
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
 function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]]?' <button class="practice-tag" data-prac="'+c[0]+'" title="Marcar como consolidado">conheço → praticar</button>':"";
@@ -540,12 +551,12 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   if(cgS){ const _st = gateStatus(g, s); cgS.textContent = _st[1]; cgS.className = "loc-status " + _st[0]; }
   document.getElementById("hereText").textContent = g.id + " — " + g.titulo + " · " + s.pct + "% — " + g.objetivo;
   document.getElementById("gateMini").textContent = g.id + " — " + g.titulo + " · " + s.pct + "%";
-  const nb=nextBlock();
+  const nb=nextMission();
   if(nb.c){document.getElementById("nextTitle").textContent=nb.c[1];document.getElementById("nextDesc").textContent="Implemente e marque o critério. Competência > calendário.";
-    document.getElementById("nextGate").textContent=nb.g.id+" · restante: "+nb.g.criterios.filter(c=>!state[c[0]]).length;document.getElementById("nextRemaining").textContent=nb.g.titulo;
+    document.getElementById("nextGate").textContent=nb.g.id+" · "+nb.c[2]+" · restante: "+nb.g.criterios.filter(c=>!state[c[0]]).length;document.getElementById("nextRemaining").textContent=nb.g.titulo;
     document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
   else{document.getElementById("nextTitle").textContent=nb.g.projeto.titulo;document.getElementById("nextDesc").textContent="Critérios prontos — falta comprovar o projeto com link de evidência.";
-    document.getElementById("nextGate").textContent=nb.g.id+" · comprovar projeto";document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
+    document.getElementById("nextGate").textContent=nb.g.id+" · "+nb.kind;document.getElementById("nextGo").href="#gate-"+nb.g.id;document.getElementById("continueBtn").href="#gate-"+nb.g.id;}
   const trail=document.getElementById("gateTrail");
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
