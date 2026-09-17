@@ -172,6 +172,8 @@
 .comp-state[aria-pressed="true"].cs-practiced{color:var(--accent-yellow);background:var(--accent-yellow-soft);border-color:var(--accent-yellow)}
 .comp-state[aria-pressed="true"].cs-proven{color:var(--accent-green);background:var(--accent-green-soft);border-color:var(--accent-green)}
 .comp-state:focus-visible{outline:2px solid var(--primary-focus);outline-offset:2px}
+pre.ia-preview{background:var(--tile-1);border:1px solid var(--hairline);border-radius:8px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.6;color:var(--body);white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow:auto;margin:12px 0 0}
+details.ia-details{margin-top:12px}details.ia-details summary{cursor:pointer;font-size:14px;color:var(--primary)}
 .hidden{display:none !important}
   a.inline-link{color:var(--primary);text-decoration:none}
   @media (max-width:1023px){.hero-grid{grid-template-columns:1fr}.global-nav .links{display:none}}
@@ -260,6 +262,13 @@
   <div class="wrap">
     <div class="tile-head"><p class="ref-time">Linha de evolução</p><h2>🛠️ Projetos</h2><p>Cada projeto transforma competência em evidência. O progresso combina nível de evidência com competências praticadas.</p></div>
     <div id="projList"></div>
+  </div>
+</section>
+
+<section class="tile tile-1" id="contexto-ia" aria-label="Contexto para IA">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Leve seu estado</p><h2>🤖 Contexto para IA</h2><p>Copie sua situação atual e continue o estudo em qualquer IA, de onde parou.</p></div>
+    <div class="sec-card"><div class="review-list"><div><b>Gate atual</b><span id="aiGate">—</span></div><div><b>Próxima missão</b><span id="aiMission">—</span></div><div><b>CORE restantes</b><span id="aiCore">—</span></div><div><b>Precisa de reforço</b><span id="aiReview">—</span></div></div><p style="margin-top:16px"><button class="btn-primary" id="copyContextBtn" type="button">Copiar contexto</button></p><details class="ia-details"><summary>Ver prévia do texto</summary><pre class="ia-preview" id="iaPreview">—</pre></details></div>
   </div>
 </section>
 
@@ -525,7 +534,7 @@ function competenceStats(){
   }));
   const projs = GATES.slice(0,4).map(g=>g.projeto.id);
   const projComp = projs.filter(pid => projOk(pid)).length;
-  return { estudadoPct: tot?Math.round(est/tot*100):0, praticadoPct: tot?Math.round(pra/tot*100):0, comprovadoPct: tot?Math.round(cp/tot*100):projComp?100:0 };
+  return { estudadoPct: tot?Math.round(est/tot*100):0, praticadoPct: tot?Math.round(pra/tot*100):0, comprovadoPct: tot?Math.round(cp/tot*100):projComp?100:0, tot:tot, est:est, pra:pra, cp:cp };
 }
 function nextBlock(){for(const g of GATES.slice(0,4)){for(const c of g.criterios){if(c[2]==="CORE"&&!state[c[0]])return{g,c};}}
   for(const g of GATES.slice(0,4)){if(g.projeto&&!projOk(g.projeto.id))return{g,c:null,proj:true};}
@@ -587,6 +596,7 @@ function renderProjects(){
     return '<div class="gate-card" id="proj-'+p.id+'"><div class="gate-top"><span class="gate-title">'+esc(p.nome||p.id)+'</span><span class="gate-meta">'+g.id+' · '+(e.nivel||"ESTUDADO")+' · '+pr.pct+'%</span></div>'+baseLine+'<p class="gate-obj">'+esc(p.titulo)+'</p><div class="bar-track"><div class="bar-fill" style="width:'+pr.pct+'%"></div></div><p class="gate-criteria">Tecnologias</p><ul class="dont-list">'+techs+'</ul><p class="gate-criteria">Competências relacionadas · '+pr.done+'/'+pr.tot+' praticadas</p><ul class="items">'+comps+'</ul><p class="gate-criteria">Evidências</p><div class="review-actions" style="justify-content:flex-start">'+evs+'</div><div class="explain-box"><h4>Próximos passos</h4><ul>'+steps+'</ul></div><p style="margin-top:12px">'+open+'</p></div>';
   }).join("");
 }
+function renderAiSection(){const gEl=document.getElementById("aiGate"),mEl=document.getElementById("aiMission"),cEl=document.getElementById("aiCore"),rEl=document.getElementById("aiReview"),pv=document.getElementById("iaPreview");if(!gEl||!pv)return;const cg=getCurrentGate();const m=nextMission();const coreLeft=cg.g.criterios.filter(c=>c[2]==="CORE"&&!state[c[0]]).length;const rf=reviewSummary().reinforce.length;gEl.textContent=cg.g.id+" — "+cg.g.titulo+" · "+cg.s.pct+"%";mEl.textContent=m.c?m.c[1]:m.label;cEl.textContent=coreLeft+" neste Gate";rEl.textContent=rf+" itens";pv.textContent=generateStatusText();}
 /* ============ HISTÓRICO DE ESTUDO + REVISÃO ============ */
 const STUDY_HISTORY_LIMIT=80;
 function saveStudyMeta(){save(K.history,studyHistory);save(K.review,reviewState);}
@@ -594,7 +604,7 @@ function recentStudyEvents(days=14){const since=Date.now()-days*864e5;return stu
 function criterionLabel(id){for(const g of GATES)for(const c of g.criterios)if(c[0]===id)return{label:c[1],gate:g.id};for(const c of FRONT.criterios)if(c[0]===id)return{label:c[1],gate:FRONT.id};return{label:id,gate:""};}
 function projectLabel(id){for(const g of GATES)if(g.projeto&&g.projeto.id===id)return{label:g.projeto.nome||g.projeto.titulo,gate:g.id};if(FRONT.projeto&&FRONT.projeto.id===id)return{label:FRONT.projeto.nome||FRONT.projeto.titulo,gate:FRONT.id};return{label:id,gate:""};}
 function recordStudyEvent(type,id,status,label,gate){if(!id)return;const now=Date.now(),last=studyHistory[0];if(last&&last.id===id&&last.status===status&&now-last.ts<2*60*1000)return;studyHistory.unshift({ts:now,type,id,status,label,gate});studyHistory=studyHistory.slice(0,STUDY_HISTORY_LIMIT);saveStudyMeta();renderStudyPanel();}
-function markReview(id,status){reviewState.date=Date.now();reviewState.items[id]=status;saveStudyMeta();renderStudyPanel();}
+function markReview(id,status){reviewState.date=Date.now();reviewState.items[id]=status;saveStudyMeta();renderStudyPanel();renderAiSection();}
 function reviewSummary(){const out={consolidated:[],reinforce:[],unproven:[]};Object.keys(reviewState.items||{}).forEach(id=>{const r=reviewState.items[id];let item=studyHistory.find(e=>e.id===id);if(!item){try{if(id.indexOf("-proj")>=0||projectLabel(id).gate){const p=projectLabel(id);item={label:p.label,gate:p.gate};}else{const c=criterionLabel(id);item={label:c.label,gate:c.gate};}}catch(e){return;}}const bucket=r==="CONSOLIDADO"?"consolidated":r==="REFORCAR"?"reinforce":"unproven";if(!out[bucket].some(x=>x.label===item.label))out[bucket].push(item);});return out;}
 function fmtStudyDate(ts){return new Date(ts).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});}
 function reviewButton(id,text,status){const active=(reviewState.items||{})[id]===status?" active":"";return '<button type="button" class="review-btn'+active+'" data-review="'+esc(id)+'" data-review-status="'+status+'">'+text+'</button>';}
@@ -637,10 +647,10 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
   let done=0;GATES.forEach(g=>{if(gateStatus(g,gateStats(g))[0]==="green")done++;});if(frontStats().pct>=70)done++;
-  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";renderProjects();}
+  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";renderProjects();renderAiSection();}
 /* ============ EXPORTAR STATUS PRA IA (Gemini Guided Learning etc.) ============ */
 function generateStatusText(){
-  const nb=nextBlock(),lines=[],hoje=new Date().toLocaleDateString("pt-BR");
+  const nb=nextMission(),lines=[],hoje=new Date().toLocaleDateString("pt-BR");
   lines.push("📍 Meu progresso no roadmap Java Backend → Júnior (gerado em "+hoje+")","");
   const g=nb.g,s=gateStats(g),st=gateStatus(g,s);
   lines.push("GATE ATUAL: "+g.id+" — "+g.titulo+" ("+s.pct+"% · meta "+g.threshold+"%) — "+st[1],"Objetivo do Gate: "+g.objetivo,"");
@@ -651,7 +661,8 @@ function generateStatusText(){
   lines.push("","🛠️ PROJETOS:");
   const allProjs=[];GATES.forEach(gg=>{if(gg.projeto)allProjs.push(gg.projeto);});if(FRONT.projeto)allProjs.push(FRONT.projeto);
   allProjs.forEach(p=>{const pe=evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const pp=projProgress(p);const cks=p.evidence||[];const ckd=cks.filter((_,i)=>(pe.checks||{})[i]).length;lines.push("- "+(p.nome||p.id)+": "+(pe.nivel||"ESTUDADO")+" · "+pp.pct+"% · evidências "+ckd+"/"+cks.length+(pe.link?" · com link":" · sem link"));});
-  lines.push("","🚀 Próxima missão: "+(nb.c?nb.c[1]:"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)"),"","🔥 Sequência atual: "+streak.count+(streak.count===1?" dia seguido":" dias seguidos"));
+  lines.push("","🎯 COMPETÊNCIAS:");const _cs=competenceStats();const _rf=reviewSummary().reinforce.length;lines.push("- Estudado "+_cs.est+"/"+_cs.tot+" ("+_cs.estudadoPct+"%) · Praticado "+_cs.pra+"/"+_cs.tot+" ("+_cs.praticadoPct+"%) · Comprovado "+_cs.cp+"/"+_cs.tot+" ("+_cs.comprovadoPct+"%) · Precisa de reforço "+_rf);
+  lines.push("","🚀 Próxima missão ("+({core:"CORE",practice:"prática",evidence:"evidência",review:"revisão",comp:"complementar"}[nb.kind]||nb.kind)+"): "+(nb.c?nb.c[1]:(nb.label||"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)")),"","🔥 Sequência atual: "+streak.count+(streak.count===1?" dia seguido":" dias seguidos"));
   const events=recentStudyEvents(14).filter(e=>e.type==="criterio"||e.type==="projeto"),studied=[],practiced=[];
   events.forEach(e=>{const off = (e.status||"").endsWith("_OFF"); if(off) return;const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
   const rs=reviewSummary();
@@ -668,21 +679,12 @@ function generateStatusText(){
   return lines.join("\n");
 }
 
+async function copyAiText(btn){const text=generateStatusText();const orig=btn.textContent;try{await navigator.clipboard.writeText(text);btn.textContent="✓ Copiado!";}catch(e){window.prompt("Copie o texto abaixo (Ctrl+C / Cmd+C) e cole no Gemini:",text);btn.textContent="✓ Pronto";}setTimeout(()=>{btn.textContent=orig;},2200);}
 function bindCopyStatus(){
-  const btn=document.getElementById("copyStatusBtn");
-  if(!btn)return;
-  btn.addEventListener("click",async ()=>{
-    const text=generateStatusText();
-    const orig=btn.textContent;
-    try{
-      await navigator.clipboard.writeText(text);
-      btn.textContent="✓ Copiado!";
-    }catch(e){
-      window.prompt("Copie o texto abaixo (Ctrl+C / Cmd+C) e cole no Gemini:",text);
-      btn.textContent="✓ Pronto";
-    }
-    setTimeout(()=>{btn.textContent=orig;},2200);
-  });
+  const b1=document.getElementById("copyStatusBtn");
+  if(b1)b1.addEventListener("click",()=>copyAiText(b1));
+  const b2=document.getElementById("copyContextBtn");
+  if(b2)b2.addEventListener("click",()=>copyAiText(b2));
 }
 /* ============ EVENTOS ============ */
 function bind(){
