@@ -186,7 +186,7 @@
 <nav class="global-nav" aria-label="Navegação principal">
   <span class="wordmark">Roadmap Java Backend → Júnior</span>
   <div class="links">
-    <a href="#gates">Gates</a><a href="#frontend">Frontend</a><a href="#vagas">Vagas</a><a href="#candidatura">Estágio</a><a href="#diferenciais">Diferenciais</a>
+    <a href="#gates">Gates</a><a href="#projetos">Projetos</a><a href="#frontend">Frontend</a><a href="#vagas">Vagas</a><a href="#candidatura">Estágio</a><a href="#diferenciais">Diferenciais</a>
   </div>
   <span class="streak-pill" id="streakPill">🔥 0 dias seguidos</span>
 </nav>
@@ -255,6 +255,13 @@
 </section>
 
 <main id="gates"></main>
+
+<section class="tile tile-2" id="projetos">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Linha de evolução</p><h2>🛠️ Projetos</h2><p>Cada projeto transforma competência em evidência. O progresso combina nível de evidência com competências praticadas.</p></div>
+    <div id="projList"></div>
+  </div>
+</section>
 
 <section class="tile tile-1" id="ia">
   <div class="wrap">
@@ -345,7 +352,7 @@ criterios:[
 ["g0-09","3 programas de console do zero, sem tutorial","CORE"],["g0-10","Git: init, add, commit, push, branches, merge, conflitos, .gitignore","CORE"],
 ["g0-11","Linux básico: cd, ls, pwd, permissões","CORE"],["g0-12","SQL: SELECT, INSERT, UPDATE, DELETE, JOIN, PK/FK","CORE"],
 ["g0-13","JVM e GC — visão conceitual (sem aprofundar agora)","COMP"]],
-projeto:{id:"g0-proj",nome:"BiblioTrack",titulo:"Sistema de biblioteca em console (500+ linhas, sem tutorial) — serve pra POO, Collections, Exceptions, Generics e Streams trabalharem juntos num problema real, não isolados."},naoExige:[]},
+projeto:{id:"g0-proj",nome:"BiblioTrack",titulo:"Sistema de biblioteca em console (500+ linhas, sem tutorial) — serve pra POO, Collections, Exceptions, Generics e Streams trabalharem juntos num problema real, não isolados.",tech:["Java 17","Maven","Git"],comps:["g0-03","g0-04","g0-05","g0-06","g0-07","g0-09"],next:["500+ linhas sem tutorial","README com execução"],evidence:["Código no GitHub","README","Execução documentada"],base:null},naoExige:[]},
 {id:"G1",titulo:"Backend Foundation — primeira API real",threshold:80,ref:"~ Out/2026 · Spring Boot + primeiro backend real · CORE",
 objetivo:"Construir uma API REST funcional com Spring Boot + PostgreSQL.",
 explicar:["O que é IoC e por que o Spring existe por causa disso","Diferença entre Service, Repository e Controller — o que cada um NÃO deveria fazer","Por que usar DTO em vez de expor a entidade JPA direto"],
@@ -357,7 +364,7 @@ criterios:[
 ["g1-09","5 queries SQL manuais + 3 JOINs + 1 agregada","CORE"],["g1-10","application.properties / profiles p/ múltiplos ambientes","CORE"],
 ["g1-11","Migrations versionadas com Flyway (por que não usar apenas ddl-auto)","CORE"],
 ["g1-12","Lombok p/ boilerplate","COMP"],["g1-13","Paginação, filtros e versionamento de API","COMP"]],
-projeto:{id:"g1-proj",nome:"TaskFlow",titulo:"API de tarefas: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres + Flyway, README + instruções."},naoExige:[]},
+projeto:{id:"g1-proj",nome:"TaskFlow",titulo:"API de tarefas: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres + Flyway, README + instruções.",tech:["Java 17","Spring Boot","PostgreSQL","Flyway","JPA / Hibernate"],comps:["g1-02","g1-03","g1-04","g1-05","g1-06","g1-07","g1-08","g1-11"],next:["5+ endpoints no ar","4+ entidades relacionadas","README com instruções"],evidence:["Código no GitHub","README","Testes","API local"],base:null},naoExige:[]},
 {id:"G2",titulo:"🚀 Gate de Estágio Java Backend",threshold:90,ref:"~ Nov–Dez/2026 · Security + testes + Docker → COMEÇAR A SE CANDIDATAR",
 objetivo:"Estar tecnicamente pronto para candidaturas a estágio. Não exige React, AWS, K8s, Kafka ou microservices.",
 explicar:["Como o JWT prova que um usuário está autenticado sem guardar sessão no servidor","Por que hashear senha (e por que nunca comparar senha em texto puro)","O que um teste de integração cobre que um teste unitário não cobre"],
@@ -370,7 +377,7 @@ criterios:[
 ["g2-10","Branches + merge + 3 conflitos simulados + PR + commits claros + leitura de diff","CORE"],["g2-11","Dockerfile + app em container + Postgres em container + Compose","CORE"],
 ["g2-12","Projeto final no GitHub: Spring + Postgres + JPA + REST + DTO + Validation + JWT + Tests + Docker + README","CORE"],
 ["g2-13","Swagger/OpenAPI documentando a API","COMP"],["g2-14","Consumo de API externa (base OpenFeign do bootcamp)","COMP"]],
-projeto:{id:"g2-proj",nome:"TaskFlow — versão profissional",titulo:"Evolução do TaskFlow (G1): + JWT/autorização + Docker/Compose + testes de integração. Precisa subir com docker-compose, persistir, retornar erros corretos e ter README completo."},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
+projeto:{id:"g2-proj",nome:"TaskFlow — versão profissional",titulo:"Evolução do TaskFlow (G1): + JWT/autorização + Docker/Compose + testes de integração. Precisa subir com docker-compose, persistir, retornar erros corretos e ter README completo.",tech:["Spring Boot","JWT","Docker / Compose","JUnit 5 + Mockito","Swagger / OpenAPI"],comps:["g2-07","g2-08","g2-09","g2-10","g2-11","g2-12"],next:["JWT + rotas protegidas","Subir com docker-compose","Testes de integração"],evidence:["Código no GitHub","README completo","Testes","Docker Compose"],base:"g1-proj"},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
 {id:"G3",titulo:"Backend Júnior — práticas profissionais",threshold:85,ref:"~ 2027 · Arquitetura, testes, CI/CD, cloud, performance",
 objetivo:"Desenvolver e manter backend de verdade, em produção.",
 explicar:["Um trade-off arquitetural que você escolheu conscientemente e por quê","Como você encontraria uma query N+1 num projeto que não é seu","O que um pipeline de CI verde garante — e o que ele NÃO garante"],
@@ -381,7 +388,7 @@ criterios:[
 ["g3-07","Documentação profissional da API e do projeto","CORE"],
 ["g3-08","Redis: hit/miss + invalidação","COMP"],["g3-09","Observabilidade: logs estruturados, métricas, health checks","COMP"],
 ["g3-10","Cloud (EC2/RDS/S3, noção→uso) + concorrência básica (threads/virtual threads)","COMP"]],
-projeto:{id:"g3-proj",nome:"TaskFlow em produção",titulo:"TaskFlow (G2) publicado: URL pública + banco remoto + CI verde + logs + health check."},naoExige:[]},
+projeto:{id:"g3-proj",nome:"TaskFlow em produção",titulo:"TaskFlow (G2) publicado: URL pública + banco remoto + CI verde + logs + health check.",tech:["Docker","GitHub Actions","Redis","Cloud (EC2/RDS/S3)"],comps:["g3-03","g3-04","g3-05","g3-06","g3-07"],next:["Deploy com URL pública","CI verde","Logs + health check"],evidence:["Código no GitHub","CI verde","URL pública","Logs + health"],base:"g2-proj"},naoExige:[]},
 {id:"G4",titulo:"Backend Avançado — sistemas complexos",threshold:80,ref:"2027+ · Mensageria, cache, concorrência, arquitetura",
 objetivo:"Lidar com problemas reais distribuídos (sem lista rígida de tecnologias obrigatórias).",
 explicar:["A diferença prática entre monólito modular e microservices — quando cada um vale a pena","O que idempotência resolve em mensageria, com um exemplo concreto","Um trade-off de escalabilidade que você aceitaria conscientemente"],
@@ -389,7 +396,7 @@ criterios:[
 ["g4-01","Mensageria async (RabbitMQ ou Kafka): retry + DLQ + idempotência","AVANC"],["g4-02","Redis: hit/miss demonstrado + invalidação","AVANC"],
 ["g4-03","Concorrência: race/deadlock/starvation + CompletableFuture ou virtual threads em projeto","AVANC"],["g4-04","Observabilidade: logs estruturados + métricas + tracing + erro via logs","AVANC"],
 ["g4-05","Explicar monólito/modular/micro/async/consistência/escalabilidade/trade-offs","AVANC"],["g4-06","System design: disponibilidade + escalabilidade","AVANC"]],
-projeto:{id:"g4-proj",nome:"Capstone",titulo:"Projeto aberto demonstrando UM conceito avançado com profundidade real (mensageria OU cache OU concorrência) — não é sobre acumular tecnologia, é sobre resolver um problema que só existe nessa escala."},naoExige:[]}
+projeto:{id:"g4-proj",nome:"Capstone",titulo:"Projeto aberto demonstrando UM conceito avançado com profundidade real (mensageria OU cache OU concorrência) — não é sobre acumular tecnologia, é sobre resolver um problema que só existe nessa escala.",tech:["A definir pelo conceito"],comps:["g4-01","g4-02","g4-03","g4-04","g4-05","g4-06"],next:["Escolher UM conceito avançado","README com trade-offs"],evidence:["Código no GitHub","README de trade-offs","Demonstração"],base:null},naoExige:[]}
 ];
 const FRONT={id:"F1",titulo:"Frontend Complementar",threshold:70,ref:"Paralelo e opcional em 2027 · menor carga",
 objetivo:"Consumir e apresentar sua própria API. Nunca bloqueia G0–G4.",
@@ -397,7 +404,7 @@ criterios:[
 ["f1-01","HTML semântico + CSS Flexbox/Grid + responsivo → página estática","FRONT"],["f1-02","JS: vars, tipos, condicionais, loops, arrays, funções, callbacks, arrow","FRONT"],
 ["f1-03","DOM, eventos, fetch, async/await → app consumindo API pública","FRONT"],["f1-04","TS: types, interfaces, generics, union, narrowing → reescrever projeto JS","FRONT"],
 ["f1-05","React: componentes, JSX, props, state, hooks, Router, formulários","FRONT"],["f1-06","Axios/fetch + login JWT + protected routes + CORS + env + erros UI","FRONT"]],
-projeto:{id:"f1-proj",nome:"TaskFlow UI",titulo:"Interface React consumindo o TaskFlow (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres."}};
+projeto:{id:"f1-proj",nome:"TaskFlow UI",titulo:"Interface React consumindo o TaskFlow (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres.",tech:["React","TypeScript","Axios"],comps:["f1-05","f1-06"],next:["Login JWT na UI","CRUD completo consumindo a API"],evidence:["Código no GitHub","README","App consumindo a API"],base:"g2-proj"}};
 const CAND=[["cand-01","GitHub organizado (perfil, pins, READMEs)"],["cand-02","Projeto backend completo no ar/documentado"],["cand-03","README que mostra COMO você pensa"],["cand-04","Currículo focado em Backend"],["cand-05","LinkedIn com palavras-chave + posts sobre projetos"],["cand-06","Perguntas técnicas ensaiadas"],["cand-07","Histórias comportamentais (STAR)"],["cand-08","Simulação de entrevista"],["cand-09","Primeira candidatura enviada"]];
 /* Diferenciais: textos V1 preservados p/ manter chaves dX-item-Y */
 const DIF=[
@@ -500,6 +507,7 @@ function gateStats(g){const tot=g.criterios.length;const done=g.criterios.filter
   const core=g.criterios.filter(c=>c[2]==="CORE");const coreDone=core.filter(c=>state[c[0]]).length;
   const pct=tot?Math.round(done/tot*100):0;return{tot,done,coreTot:core.length,coreDone,pct};}
 function projOk(pid){const e=evState[pid];return e&&e.nivel==="COMPROVADO"&&e.link;}
+function projProgress(p){const e=evState[p.id]||{};const ni=Math.max(0,EV_LEVELS.indexOf(e.nivel||"ESTUDADO"));const comps=(p.comps||[]);const done=comps.filter(id=>{const c=compOf(id);return c&&(c.practiced||c.proven);}).length;return{ni:ni,pct:Math.round(ni/3*50+(comps.length?done/comps.length*50:0)),done:done,tot:comps.length};}
 function gateStatus(g,s){if(g.criterios.length&&s.done===g.criterios.length&&(!g.projeto||projOk(g.projeto.id)))return["green","🟢 Gate concluído"];
   if(s.pct>=g.threshold&&(!g.projeto||projOk(g.projeto.id)))return["green","🟢 Gate concluído"];
   if(s.pct>=g.threshold)return["yellow","🟡 Pronto para avançar — falta comprovar o projeto"];
@@ -549,7 +557,8 @@ function critLI(c){const checked=state[c[0]]?"checked":"";const pr=practice[c[0]
 function projBox(p){const e=evState[p.id]||{nivel:"ESTUDADO",link:""};
   const segs=EV_LEVELS.map(l=>'<button type="button" class="pill-tab'+(e.nivel===l?" active":"")+'" data-ev="'+p.id+'" data-nivel="'+l+'">'+l+'</button>').join("");
   const nome=p.nome?'<span style="color:var(--primary)">'+esc(p.nome)+'</span> — ':"";
-  return '<div class="proj-box" data-proj="'+p.id+'"><h4>🛠️ Projeto obrigatório</h4><p>'+nome+esc(p.titulo)+'</p><div class="ev-seg" role="group" aria-label="Nível de evidência">'+segs+'</div><input class="ev-link" data-evlink="'+p.id+'" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" value="'+esc(e.link||"")+'"></div>';}
+  const pr=projProgress(p);
+  return '<div class="proj-box" data-proj="'+p.id+'"><h4>🛠️ Projeto obrigatório</h4><p>'+nome+esc(p.titulo)+'</p><div class="ev-seg" role="group" aria-label="Nível de evidência">'+segs+'</div><input class="ev-link" data-evlink="'+p.id+'" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" value="'+esc(e.link||"")+'"><p class="indicator-note">Progresso do projeto: '+pr.pct+'% · '+pr.done+'/'+pr.tot+' competências praticadas · <a class="inline-link" href="#proj-'+p.id+'">Ver em Projetos →</a></p></div>';}
 function renderGates(){
   const host=document.getElementById("gates");let html="";
   GATES.forEach((g,i)=>{const s=gateStats(g);const st=gateStatus(g,s);const tile=(i%3)+1;
@@ -562,6 +571,22 @@ function renderGates(){
 }
 function renderFront(){const s=frontStats();
   document.getElementById("frontList").innerHTML='<div class="gate-card"><div class="gate-top"><span class="gate-title">F1 · Trilha opcional</span><span class="gate-meta">'+s.d+'/'+s.t+' · '+s.pct+'% — meta 70%, nunca bloqueia Backend</span></div><p class="gate-obj">'+esc(FRONT.objetivo)+'</p><div class="bar-track"><div class="bar-fill green" style="width:'+s.pct+'%"></div></div><p class="gate-criteria">Critérios</p><ul class="items">'+FRONT.criterios.map(critLI).join("")+'</ul>'+projBox(FRONT.projeto)+'</div>';}
+function projById(pid){for(const g of GATES){if(g.projeto&&g.projeto.id===pid)return{proj:g.projeto,gate:g};}if(FRONT.projeto&&FRONT.projeto.id===pid)return{proj:FRONT.projeto,gate:FRONT};return null;}
+function compStatusIcon(id){const c=compOf(id);if(c.proven)return '<span style="color:var(--accent-green)">✓</span>';if(c.practiced)return '<span style="color:var(--accent-yellow)">🧪</span>';if(c.studied)return '<span style="color:var(--accent-blue)">📚</span>';return '<span style="color:var(--mute)">○</span>';}
+function renderProjects(){
+  const host=document.getElementById("projList");if(!host)return;
+  const all=[];GATES.forEach(g=>{if(g.projeto)all.push({proj:g.projeto,gate:g});});if(FRONT.projeto)all.push({proj:FRONT.projeto,gate:FRONT});
+  host.innerHTML=all.map(({proj:p,gate:g})=>{
+    const pr=projProgress(p);const e=evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const checks=e.checks||{};
+    const baseLine=p.base?(()=>{const b=projById(p.base);return b?'<p class="dif-encaixe">evolução de '+esc(b.proj.nome||b.proj.id)+' ('+b.gate.id+')</p>':'';})():'';
+    const techs=(p.tech||[]).map(t=>'<li>'+esc(t)+'</li>').join("");
+    const comps=(p.comps||[]).map(id=>{let lab=id,gt="";try{const c=criterionLabel(id);lab=c.label;gt=c.gate;}catch(_){};return '<li data-text="'+esc(lab.toLowerCase())+'"><div class="study-event"><div>'+compStatusIcon(id)+' <b>'+esc(lab)+'</b><span class="study-event-meta">'+esc(gt)+'</span></div></div></li>';}).join("");
+    const evs=(p.evidence||[]).map((lbl,i)=>{const on=!!checks[i];return '<button type="button" class="review-btn'+(on?" active":"")+'" data-pcheck="'+p.id+'" data-pcheck-idx="'+i+'" aria-pressed="'+on+'" aria-label="Evidência: '+esc(lbl)+'">'+(on?"✓ ":"○ ")+esc(lbl)+'</button>';}).join("");
+    const steps=(p.next||[]).map(s=>'<li>'+esc(s)+'</li>').join("");
+    const open=e.link?'<a class="btn-ghost btn-small" href="'+esc(e.link)+'" target="_blank" rel="noopener">Abrir evidência →</a>':'<a class="btn-ghost btn-small" href="'+(g.id==="F1"?"#frontend":"#gate-"+g.id)+'">Ver no gate →</a>';
+    return '<div class="gate-card" id="proj-'+p.id+'"><div class="gate-top"><span class="gate-title">'+esc(p.nome||p.id)+'</span><span class="gate-meta">'+g.id+' · '+(e.nivel||"ESTUDADO")+' · '+pr.pct+'%</span></div>'+baseLine+'<p class="gate-obj">'+esc(p.titulo)+'</p><div class="bar-track"><div class="bar-fill" style="width:'+pr.pct+'%"></div></div><p class="gate-criteria">Tecnologias</p><ul class="dont-list">'+techs+'</ul><p class="gate-criteria">Competências relacionadas · '+pr.done+'/'+pr.tot+' praticadas</p><ul class="items">'+comps+'</ul><p class="gate-criteria">Evidências</p><div class="review-actions" style="justify-content:flex-start">'+evs+'</div><div class="explain-box"><h4>Próximos passos</h4><ul>'+steps+'</ul></div><p style="margin-top:12px">'+open+'</p></div>';
+  }).join("");
+}
 /* ============ HISTÓRICO DE ESTUDO + REVISÃO ============ */
 const STUDY_HISTORY_LIMIT=80;
 function saveStudyMeta(){save(K.history,studyHistory);save(K.review,reviewState);}
@@ -612,7 +637,7 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
   let done=0;GATES.forEach(g=>{if(gateStatus(g,gateStats(g))[0]==="green")done++;});if(frontStats().pct>=70)done++;
-  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";}
+  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";renderProjects();}
 /* ============ EXPORTAR STATUS PRA IA (Gemini Guided Learning etc.) ============ */
 function generateStatusText(){
   const nb=nextBlock(),lines=[],hoje=new Date().toLocaleDateString("pt-BR");
@@ -623,6 +648,9 @@ function generateStatusText(){
   if(pendCore.length){lines.push("Critérios CORE pendentes neste Gate:");pendCore.forEach(t=>lines.push("- "+t));}else lines.push("Todos os critérios CORE deste Gate já estão marcados.");
   lines.push("");
   if(g.projeto){const e=evState[g.projeto.id]||{nivel:"ESTUDADO",link:""};lines.push("Projeto do Gate ("+(g.projeto.nome||g.projeto.titulo)+"): nível atual "+e.nivel+(e.link?" — com evidência registrada":" — ainda sem link de evidência"));}
+  lines.push("","🛠️ PROJETOS:");
+  const allProjs=[];GATES.forEach(gg=>{if(gg.projeto)allProjs.push(gg.projeto);});if(FRONT.projeto)allProjs.push(FRONT.projeto);
+  allProjs.forEach(p=>{const pe=evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const pp=projProgress(p);const cks=p.evidence||[];const ckd=cks.filter((_,i)=>(pe.checks||{})[i]).length;lines.push("- "+(p.nome||p.id)+": "+(pe.nivel||"ESTUDADO")+" · "+pp.pct+"% · evidências "+ckd+"/"+cks.length+(pe.link?" · com link":" · sem link"));});
   lines.push("","🚀 Próxima missão: "+(nb.c?nb.c[1]:"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)"),"","🔥 Sequência atual: "+streak.count+(streak.count===1?" dia seguido":" dias seguidos"));
   const events=recentStudyEvents(14).filter(e=>e.type==="criterio"||e.type==="projeto"),studied=[],practiced=[];
   events.forEach(e=>{const off = (e.status||"").endsWith("_OFF"); if(off) return;const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
@@ -665,6 +693,7 @@ function bind(){
   });
   document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;
     if(t.matches("[data-comp]")){e.preventDefault();const id=t.getAttribute("data-comp"),k=t.getAttribute("data-cstate");if(!compState[id])compState[id]={studied:null,practiced:null,proven:false};const cur=compState[id];if(k==="proven"){cur.proven=!cur.proven;}else{cur[k]=cur[k]?null:Date.now();}save(K.comp,compState);registerActivity();const x=criterionLabel(id);recordStudyEvent("criterio",id,k==="proven"?(cur.proven?"COMPROVADO":"COMPROVADO_OFF"):((k==="studied"?"ESTUDADO":"PRATICADO")+(cur[k]?"":"_OFF")),x.label,x.gate);renderGates();renderFront();bind2();updateDash();reapplyFilter();return;}
+    if(t.matches("[data-pcheck]")){e.preventDefault();const pid=t.getAttribute("data-pcheck"),idx=parseInt(t.getAttribute("data-pcheck-idx"),10);if(!pid||isNaN(idx))return;const _pb=projById(pid);if(!_pb||idx>=((_pb.proj.evidence||[]).length))return;const cur=evState[pid]||{nivel:"ESTUDADO",link:""};cur.checks=cur.checks||{};cur.checks[idx]=!cur.checks[idx];evState[pid]=cur;save(K.ev,evState);registerActivity();const x=projectLabel(pid);if(cur.checks[idx])recordStudyEvent("projeto",pid,"EVIDENCIA_CHECK",x.label,x.gate);renderGates();renderFront();bind2();updateDash();reapplyFilter();return;}
     if(t.matches("[data-goto-filter]")){e.preventDefault();const q=t.getAttribute("data-goto-filter")||"";const input=document.getElementById("cmdk");if(input){input.value=q.slice(0,40);input.dispatchEvent(new Event("input",{bubbles:true}));input.focus();const gsec=document.getElementById("gates");if(gsec)gsec.scrollIntoView();}return;}
     if(t.matches("[data-ev]")){const pid=t.getAttribute("data-ev"),level=t.getAttribute("data-nivel"),cur=evState[pid]||{nivel:"ESTUDADO",link:""};cur.nivel=level;evState[pid]=cur;save(K.ev,evState);registerActivity();const x=projectLabel(pid);recordStudyEvent("projeto",pid,level,x.label,x.gate);renderGates();renderFront();bind2();updateDash();}
     if(t.matches("[data-prac]")){e.preventDefault();const id=t.getAttribute("data-prac"),x=criterionLabel(id);delete practice[id];save(K.prac,practice);registerActivity();recordStudyEvent("criterio",id,"PRATICADO",x.label,x.gate);renderGates();renderFront();bind2();updateDash();}
