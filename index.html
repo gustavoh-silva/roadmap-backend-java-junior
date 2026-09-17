@@ -172,6 +172,8 @@
 .comp-state[aria-pressed="true"].cs-practiced{color:var(--accent-yellow);background:var(--accent-yellow-soft);border-color:var(--accent-yellow)}
 .comp-state[aria-pressed="true"].cs-proven{color:var(--accent-green);background:var(--accent-green-soft);border-color:var(--accent-green)}
 .comp-state:focus-visible{outline:2px solid var(--primary-focus);outline-offset:2px}
+pre.ia-preview{background:var(--tile-1);border:1px solid var(--hairline);border-radius:8px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.6;color:var(--body);white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow:auto;margin:12px 0 0}
+details.ia-details{margin-top:12px}details.ia-details summary{cursor:pointer;font-size:14px;color:var(--primary)}
 .hidden{display:none !important}
   a.inline-link{color:var(--primary);text-decoration:none}
   @media (max-width:1023px){.hero-grid{grid-template-columns:1fr}.global-nav .links{display:none}}
@@ -260,6 +262,13 @@
   <div class="wrap">
     <div class="tile-head"><p class="ref-time">Linha de evolução</p><h2>🛠️ Projetos</h2><p>Cada projeto transforma competência em evidência. O progresso combina nível de evidência com competências praticadas.</p></div>
     <div id="projList"></div>
+  </div>
+</section>
+
+<section class="tile tile-1" id="contexto-ia" aria-label="Contexto para IA">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Leve seu estado</p><h2>🤖 Contexto para IA</h2><p>Copie sua situação atual e continue o estudo em qualquer IA, de onde parou.</p></div>
+    <div class="sec-card"><div class="review-list"><div><b>Gate atual</b><span id="aiGate">—</span></div><div><b>Próxima missão</b><span id="aiMission">—</span></div><div><b>CORE restantes</b><span id="aiCore">—</span></div><div><b>Precisa de reforço</b><span id="aiReview">—</span></div></div><p style="margin-top:16px"><button class="btn-primary" id="copyContextBtn" type="button">Copiar contexto</button></p><details class="ia-details"><summary>Ver prévia do texto</summary><pre class="ia-preview" id="iaPreview">—</pre></details></div>
   </div>
 </section>
 
@@ -587,6 +596,7 @@ function renderProjects(){
     return '<div class="gate-card" id="proj-'+p.id+'"><div class="gate-top"><span class="gate-title">'+esc(p.nome||p.id)+'</span><span class="gate-meta">'+g.id+' · '+(e.nivel||"ESTUDADO")+' · '+pr.pct+'%</span></div>'+baseLine+'<p class="gate-obj">'+esc(p.titulo)+'</p><div class="bar-track"><div class="bar-fill" style="width:'+pr.pct+'%"></div></div><p class="gate-criteria">Tecnologias</p><ul class="dont-list">'+techs+'</ul><p class="gate-criteria">Competências relacionadas · '+pr.done+'/'+pr.tot+' praticadas</p><ul class="items">'+comps+'</ul><p class="gate-criteria">Evidências</p><div class="review-actions" style="justify-content:flex-start">'+evs+'</div><div class="explain-box"><h4>Próximos passos</h4><ul>'+steps+'</ul></div><p style="margin-top:12px">'+open+'</p></div>';
   }).join("");
 }
+function renderAiSection(){const gEl=document.getElementById("aiGate"),mEl=document.getElementById("aiMission"),cEl=document.getElementById("aiCore"),rEl=document.getElementById("aiReview"),pv=document.getElementById("iaPreview");if(!gEl||!pv)return;const cg=getCurrentGate();const m=nextMission();const coreLeft=cg.g.criterios.filter(c=>!state[c[0]]).length;const rf=reviewSummary().reinforce.length;gEl.textContent=cg.g.id+" — "+cg.g.titulo+" · "+cg.s.pct+"%";mEl.textContent=m.c?m.c[1]:m.label;cEl.textContent=coreLeft+" neste Gate";rEl.textContent=rf+" itens";pv.textContent=generateStatusText();}
 /* ============ HISTÓRICO DE ESTUDO + REVISÃO ============ */
 const STUDY_HISTORY_LIMIT=80;
 function saveStudyMeta(){save(K.history,studyHistory);save(K.review,reviewState);}
@@ -637,7 +647,7 @@ function updateDash(){const b=backendCore();const g2=gateStats(GATES[2]);const f
   trail.innerHTML=GATES.map(g=>{const s=gateStats(g);const st=gateStatus(g,s);const cls=st[0]==="green"?"done":(nextBlock().g.id===g.id?"now":"");
     return '<span class="badge-pro '+cls+'">'+g.id+' '+(st[0]==="green"?"✓":s.pct+"%")+'</span>';}).join("")+'<span class="badge-pro">F1 '+f.pct+'% (secundário)</span>';
   let done=0;GATES.forEach(g=>{if(gateStatus(g,gateStats(g))[0]==="green")done++;});if(frontStats().pct>=70)done++;
-  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";renderProjects();}
+  document.getElementById("doneGates").textContent=done+" de 6 gates concluídos";renderProjects();renderAiSection();}
 /* ============ EXPORTAR STATUS PRA IA (Gemini Guided Learning etc.) ============ */
 function generateStatusText(){
   const nb=nextMission(),lines=[],hoje=new Date().toLocaleDateString("pt-BR");
