@@ -273,6 +273,13 @@ details.ia-details{margin-top:12px}details.ia-details summary{cursor:pointer;fon
   </div>
 </section>
 
+<section class="tile tile-2" id="exportar" aria-label="Exportar progresso">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Portabilidade</p><h2>📤 Exportar</h2><p>Baixe seu progresso para backup, relatório ou impressão.</p></div>
+    <div class="sec-card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-ghost btn-small" id="expJson" type="button">Baixar JSON</button><button class="btn-ghost btn-small" id="expMd" type="button">Baixar Markdown</button><button class="btn-ghost btn-small" id="expPdf" type="button">Baixar PDF</button></div><p class="indicator-note">JSON versionado 4.0 — guarde para importar na V4.6.</p></div>
+  </div>
+</section>
+
 <section class="tile tile-1" id="ia">
   <div class="wrap">
     <div class="tile-head"><h2>🧭 IA como ferramenta, não substituto</h2>
@@ -701,6 +708,8 @@ function bindCopyStatus(){
   const b2=document.getElementById("copyContextBtn");
   if(b2)b2.addEventListener("click",()=>copyAiText(b2));
 }
+function flashBtn(btn,ok){const orig=btn.textContent;btn.textContent=ok?"✓ Salvo!":"✕ Falhou";setTimeout(()=>{btn.textContent=orig;},2200);}
+function bindExport(){const j=document.getElementById("expJson");if(j)j.addEventListener("click",()=>{try{downloadBlob("roadmap-java-backend-"+exportStamp()+".json","application/json",JSON.stringify(buildExportJSON(),null,2));flashBtn(j,true);}catch(e){flashBtn(j,false);}});const m=document.getElementById("expMd");if(m)m.addEventListener("click",()=>{try{downloadBlob("roadmap-java-backend-"+exportStamp()+".md","text/markdown",buildMarkdown());flashBtn(m,true);}catch(e){flashBtn(m,false);}});const p=document.getElementById("expPdf");if(p)p.addEventListener("click",()=>{try{buildAndDownloadPDF();flashBtn(p,true);}catch(e){flashBtn(p,false);}});}
 /* ============ EVENTOS ============ */
 function bind(){
   document.addEventListener("change",e=>{const t=e.target;
@@ -730,6 +739,7 @@ function bind(){
     state={};difState={};evState={};candState={};vagas=[];practice={};streak={count:0,lastActive:null};studyHistory=[];reviewState={date:null,items:{}};compState={};
     Object.values(K).forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});save(K.prog,state);renderGates();renderFront();renderCand();renderDif();renderVagas();bind2();updateDash();updateStreak();renderStudyPanel();});
   bindCopyStatus();
+  bindExport();
 }
 
 function bind2(){/* re-anexo não necessário (delegação), mantido p/ clareza */}

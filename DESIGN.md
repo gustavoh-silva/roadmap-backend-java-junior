@@ -572,6 +572,8 @@ There is no photography or product imagery. The only visuals are CSS-native: the
 
 **`ai-context-panel`** — seção #contexto-ia após #projetos (spec V4 §§22–23): `tile-1`, `aria-label="Contexto para IA"`; `tile-head` (ref-time "Leve seu estado", `h2 🤖 Contexto para IA`); `sec-card` com `review-list` de 4 linhas (`aiGate/aiMission/aiCore/aiReview`); UM primário por fold (`btn-primary#copyContextBtn` "Copiar contexto"; atalho ghost do hero mantido, ambos via `copyAiText()`); `details.ia-details>summary` "Ver prévia do texto" + `pre.ia-preview` (`tile-1`, hairline, 8px, 12px mono, `pre-wrap`, `max-height:320px` scroll); preview via `textContent` (XSS-safe), sem `aria-live` no `pre`. Texto: missão kind-aware via `nextMission()` + bloco 🎯 COMPETÊNCIAS (contagens reais); demais blocos e ordem intactos.
 
+**`export-panel`** — seção #exportar após #contexto-ia (spec V4 §§24–28): `tile-2`, `sec-card` com 3 `btn-ghost` (JSON/Markdown/PDF) + nota de versão; JSON `{app, version:"4.0", exportedAt, currentGate, progress, criteria, projects, studyHistory, reviews, vagas, diferenciais, candidatura, streak, settings}` para backup e futura importação V4.6; Markdown com 8 blocos e cap de 30 itens; PDF jsPDF UMD pinado (`jspdf@2.5.1`, sem autotable) em 6 blocos com fallback `window.print()` + CSS de impressão. `import-panel` segue stub V4.6.
+
 ### Secondary Sections
 
 **`section-card`** — Generic tile-2 rounded-18px container for candidatura, vaga registration, and informational notes.
