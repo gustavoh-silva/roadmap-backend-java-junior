@@ -634,3 +634,39 @@ There is no image pipeline — the only "media" is CSS. Progress bars animate wi
 - **No visual regression tests** — verification is metric-based (overflow widths, contrast ratios, console errors via Playwright), not screenshot-based.
 - **Trail badge `%` text** uses 12px translucent white that passes only by a small margin on tile-3; re-check if the badge surface ever changes.
 - **Touch `⌘K` affordance** — with the keycap hidden on touch, there is no visible hint that `/` focuses search on mobile keyboards.
+
+## Appendix — Tailwind + Material Symbols (CDN leve, sem Angular)
+
+Decisão: sem Angular e sem build. `index.html` continua single-file; Tailwind entra via Play CDN com `preflight:false` e `tailwind.config` mapeando os tokens acima (`canvas/tile1-3/primary/cta/ink/body/mute/ash/stone/ablue/ared/agreen/ayellow`, `font-sans Inter`, `rounded-card 18px`). `:root` continua fonte de verdade; utilitários Tailwind (`bg-canvas`, `flex`, `grid`, `gap-2/6`) são aditivos em `body`, `hero-grid`, `gate-trail`, `dont-list`, `vaga-form` — nunca substituem o CSS existente de uma vez.
+
+Ícones: fonte `Material Symbols Outlined` + helper `.msym` (18px, `.msym-sm` 16px, `.msym-lg` 22px, `aria-hidden`). Troca 1:1, texto mantido:
+
+| Antes (emoji) | Material Symbol | Onde |
+|---|---|---|
+| 🔥 | `local_fire_department` | streak pill + `updateStreak()` |
+| 🎯 | `track_changes` | hero Objetivo |
+| 🚀 | `rocket_launch` | Próximo bloqueio, hierarquia, Preparação estágio (G2 virou texto sem emoji) |
+| 📋 | `content_copy` | Copiar status pra IA (preserva ícone no feedback `check`) |
+| ⌕ | `search` | palette-search |
+| 🧭 | `explore` | IA como ferramenta |
+| ✅ / ❌ | `check_circle` / `cancel` | IA pode / precisa sozinho |
+| 🟢 / ❌ / 🔴🟡 | `circle` / `block` / `check_circle, hourglass_top, circle` | Frontend h2, Não-prioridade h2, `gateStatus()` |
+| 📊 | `monitoring` | Feedback mercado |
+| 🌟 / 🎓 | `star` / `school` | Diferenciais, A seu favor |
+| 💾 | `save` | storage warning |
+| 🛠️ | `build` | `projBox()` |
+| 💬 | `forum` | `explain-box` |
+| 📚 | `menu_book` | study panel |
+| ✓ / ⚠ / ○ | `check` / `warning` / `circle` | review buttons |
+| 🤖🔒🧪📦🌐 | `smart_toy/security/science/inventory_2/public` | `DIF[].icone` via `<span class="msym">` em `renderDif()` |
+
+Mantidos como texto (não-UI): emojis do `generateStatusText()` p/ clipboard IA, `✓` do `gate-trail` e `→` do stepper. `st[1]` agora retorna HTML com ícone — `generateStatusText()` faz strip de tags antes de copiar.
+
+## Appendix — Vue 3 via CDN (reatividade total, sem build)
+
+`index.html` continua single-file, sem Vite/SFC: `https://cdn.jsdelivr.net/npm/vue@3.4.38/dist/vue.global.prod.js` pinado antes do script do app, com `[v-cloak]` escondendo o `#app` até compilar e `#vueFallback` (banner) exibido pelo guard inline se `window.Vue` não existir. `Pages.yml` inalterado (`path: "."`).
+
+- **Estado:** mesmos objetos e chaves `localStorage` V3 (`state`, `difState`, `evState`, `candState`, `vagas`, `practice`, `streak`, `studyHistory`, `reviewState`); `migrate()`/`migrateV3()` rodam idênticas antes do `createApp`. Persistência via `watch` profundo por fatia (`studyHistory`/`reviewState` via `persistMeta()` nas ações).
+- **Reatividade:** `gateStats`/`backendCore`/`frontStats`/`nextBlock` viraram helpers puros (`*Calc` + `gateStatusObj`, sem globais) consumidos por `computed` (`backend`, `g2`, `front`, `nb`, `trail`, `gatesWithStats`, `doneGates`, `recentEvents`, `reviewCounts`). Nada de `render*`/`updateDash`/`bind` com `innerHTML` — templates `v-for`/`v-if`/`v-model`/`@change`/`@click` vivem no DOM, com mesmos ids/classes/âncoras do CSS.
+- **`m-icon`:** único componente global (`name`, `size`) renderizando `<span class="msym">`; usar sempre com tag de fechamento explícita (in-DOM template). Filtro `⌘K//` é `v-model="filterQuery"` + método `hidden()`.
+- **Iteração:** após editar templates, repetir o smoke Playwright (5 gates, toggle 0/42→1/42 + `localStorage`, filtro, evidência, vaga, reset, 0 erros console).
