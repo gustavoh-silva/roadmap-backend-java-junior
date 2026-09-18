@@ -176,7 +176,21 @@ tailwind.config = {
   #resetBtn:hover{border-color:var(--accent-red);color:var(--accent-red)}
   .sources{max-width:1240px;margin:0 auto;line-height:1.7;color:var(--stone)}
   .storage-warning{max-width:1240px;margin:14px auto 0;color:var(--accent-yellow);background:var(--accent-yellow-soft);border:1px solid var(--accent-yellow);padding:9px 12px;border-radius:8px;font-size:12.5px}
-  .study-panel{margin-top:28px;background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:22px 24px}.study-panel-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.study-panel h3{margin:0 0 6px;color:var(--on-dark);font-size:20px;font-weight:500}.study-panel h4{margin:18px 0 10px;color:var(--on-dark);font-size:14px;font-weight:600}.study-panel p{margin:0;color:var(--mute);font-size:13px}.study-review-date{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ash);text-align:right}.study-review-date b{color:var(--on-dark);font-size:13px;text-transform:none;letter-spacing:0}.study-columns{display:grid;grid-template-columns:2fr 1fr;gap:24px}.study-event{border-top:1px solid var(--hairline);padding:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.study-event:first-child{border-top:0}.study-event b{color:var(--on-dark);font-size:13px}.study-event-date,.study-event-meta{font-size:11px;color:var(--ash)}.study-event-meta{display:block;margin-top:2px}.review-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.review-btn{background:transparent;color:var(--body);border:1px solid var(--hairline);border-radius:9999px;padding:5px 9px;font-size:11px;cursor:pointer}.review-btn.active{color:var(--on-dark);background:var(--tile-3);border-color:var(--hairline-strong)}.review-list{display:grid;gap:8px}.review-list>div{display:flex;justify-content:space-between;padding:10px 12px;background:var(--tile-2);border:1px solid var(--hairline);border-radius:8px;font-size:12px}.review-list span{color:var(--on-dark);font-weight:600}.study-empty{padding:12px 0}@media(max-width:760px){.study-panel-head,.study-event{flex-direction:column;align-items:flex-start}.study-review-date{text-align:left}.study-columns{grid-template-columns:1fr}.review-actions{justify-content:flex-start}}\n  .hidden{display:none !important}
+  .study-panel{margin-top:28px;background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:22px 24px}.study-panel-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.study-panel h3{margin:0 0 6px;color:var(--on-dark);font-size:20px;font-weight:500}.study-panel h4{margin:18px 0 10px;color:var(--on-dark);font-size:14px;font-weight:600}.study-panel p{margin:0;color:var(--mute);font-size:13px}.study-review-date{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ash);text-align:right}.study-review-date b{color:var(--on-dark);font-size:13px;text-transform:none;letter-spacing:0}.study-columns{display:grid;grid-template-columns:2fr 1fr;gap:24px}.study-event{border-top:1px solid var(--hairline);padding:10px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.study-event:first-child{border-top:0}.study-event b{color:var(--on-dark);font-size:13px}.study-event-date,.study-event-meta{font-size:11px;color:var(--ash)}.study-event-meta{display:block;margin-top:2px}.review-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.review-btn{background:transparent;color:var(--body);border:1px solid var(--hairline);border-radius:9999px;padding:5px 9px;font-size:11px;cursor:pointer}.review-btn.active{color:var(--on-dark);background:var(--tile-3);border-color:var(--hairline-strong)}.review-list{display:grid;gap:8px}.review-list>div{display:flex;justify-content:space-between;padding:10px 12px;background:var(--tile-2);border:1px solid var(--hairline);border-radius:8px;font-size:12px}.review-list span{color:var(--on-dark);font-weight:600}.study-empty{padding:12px 0}@media(max-width:760px){.study-panel-head,.study-event{flex-direction:column;align-items:flex-start}.study-review-date{text-align:left}.study-columns{grid-template-columns:1fr}.review-actions{justify-content:flex-start}}\n  .current-location-card{background:var(--tile-1);border:1px solid var(--hairline);border-radius:18px;padding:24px}
+.current-location-card .loc-status{font-size:13px;font-weight:600}
+.current-location-card .loc-status.red{color:var(--accent-red)}
+.current-location-card .loc-status.yellow{color:var(--accent-yellow)}
+.current-location-card .loc-status.green{color:var(--accent-green)}
+.comp-states{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.comp-state{font-size:11px;font-weight:600;letter-spacing:0.04em;border-radius:9999px;padding:2px 10px;border:1px solid var(--hairline);background:transparent;color:var(--mute);cursor:pointer;font-family:var(--sans)}
+.comp-state[aria-pressed="true"].cs-studied{color:var(--accent-blue);background:var(--accent-blue-soft);border-color:var(--accent-blue)}
+.comp-state[aria-pressed="true"].cs-practiced{color:var(--accent-yellow);background:var(--accent-yellow-soft);border-color:var(--accent-yellow)}
+.comp-state[aria-pressed="true"].cs-proven{color:var(--accent-green);background:var(--accent-green-soft);border-color:var(--accent-green)}
+.comp-state:focus-visible{outline:2px solid var(--primary-focus);outline-offset:2px}
+pre.ia-preview{background:var(--tile-1);border:1px solid var(--hairline);border-radius:8px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.6;color:var(--body);white-space:pre-wrap;overflow-wrap:anywhere;max-height:320px;overflow:auto;margin:12px 0 0}
+details.ia-details{margin-top:12px}details.ia-details summary{cursor:pointer;font-size:14px;color:var(--primary)}
+@media print{.global-nav,.sub-nav,.palette-search,.btn-primary,.btn-ghost,.review-actions,.ia-details,#copyStatusBtn,#copyContextBtn,#expJson,#expMd,#expPdf,#impJson{display:none !important}}
+.hidden{display:none !important}
   [v-cloak]{display:none !important}
   a.inline-link{color:var(--primary);text-decoration:none}
   @media (max-width:1023px){.hero-grid{grid-template-columns:1fr}.global-nav .links{display:none}}
@@ -193,7 +207,7 @@ tailwind.config = {
 <nav class="global-nav" aria-label="Navegação principal">
   <span class="wordmark">Roadmap Java Backend → Júnior</span>
   <div class="links">
-    <a href="#gates">Gates</a><a href="#frontend">Frontend</a><a href="#vagas">Vagas</a><a href="#candidatura">Estágio</a><a href="#diferenciais">Diferenciais</a>
+    <a href="#gates">Gates</a><a href="#projetos">Projetos</a><a href="#frontend">Frontend</a><a href="#vagas">Vagas</a><a href="#candidatura">Estágio</a><a href="#diferenciais">Diferenciais</a>
   </div>
   <span class="streak-pill" id="streakPill"><m-icon name="local_fire_department" size="sm"></m-icon> {{ streakText }}</span>
 </nav>
@@ -220,6 +234,8 @@ tailwind.config = {
           <div class="bar-row"><div class="bar-top"><span>BACKEND Core</span><span class="count" id="backendCount">{{ backend.d }}/{{ backend.t }} ({{ backend.pct }}%)</span></div><div class="bar-track"><div class="bar-fill" id="backendBar" :style="{ width: backend.pct + '%' }"></div></div></div>
           <div class="bar-row"><div class="bar-top"><span>G2 — GATE ESTÁGIO</span><span class="count" id="g2Count">{{ g2.done }}/{{ g2.tot }} ({{ g2.pct }}%)</span></div><div class="bar-track"><div class="bar-fill yellow" id="g2Bar" :style="{ width: g2.pct + '%' }"></div></div></div>
           <div class="bar-row"><div class="bar-top"><span>FRONTEND — secundário</span><span class="count" id="frontCount">{{ front.d }}/{{ front.t }} ({{ front.pct }}%)</span></div><div class="bar-track"><div class="bar-fill green" id="frontBar" :style="{ width: front.pct + '%' }"></div></div></div>
+          <div class="bar-row"><div class="bar-top"><span>COMPETÊNCIAS · estudado / praticado / comprovado</span><span class="count" id="compCount">{{ compText }}</span></div><div class="bar-track"><div class="bar-fill" id="compBar" :style="{ width: comp.estudadoPct + '%' }"></div></div></div>
+          <p class="indicator-note">Checkbox = progresso. Comprovado exige projeto + link.</p>
         </div>
       </div>
       <div class="palette-card" id="proximo">
@@ -250,11 +266,20 @@ tailwind.config = {
       <div class="study-columns"><div><h4>Trabalhado recentemente</h4>
         <div v-if="recentEvents.length"><div class="study-event" v-for="e in recentEvents" :key="e.ts + e.id + e.status"><div><span class="study-event-date">{{ fmtDate(e.ts) }}</span> <b>{{ e.label }}</b><span class="study-event-meta">{{ e.gate }} · {{ e.status }}</span></div><div class="review-actions"><button type="button" class="review-btn" :class="{ active: isReviewed(e.id, 'CONSOLIDADO') }" @click="setReview(e.id, 'CONSOLIDADO')"><m-icon name="check" size="sm"></m-icon> Consolidado</button><button type="button" class="review-btn" :class="{ active: isReviewed(e.id, 'REFORCAR') }" @click="setReview(e.id, 'REFORCAR')"><m-icon name="warning" size="sm"></m-icon> Reforçar</button><button type="button" class="review-btn" :class="{ active: isReviewed(e.id, 'NAO_COMPROVADO') }" @click="setReview(e.id, 'NAO_COMPROVADO')"><m-icon name="circle" size="sm"></m-icon> Não comprovado</button></div></div></div>
         <p v-else class="study-empty">Nenhuma atividade recente registrada ainda. Marque um critério, pratique ou avance uma evidência para começar.</p>
-      </div><div><h4>Resultado da última revisão</h4><div class="review-list"><div><b>Consolidado</b><span>{{ reviewCounts.consolidated.length }}</span></div><div><b>Precisa de reforço</b><span>{{ reviewCounts.reinforce.length }}</span></div><div><b>Não comprovado</b><span>{{ reviewCounts.unproven.length }}</span></div></div></div></div>
+      </div><div><h4>Resultado da última revisão</h4><div class="review-list"><div><b>Consolidado</b><span>{{ reviewCounts.consolidated.length }}</span></div><div><b>Precisa de reforço</b><span>{{ reviewCounts.reinforce.length }}</span></div><div><b>Não comprovado</b><span>{{ reviewCounts.unproven.length }}</span></div></div><div v-if="reviewCounts.reinforce.length"><p class="indicator-note">Toque num item para filtrar: </p><div style="display:flex;gap:6px;flex-wrap:wrap"><button v-for="(e, i) in reviewCounts.reinforce.slice(0, 3)" :key="i" type="button" class="review-btn" @click="gotoFilter(e.label)">⚠ {{ e.label.slice(0, 28) }}</button></div></div></div></div>
     </section>
     <div class="gate-trail flex flex-wrap gap-2" id="gateTrail"><span v-for="b in trail" :key="b.id" class="badge-pro" :class="b.cls">{{ b.label }}</span><span class="badge-pro">F1 {{ front.pct }}% (secundário)</span></div>
   </div>
 </header>
+
+<section class="tile tile-1" id="voce-esta-aqui" aria-label="Você está aqui">
+  <div class="wrap"><div class="current-location-card">
+    <p class="ref-time">Você está aqui</p>
+    <h2 id="currentGateTitle" style="font-size:20px;color:var(--on-dark);margin:0 0 6px">{{ curGate.title }}</h2>
+    <p id="currentGateCore" style="font-size:14px;margin:0 0 8px">{{ curGate.core }}</p>
+    <p class="loc-status" :class="curGate.color" id="currentGateStatus" role="status">{{ curGate.text }}</p>
+  </div></div>
+</section>
 
 <main id="gates">
   <section v-for="gw in gatesWithStats" :key="gw.g.id" class="tile" :class="'tile-' + gw.tile" :id="'gate-' + gw.g.id">
@@ -267,7 +292,7 @@ tailwind.config = {
         <p class="gate-criteria">Critérios mensuráveis</p>
         <ul class="items">
           <li v-for="c in gw.g.criterios" :key="c[0]" :class="{ hidden: hidden(c[1]) }" :data-text="c[1].toLowerCase()">
-            <label class="item"><input type="checkbox" :checked="!!state[c[0]]" @change="toggleCrit(c[0], $event.target.checked)"><span class="txt">{{ c[1] }}<button v-if="practice[c[0]]" type="button" class="practice-tag" title="Marcar como consolidado" @click.prevent="dismissPractice(c[0])">conheço → praticar</button></span><span class="prio-pill" :class="'prio-' + c[2]">{{ c[2] }}</span></label>
+            <label class="item"><input type="checkbox" :checked="!!state[c[0]]" @change="toggleCrit(c[0], $event.target.checked)"><span class="txt">{{ c[1] }}<button v-if="practice[c[0]]" type="button" class="practice-tag" title="Marcar como consolidado" @click.prevent="dismissPractice(c[0])">conheço → praticar</button></span><span class="prio-pill" :class="'prio-' + c[2]">{{ c[2] }}</span></label><div class="comp-states" role="group" aria-label="Estados de competência"><button type="button" class="comp-state cs-studied" :aria-pressed="compPressed(c[0], 'studied').toString()" @click.prevent="toggleComp(c[0], 'studied')">Estudado</button><button type="button" class="comp-state cs-practiced" :aria-pressed="compPressed(c[0], 'practiced').toString()" @click.prevent="toggleComp(c[0], 'practiced')">Praticado</button><button type="button" class="comp-state cs-proven" :aria-pressed="compPressed(c[0], 'proven').toString()" @click.prevent="toggleComp(c[0], 'proven')">Comprovado</button></div>
           </li>
         </ul>
         <p class="indicator-note">Números (ex: "20 exercícios", "500+ linhas") são indicadores de prática, não prova sozinha — o que conta é conseguir fazer, não bater a meta numérica.</p>
@@ -284,6 +309,27 @@ tailwind.config = {
   </section>
 </main>
 
+<section class="tile tile-2" id="projetos">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Linha de evolução</p><h2><m-icon name="build" size="lg"></m-icon> Projetos</h2><p>Cada projeto transforma competência em evidência. O progresso combina nível de evidência com competências praticadas.</p></div>
+    <div id="projList"><div v-for="pc in projCards" :key="pc.proj.id" class="gate-card" :id="'proj-' + pc.proj.id"><div class="gate-top"><span class="gate-title">{{ pc.proj.nome || pc.proj.id }}</span><span class="gate-meta">{{ pc.gate.id }} · {{ pc.nivel }} · {{ pc.pr.pct }}%</span></div><p v-if="pc.baseLine" class="dif-encaixe">{{ pc.baseLine }}</p><p class="gate-obj">{{ pc.proj.titulo }}</p><div class="bar-track"><div class="bar-fill" :style="{ width: pc.pr.pct + '%' }"></div></div><p class="gate-criteria">Tecnologias</p><ul class="dont-list flex flex-wrap gap-2"><li v-for="(t, ti) in (pc.proj.tech || [])" :key="ti">{{ t }}</li></ul><p class="gate-criteria">Competências relacionadas · {{ pc.pr.done }}/{{ pc.pr.tot }} praticadas</p><ul class="items"><li v-for="cc in pc.comps" :key="cc.id" :class="{ hidden: hidden(cc.lab) }" :data-text="cc.lab.toLowerCase()"><div class="study-event"><div><span :style="{ color: compBadge(cc.id).color }">{{ compBadge(cc.id).icon === 'check_circle' ? '✓' : compBadge(cc.id).icon === 'circle' ? '○' : '·' }}</span> <b>{{ cc.lab }}</b><span class="study-event-meta">{{ cc.gt }}</span></div></div></li></ul><p class="gate-criteria">Evidências</p><div class="review-actions" style="justify-content:flex-start"><button v-for="(lbl, i) in (pc.proj.evidence || [])" :key="i" type="button" class="review-btn" :class="{ active: projCheckOn(pc.proj.id, i) }" :aria-pressed="projCheckOn(pc.proj.id, i).toString()" :aria-label="'Evidência: ' + lbl" @click="toggleProjCheck(pc.proj.id, i)">{{ projCheckOn(pc.proj.id, i) ? '✓ ' : '○ ' }}{{ lbl }}</button></div><div class="explain-box"><h4>Próximos passos</h4><ul><li v-for="(s, si) in (pc.proj.next || [])" :key="si">{{ s }}</li></ul></div><p style="margin-top:12px"><a class="btn-ghost btn-small" :href="pc.openHref" :target="pc.openBlank ? '_blank' : null" :rel="pc.openBlank ? 'noopener' : null">{{ pc.openLabel }}</a></p></div></div>
+  </div>
+</section>
+
+<section class="tile tile-1" id="contexto-ia" aria-label="Contexto para IA">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Leve seu estado</p><h2><m-icon name="smart_toy" size="lg"></m-icon> Contexto para IA</h2><p>Copie sua situação atual e continue o estudo em qualquer IA, de onde parou.</p></div>
+    <div class="sec-card"><div class="review-list"><div><b>Gate atual</b><span id="aiGate">{{ aiGate }}</span></div><div><b>Próxima missão</b><span id="aiMission">{{ aiMission }}</span></div><div><b>CORE restantes</b><span id="aiCore">{{ aiCore }}</span></div><div><b>Precisa de reforço</b><span id="aiReview">{{ aiReview }}</span></div></div><p style="margin-top:16px"><button class="btn-primary" id="copyContextBtn" type="button" @click="copyStatus">Copiar contexto</button></p><details class="ia-details"><summary>Ver prévia do texto</summary><pre class="ia-preview" id="iaPreview">{{ iaPreview }}</pre></details></div>
+  </div>
+</section>
+
+<section class="tile tile-2" id="exportar" aria-label="Exportar progresso">
+  <div class="wrap">
+    <div class="tile-head"><p class="ref-time">Portabilidade</p><h2><m-icon name="upload" size="lg"></m-icon> Exportar</h2><p>Baixe seu progresso para backup, relatório ou impressão.</p></div>
+    <div class="sec-card"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-ghost btn-small" id="expJson" type="button" @click="expJson">Baixar JSON</button><button class="btn-ghost btn-small" id="expMd" type="button" @click="expMd">Baixar Markdown</button><button class="btn-ghost btn-small" id="expPdf" type="button" @click="expPdf">Baixar PDF</button></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn-ghost btn-small" id="impJson" type="button" @click="impTrigger">Importar JSON</button><input type="file" id="impFile" ref="impFile" accept="application/json,.json" hidden @change="impFileChange"></div><p class="indicator-note" id="impMsg">{{ impMsg }}</p><p class="indicator-note">JSON versionado 4.0 — guarde para importar na V4.6.</p></div>
+  </div>
+</section>
+
 <section class="tile tile-1" id="ia">
   <div class="wrap">
     <div class="tile-head"><h2><span class="msym msym-lg" aria-hidden="true">explore</span> IA como ferramenta, não substituto</h2>
@@ -299,7 +345,7 @@ tailwind.config = {
   <div class="wrap">
     <div class="tile-head"><h2><span class="msym msym-lg" aria-hidden="true">circle</span> Trilha Secundária: Frontend</h2>
     <p>Existe para aumentar sua autonomia como Backend Developer. <b>Você não precisa concluí-la para atingir nenhum Gate de Backend (G0–G4).</b> Objetivo: criar uma interface funcional que consuma sua própria API e entender o frontend moderno — não se tornar especialista em React.</p></div>
-    <div id="frontList"><div class="gate-card"><div class="gate-top"><span class="gate-title">F1 · Trilha opcional</span><span class="gate-meta">{{ front.d }}/{{ front.t }} · {{ front.pct }}% — meta 70%, nunca bloqueia Backend</span></div><p class="gate-obj">{{ FRONT.objetivo }}</p><div class="bar-track"><div class="bar-fill green" :style="{ width: front.pct + '%' }"></div></div><p class="gate-criteria">Critérios</p><ul class="items"><li v-for="c in FRONT.criterios" :key="c[0]" :class="{ hidden: hidden(c[1]) }" :data-text="c[1].toLowerCase()"><label class="item"><input type="checkbox" :checked="!!state[c[0]]" @change="toggleCrit(c[0], $event.target.checked)"><span class="txt">{{ c[1] }}<button v-if="practice[c[0]]" type="button" class="practice-tag" title="Marcar como consolidado" @click.prevent="dismissPractice(c[0])">conheço → praticar</button></span><span class="prio-pill" :class="'prio-' + c[2]">{{ c[2] }}</span></label></li></ul><div class="proj-box" :data-proj="FRONT.projeto.id"><h4><m-icon name="build" size="sm"></m-icon> Projeto obrigatório</h4><p><span v-if="FRONT.projeto.nome" style="color:var(--primary)">{{ FRONT.projeto.nome }}</span> {{ FRONT.projeto.nome ? "— " + FRONT.projeto.titulo : FRONT.projeto.titulo }}</p><div class="ev-seg" role="group" aria-label="Nível de evidência"><button v-for="l in EVL" :key="l" type="button" class="pill-tab" :class="{ active: evLevel(FRONT.projeto.id) === l }" @click="setEv(FRONT.projeto.id, l)">{{ l }}</button></div><input class="ev-link" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" :value="evLink(FRONT.projeto.id)" @input="evLinkInput(FRONT.projeto.id, $event.target.value)" @change="evLinkChange(FRONT.projeto.id, $event.target.value)"></div></div></div>
+    <div id="frontList"><div class="gate-card"><div class="gate-top"><span class="gate-title">F1 · Trilha opcional</span><span class="gate-meta">{{ front.d }}/{{ front.t }} · {{ front.pct }}% — meta 70%, nunca bloqueia Backend</span></div><p class="gate-obj">{{ FRONT.objetivo }}</p><div class="bar-track"><div class="bar-fill green" :style="{ width: front.pct + '%' }"></div></div><p class="gate-criteria">Critérios</p><ul class="items"><li v-for="c in FRONT.criterios" :key="c[0]" :class="{ hidden: hidden(c[1]) }" :data-text="c[1].toLowerCase()"><label class="item"><input type="checkbox" :checked="!!state[c[0]]" @change="toggleCrit(c[0], $event.target.checked)"><span class="txt">{{ c[1] }}<button v-if="practice[c[0]]" type="button" class="practice-tag" title="Marcar como consolidado" @click.prevent="dismissPractice(c[0])">conheço → praticar</button></span><span class="prio-pill" :class="'prio-' + c[2]">{{ c[2] }}</span></label><div class="comp-states" role="group" aria-label="Estados de competência"><button type="button" class="comp-state cs-studied" :aria-pressed="compPressed(c[0], 'studied').toString()" @click.prevent="toggleComp(c[0], 'studied')">Estudado</button><button type="button" class="comp-state cs-practiced" :aria-pressed="compPressed(c[0], 'practiced').toString()" @click.prevent="toggleComp(c[0], 'practiced')">Praticado</button><button type="button" class="comp-state cs-proven" :aria-pressed="compPressed(c[0], 'proven').toString()" @click.prevent="toggleComp(c[0], 'proven')">Comprovado</button></div></li></ul><div class="proj-box" :data-proj="FRONT.projeto.id"><h4><m-icon name="build" size="sm"></m-icon> Projeto obrigatório</h4><p><span v-if="FRONT.projeto.nome" style="color:var(--primary)">{{ FRONT.projeto.nome }}</span> {{ FRONT.projeto.nome ? "— " + FRONT.projeto.titulo : FRONT.projeto.titulo }}</p><div class="ev-seg" role="group" aria-label="Nível de evidência"><button v-for="l in EVL" :key="l" type="button" class="pill-tab" :class="{ active: evLevel(FRONT.projeto.id) === l }" @click="setEv(FRONT.projeto.id, l)">{{ l }}</button></div><input class="ev-link" type="url" placeholder="Link da evidência: commit / PR / API / deploy…" :value="evLink(FRONT.projeto.id)" @input="evLinkInput(FRONT.projeto.id, $event.target.value)" @change="evLinkChange(FRONT.projeto.id, $event.target.value)"></div></div></div>
     <div class="sec-card"><h3>Integração Full Stack (extensão, não requisito)</h3>
     <p>Somente aqui você conecta: React ↓ HTTP ↓ Spring Boot ↓ PostgreSQL — login, listagem, criação, edição, exclusão e tratamento de erros consumindo sua API.</p></div>
   </div>
@@ -353,7 +399,7 @@ tailwind.config = {
     <span id="doneGates">{{ doneGatesText }}</span>
     <button id="resetBtn" type="button" @click="resetAll">Zerar progresso</button>
   </div>
-  <p class="storage-warning"><span class="msym msym-sm" aria-hidden="true">save</span> Progresso salvo neste navegador (inclui evidências e vagas). Em outro dispositivo, use o GitHub como referência.</p>
+  <p class="storage-warning"><span class="msym msym-sm" aria-hidden="true">save</span> Progresso salvo neste navegador (inclui evidências e vagas). Em outro dispositivo, use o GitHub como referência. Métricas mostram apenas o registrado neste navegador.</p>
   <p class="sources">Fontes: bootcamp Santander/DIO AI Java Back-end; Roadmap Java 2026; Javanauta; roadmap.sh; vagas reais (Gupy, LinkedIn, Vagas.com.br, Indeed, Glassdoor); relatório Alura 2026 (IA aplicada, DevSecOps, performance); versões conferidas em set/2026 (Spring Boot 4.1 sobre Spring Framework 7, Java 17+ mínimo).</p>
 </footer>
 </div><!-- /#app -->
@@ -378,7 +424,7 @@ criterios:[
 ["g0-09","3 programas de console do zero, sem tutorial","CORE"],["g0-10","Git: init, add, commit, push, branches, merge, conflitos, .gitignore","CORE"],
 ["g0-11","Linux básico: cd, ls, pwd, permissões","CORE"],["g0-12","SQL: SELECT, INSERT, UPDATE, DELETE, JOIN, PK/FK","CORE"],
 ["g0-13","JVM e GC — visão conceitual (sem aprofundar agora)","COMP"]],
-projeto:{id:"g0-proj",nome:"BiblioTrack",titulo:"Sistema de biblioteca em console (500+ linhas, sem tutorial) — serve pra POO, Collections, Exceptions, Generics e Streams trabalharem juntos num problema real, não isolados."},naoExige:[]},
+projeto:{id:"g0-proj",nome:"BiblioTrack",titulo:"Sistema de biblioteca em console (500+ linhas, sem tutorial) — serve pra POO, Collections, Exceptions, Generics e Streams trabalharem juntos num problema real, não isolados.",tech:["Java 17","Maven","Git"],comps:["g0-03","g0-04","g0-05","g0-06","g0-07","g0-09"],next:["500+ linhas sem tutorial","README com execução"],evidence:["Código no GitHub","README","Execução documentada"],base:null},naoExige:[]},
 {id:"G1",titulo:"Backend Foundation — primeira API real",threshold:80,ref:"~ Out/2026 · Spring Boot + primeiro backend real · CORE",
 objetivo:"Construir uma API REST funcional com Spring Boot + PostgreSQL.",
 explicar:["O que é IoC e por que o Spring existe por causa disso","Diferença entre Service, Repository e Controller — o que cada um NÃO deveria fazer","Por que usar DTO em vez de expor a entidade JPA direto"],
@@ -390,7 +436,7 @@ criterios:[
 ["g1-09","5 queries SQL manuais + 3 JOINs + 1 agregada","CORE"],["g1-10","application.properties / profiles p/ múltiplos ambientes","CORE"],
 ["g1-11","Migrations versionadas com Flyway (por que não usar apenas ddl-auto)","CORE"],
 ["g1-12","Lombok p/ boilerplate","COMP"],["g1-13","Paginação, filtros e versionamento de API","COMP"]],
-projeto:{id:"g1-proj",nome:"TaskFlow",titulo:"API de tarefas: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres + Flyway, README + instruções."},naoExige:[]},
+projeto:{id:"g1-proj",nome:"TaskFlow",titulo:"API de tarefas: 5+ endpoints, 4+ entidades, relacionamentos, DTO, validation, exception handling, Postgres + Flyway, README + instruções.",tech:["Java 17","Spring Boot","PostgreSQL","Flyway","JPA / Hibernate"],comps:["g1-02","g1-03","g1-04","g1-05","g1-06","g1-07","g1-08","g1-11"],next:["5+ endpoints no ar","4+ entidades relacionadas","README com instruções"],evidence:["Código no GitHub","README","Testes","API local"],base:null},naoExige:[]},
 {id:"G2",titulo:"Gate de Estágio Java Backend",threshold:90,ref:"~ Nov–Dez/2026 · Security + testes + Docker → COMEÇAR A SE CANDIDATAR",
 objetivo:"Estar tecnicamente pronto para candidaturas a estágio. Não exige React, AWS, K8s, Kafka ou microservices.",
 explicar:["Como o JWT prova que um usuário está autenticado sem guardar sessão no servidor","Por que hashear senha (e por que nunca comparar senha em texto puro)","O que um teste de integração cobre que um teste unitário não cobre"],
@@ -403,7 +449,7 @@ criterios:[
 ["g2-10","Branches + merge + 3 conflitos simulados + PR + commits claros + leitura de diff","CORE"],["g2-11","Dockerfile + app em container + Postgres em container + Compose","CORE"],
 ["g2-12","Projeto final no GitHub: Spring + Postgres + JPA + REST + DTO + Validation + JWT + Tests + Docker + README","CORE"],
 ["g2-13","Swagger/OpenAPI documentando a API","COMP"],["g2-14","Consumo de API externa (base OpenFeign do bootcamp)","COMP"]],
-projeto:{id:"g2-proj",nome:"TaskFlow — versão profissional",titulo:"Evolução do TaskFlow (G1): + JWT/autorização + Docker/Compose + testes de integração. Precisa subir com docker-compose, persistir, retornar erros corretos e ter README completo."},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
+projeto:{id:"g2-proj",nome:"TaskFlow — versão profissional",titulo:"Evolução do TaskFlow (G1): + JWT/autorização + Docker/Compose + testes de integração. Precisa subir com docker-compose, persistir, retornar erros corretos e ter README completo.",tech:["Spring Boot","JWT","Docker / Compose","JUnit 5 + Mockito","Swagger / OpenAPI"],comps:["g2-07","g2-08","g2-09","g2-10","g2-11","g2-12"],next:["JWT + rotas protegidas","Subir com docker-compose","Testes de integração"],evidence:["Código no GitHub","README completo","Testes","Docker Compose"],base:"g1-proj"},naoExige:["React","AWS","Kubernetes","Kafka","Microservices"]},
 {id:"G3",titulo:"Backend Júnior — práticas profissionais",threshold:85,ref:"~ 2027 · Arquitetura, testes, CI/CD, cloud, performance",
 objetivo:"Desenvolver e manter backend de verdade, em produção.",
 explicar:["Um trade-off arquitetural que você escolheu conscientemente e por quê","Como você encontraria uma query N+1 num projeto que não é seu","O que um pipeline de CI verde garante — e o que ele NÃO garante"],
@@ -414,7 +460,7 @@ criterios:[
 ["g3-07","Documentação profissional da API e do projeto","CORE"],
 ["g3-08","Redis: hit/miss + invalidação","COMP"],["g3-09","Observabilidade: logs estruturados, métricas, health checks","COMP"],
 ["g3-10","Cloud (EC2/RDS/S3, noção→uso) + concorrência básica (threads/virtual threads)","COMP"]],
-projeto:{id:"g3-proj",nome:"TaskFlow em produção",titulo:"TaskFlow (G2) publicado: URL pública + banco remoto + CI verde + logs + health check."},naoExige:[]},
+projeto:{id:"g3-proj",nome:"TaskFlow em produção",titulo:"TaskFlow (G2) publicado: URL pública + banco remoto + CI verde + logs + health check.",tech:["Docker","GitHub Actions","Redis","Cloud (EC2/RDS/S3)"],comps:["g3-03","g3-04","g3-05","g3-06","g3-07"],next:["Deploy com URL pública","CI verde","Logs + health check"],evidence:["Código no GitHub","CI verde","URL pública","Logs + health"],base:"g2-proj"},naoExige:[]},
 {id:"G4",titulo:"Backend Avançado — sistemas complexos",threshold:80,ref:"2027+ · Mensageria, cache, concorrência, arquitetura",
 objetivo:"Lidar com problemas reais distribuídos (sem lista rígida de tecnologias obrigatórias).",
 explicar:["A diferença prática entre monólito modular e microservices — quando cada um vale a pena","O que idempotência resolve em mensageria, com um exemplo concreto","Um trade-off de escalabilidade que você aceitaria conscientemente"],
@@ -422,7 +468,7 @@ criterios:[
 ["g4-01","Mensageria async (RabbitMQ ou Kafka): retry + DLQ + idempotência","AVANC"],["g4-02","Redis: hit/miss demonstrado + invalidação","AVANC"],
 ["g4-03","Concorrência: race/deadlock/starvation + CompletableFuture ou virtual threads em projeto","AVANC"],["g4-04","Observabilidade: logs estruturados + métricas + tracing + erro via logs","AVANC"],
 ["g4-05","Explicar monólito/modular/micro/async/consistência/escalabilidade/trade-offs","AVANC"],["g4-06","System design: disponibilidade + escalabilidade","AVANC"]],
-projeto:{id:"g4-proj",nome:"Capstone",titulo:"Projeto aberto demonstrando UM conceito avançado com profundidade real (mensageria OU cache OU concorrência) — não é sobre acumular tecnologia, é sobre resolver um problema que só existe nessa escala."},naoExige:[]}
+projeto:{id:"g4-proj",nome:"Capstone",titulo:"Projeto aberto demonstrando UM conceito avançado com profundidade real (mensageria OU cache OU concorrência) — não é sobre acumular tecnologia, é sobre resolver um problema que só existe nessa escala.",tech:["A definir pelo conceito"],comps:["g4-01","g4-02","g4-03","g4-04","g4-05","g4-06"],next:["Escolher UM conceito avançado","README com trade-offs"],evidence:["Código no GitHub","README de trade-offs","Demonstração"],base:null},naoExige:[]}
 ];
 const FRONT={id:"F1",titulo:"Frontend Complementar",threshold:70,ref:"Paralelo e opcional em 2027 · menor carga",
 objetivo:"Consumir e apresentar sua própria API. Nunca bloqueia G0–G4.",
@@ -430,7 +476,7 @@ criterios:[
 ["f1-01","HTML semântico + CSS Flexbox/Grid + responsivo → página estática","FRONT"],["f1-02","JS: vars, tipos, condicionais, loops, arrays, funções, callbacks, arrow","FRONT"],
 ["f1-03","DOM, eventos, fetch, async/await → app consumindo API pública","FRONT"],["f1-04","TS: types, interfaces, generics, union, narrowing → reescrever projeto JS","FRONT"],
 ["f1-05","React: componentes, JSX, props, state, hooks, Router, formulários","FRONT"],["f1-06","Axios/fetch + login JWT + protected routes + CORS + env + erros UI","FRONT"]],
-projeto:{id:"f1-proj",nome:"TaskFlow UI",titulo:"Interface React consumindo o TaskFlow (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres."}};
+projeto:{id:"f1-proj",nome:"TaskFlow UI",titulo:"Interface React consumindo o TaskFlow (login, list, create, edit, delete, erros). React ↓ HTTP ↓ Spring ↓ Postgres.",tech:["React","TypeScript","Axios"],comps:["f1-05","f1-06"],next:["Login JWT na UI","CRUD completo consumindo a API"],evidence:["Código no GitHub","README","App consumindo a API"],base:"g2-proj"}};
 const CAND=[["cand-01","GitHub organizado (perfil, pins, READMEs)"],["cand-02","Projeto backend completo no ar/documentado"],["cand-03","README que mostra COMO você pensa"],["cand-04","Currículo focado em Backend"],["cand-05","LinkedIn com palavras-chave + posts sobre projetos"],["cand-06","Perguntas técnicas ensaiadas"],["cand-07","Histórias comportamentais (STAR)"],["cand-08","Simulação de entrevista"],["cand-09","Primeira candidatura enviada"]];
 /* Diferenciais: textos V1 preservados p/ manter chaves dX-item-Y */
 const DIF=[
@@ -441,10 +487,10 @@ const DIF=[
 {categoria:"Portfólio & prova social",icone:"public",encaixe:"contínuo, após G2",itens:["2-3 projetos com README que mostra COMO você pensa","Contribuir com open source (mesmo docs)","Compartilhar construção no LinkedIn"]}];
 const EV_LEVELS=["ESTUDADO","PRATICADO","APLICADO","COMPROVADO"];
 /* ============ STORAGE ============ */
-const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",history:"roadmap-study-history-v1",review:"roadmap-study-review-v1",mig:"roadmap-v2-migrated",mig3:"roadmap-v3-migrated"};
+const K={prog:"roadmap-progress",dif:"roadmap-diferenciais",streak:"roadmap-streak",ev:"roadmap-evidencias",cand:"roadmap-candidatura",vagas:"roadmap-vagas",prac:"roadmap-practice",history:"roadmap-study-history-v1",review:"roadmap-study-review-v1",mig:"roadmap-v2-migrated",mig3:"roadmap-v3-migrated",comp:"roadmap-competence-v1",mig42:"roadmap-v4-2-migrated"};
 const load=(k,f)=>{try{const r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null}),studyHistory=load(K.history,[]),reviewState=load(K.review,{date:null,items:{}});
+let state=load(K.prog,null),difState=load(K.dif,{}),evState=load(K.ev,{}),candState=load(K.cand,{}),vagas=load(K.vagas,[]),practice=load(K.prac,{}),streak=load(K.streak,{count:0,lastActive:null}),studyHistory=load(K.history,[]),reviewState=load(K.review,{date:null,items:{}}),compState=load(K.comp,{});
 /* ============ MIGRAÇÃO V1→V2 ============ */
 function migrate(){
   if(localStorage.getItem(K.mig))return;
@@ -522,16 +568,63 @@ function nextBlockCalc(st,ev){for(const g of GATES.slice(0,4)){for(const c of g.
 function criterionLabel(id){for(const g of GATES)for(const c of g.criterios)if(c[0]===id)return{label:c[1],gate:g.id};for(const c of FRONT.criterios)if(c[0]===id)return{label:c[1],gate:FRONT.id};return{label:id,gate:""};}
 function projectLabel(id){for(const g of GATES)if(g.projeto&&g.projeto.id===id)return{label:g.projeto.nome||g.projeto.titulo,gate:g.id};if(FRONT.projeto&&FRONT.projeto.id===id)return{label:FRONT.projeto.nome||FRONT.projeto.titulo,gate:FRONT.id};return{label:id,gate:""};}
 function fmtStudyDate(ts){return new Date(ts).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});}
-/* ============ VUE APP (templates reativos no DOM; sem innerHTML imperativo) ============ */
 
+function compOf(id,comp){return comp[id]||{studied:null,practiced:null,proven:false};}
+function projById(pid){for(const g of GATES){if(g.projeto&&g.projeto.id===pid)return{proj:g.projeto,gate:g};}if(FRONT.projeto&&FRONT.projeto.id===pid)return{proj:FRONT.projeto,gate:FRONT};return null;}
+function projProgress(p,ev,comp){const e=ev[p.id]||{};const ni=Math.max(0,EV_LEVELS.indexOf(e.nivel||"ESTUDADO"));const comps=(p.comps||[]);const done=comps.filter(id=>{const c=compOf(id,comp);return c&&(c.practiced||c.proven);}).length;return{ni:ni,pct:Math.round(ni/3*50+(comps.length?done/comps.length*50:0)),done:done,tot:comps.length};}
+function competenceStats(st,comp,ev){let tot=0,est=0,pra=0,cp=0;GATES.slice(0,4).forEach(g=>g.criterios.forEach(c=>{tot++;const cs=compOf(c[0],comp);if(cs.studied)est++;if(cs.practiced)pra++;if(cs.proven)cp++;}));const projs=GATES.slice(0,4).map(g=>g.projeto.id);const projComp=projs.filter(pid=>projOk(pid,ev)).length;return{estudadoPct:tot?Math.round(est/tot*100):0,praticadoPct:tot?Math.round(pra/tot*100):0,comprovadoPct:tot?Math.round(cp/tot*100):projComp?100:0,tot:tot,est:est,pra:pra,cp:cp};}
+function getCurrentGateCalc(st,ev){const nb=nextBlockCalc(st,ev);const g=nb.g,s=gateStats(g,st);return{g,s,st:gateStatusObj(g,s,ev),nb};}
+function nextMissionCalc(st,ev,prac,rev,comp){const cur=getCurrentGateCalc(st,ev).g;const corePend=cur.criterios.find(c=>c[2]==="CORE"&&!st[c[0]]);if(corePend)return{kind:"core",g:cur,c:corePend,label:corePend[1]};const pracPend=cur.criterios.find(c=>{const cs=compOf(c[0],comp);return cs.studied&&!cs.practiced;})||cur.criterios.find(c=>prac[c[0]]&&!st[c[0]]);if(pracPend)return{kind:"practice",g:cur,c:pracPend,label:pracPend[1]};if(cur.projeto&&!projOk(cur.projeto.id,ev))return{kind:"evidence",g:cur,c:null,label:"Comprovar projeto "+(cur.projeto.nome||cur.projeto.titulo)};const reinf=Object.keys((rev||{}).items||{}).find(id=>(rev.items||{})[id]==="REFORCAR");if(reinf){try{const x=criterionLabel(reinf);return{kind:"review",g:cur,c:null,label:"Revisar: "+x.label};}catch(e){}}const fb=nextBlockCalc(st,ev);return{kind:"comp",g:fb.g,c:fb.c||null,label:fb.c?fb.c[1]:(fb.g.projeto?fb.g.projeto.titulo:fb.g.titulo)};}
+
+function migrateV42(){
+  if(localStorage.getItem(K.mig42))return;
+  try{
+    GATES.forEach(g => g.criterios.forEach(c => {
+      const id = c[0];
+      if(!compState[id]) compState[id] = {
+        studied: state[id] ? Date.now() : null,
+        practiced: (state[id] && !practice[id]) ? Date.now() : null,
+        proven: false
+      };
+    }));
+    FRONT.criterios.forEach(c => {
+      const id = c[0];
+      if(!compState[id]) compState[id] = {
+        studied: state[id] ? Date.now() : null,
+        practiced: (state[id] && !practice[id]) ? Date.now() : null,
+        proven: false
+      };
+    });
+  }catch(e){ save(K.comp,compState); return; }
+  save(K.comp,compState);
+  try{localStorage.setItem(K.mig42,"1")}catch(e){}
+}
+function gateStatusLegacy(g,s){const o=gateStatusObj(g,s,evState);return[o.color,o.text];}
+function reviewSummaryLegacy(){const out={consolidated:[],reinforce:[],unproven:[]};Object.keys(reviewState.items||{}).forEach(id=>{const r=reviewState.items[id];let item=studyHistory.find(e=>e.id===id);if(!item){try{if(id.indexOf("-proj")>=0||projectLabel(id).gate){const p=projectLabel(id);item={label:p.label,gate:p.gate};}else{const c=criterionLabel(id);item={label:c.label,gate:c.gate};}}catch(e){return;}}const bucket=r==="CONSOLIDADO"?"consolidated":r==="REFORCAR"?"reinforce":"unproven";if(!out[bucket].some(x=>x.label===item.label))out[bucket].push(item);});return out;}
+function recentStudyEventsLegacy(days){days=days||14;const since=Date.now()-days*864e5;return studyHistory.filter(e=>e.ts>=since).sort((a,b)=>b.ts-a.ts);}
+
+function validateImport(o){if(!o||typeof o!=="object"||Array.isArray(o))return{ok:false,error:"Arquivo inválido: JSON não é um objeto."};if(o.app!=="roadmap-backend-java-junior")return{ok:false,error:"Arquivo inválido: app incompatível."};const major=String(o.version||"").split(".")[0];if(major!=="4")return{ok:false,error:"Arquivo inválido: versão incompatível (esperada 4.x)."};const isObj=(v)=>v&&typeof v==="object"&&!Array.isArray(v);if(!isObj(o.criteria)||!isObj(o.criteria.checked)||!isObj(o.criteria.practice)||!isObj(o.criteria.competence))return{ok:false,error:"Arquivo inválido: bloco criteria ausente ou corrompido."};if(!isObj(o.projects))return{ok:false,error:"Arquivo inválido: bloco projects ausente ou corrompido."};if(!Array.isArray(o.studyHistory))return{ok:false,error:"Arquivo inválido: studyHistory ausente ou corrompido."};if(!isObj(o.reviews))return{ok:false,error:"Arquivo inválido: bloco reviews ausente ou corrompido."};if(o.streak!==undefined&&!isObj(o.streak))return{ok:false,error:"Arquivo inválido: bloco streak corrompido."};if(o.vagas!==undefined&&!Array.isArray(o.vagas))return{ok:false,error:"Arquivo inválido: bloco vagas corrompido."};if(o.diferenciais!==undefined&&!isObj(o.diferenciais))return{ok:false,error:"Arquivo inválido: bloco diferenciais corrompido."};if(o.candidatura!==undefined&&!isObj(o.candidatura))return{ok:false,error:"Arquivo inválido: bloco candidatura corrompido."};return{ok:true};}
+function buildMarkdown(){const L=[],br=new Date().toLocaleDateString("pt-BR");const cg=getCurrentGateCalc(state,evState);const m=nextMissionCalc(state,evState,practice,reviewState);L.push("# Java Backend → Júnior","","Exportado em "+br+" · "+cg.g.id+" — "+cg.g.titulo+" ("+cg.s.pct+"%)","");L.push("## Situação atual","",cg.g.id+" — "+cg.g.titulo+" · "+cg.s.pct+"% (meta "+cg.g.threshold+"%)",cg.g.objetivo,"");L.push("## Próxima missão","",(m.c?m.c[1]:m.label)+" ("+m.kind+")","");const compLists={studied:[],practiced:[],proven:[]};Object.keys(compState).forEach(id=>{const c=compState[id];let lab=id;try{lab=criterionLabel(id).label;}catch(e){}if(c.proven)compLists.proven.push(lab);else if(c.practiced)compLists.practiced.push(lab);else if(c.studied)compLists.studied.push(lab);});const cap=(arr)=>arr.slice(0,30).map(t=>"- "+t);const more=(arr)=>arr.length>30?["","(mostrando 30 de "+arr.length+")"]:[];L.push("## Competências","","### Estudado");L.push.apply(L,cap(compLists.studied).length?cap(compLists.studied):["- (vazio)"]);L.push.apply(L,more(compLists.studied));L.push("","### Praticado");L.push.apply(L,cap(compLists.practiced).length?cap(compLists.practiced):["- (vazio)"]);L.push.apply(L,more(compLists.practiced));L.push("","### Comprovado");L.push.apply(L,cap(compLists.proven).length?cap(compLists.proven):["- (vazio)"]);L.push.apply(L,more(compLists.proven));L.push("");const allP=[];GATES.forEach(g=>{if(g.projeto)allP.push(g.projeto);});if(FRONT.projeto)allP.push(FRONT.projeto);L.push("## Projetos","");allP.forEach(p=>{const pe=evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const pp=projProgress(p,evState,compState);L.push("### "+(p.nome||p.id),"Objetivo: "+p.titulo,"Status: "+(pe.nivel||"ESTUDADO")+" · "+pp.pct+"%"+(pe.link?" · "+pe.link:""),"");});L.push("## Evidências","");let evAny=false;allP.forEach(p=>{const pe=evState[p.id]||{checks:{}};(p.evidence||[]).forEach((lbl,i)=>{if((pe.checks||{})[i]){evAny=true;L.push("- ["+(p.nome||p.id)+"] "+lbl);}});if(pe.link){evAny=true;L.push("- ["+(p.nome||p.id)+"] Link: "+pe.link);}});if(!evAny)L.push("- (nenhuma evidência registrada)");L.push("");const rs=reviewSummaryLegacy();L.push("## Última revisão","",(reviewState.date?new Date(reviewState.date).toLocaleDateString("pt-BR"):"Ainda não registrada"),"- Consolidado: "+(rs.consolidated.map(e=>e.label).join("; ")||"—"),"- Precisa de reforço: "+(rs.reinforce.map(e=>e.label).join("; ")||"—"),"- Não comprovado: "+(rs.unproven.map(e=>e.label).join("; ")||"—"),"");const pend=cg.g.criterios.filter(c=>!state[c[0]]).map(c=>c[1]);L.push("## Próximos passos","");pend.slice(0,10).forEach(t=>L.push("- "+t));(cg.g.projeto&&cg.g.projeto.next||[]).forEach(t=>L.push("- [Projeto] "+t));if(!pend.length&&!((cg.g.projeto&&cg.g.projeto.next||[]).length))L.push("- (nada pendente)");return L.join("\n");}
+function exportStamp(){return new Date().toISOString().slice(0,10);}
+function downloadBlob(name,mime,text){const b=new Blob([text],{type:mime});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);}
+function pdfTxt(s){return String(s==null?"":s).replace(/→/g,"->").replace(/[^\x20-\xFF]/g,"");}
+function ensureJsPDF(cb,fb){const done=function(ok){try{if(ok){cb();}else{window.print();if(fb)fb();}}catch(e){window.print();if(fb)fb();}};if(window.jspdf&&window.jspdf.jsPDF){done(true);return;}const ex=document.querySelector('script[data-jspdf]');if(ex){ex.addEventListener("load",function(){done(true);},{once:true});ex.addEventListener("error",function(){done(false);},{once:true});return;}const s=document.createElement("script");s.setAttribute("data-jspdf","1");s.src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js";s.onload=function(){done(true);};s.onerror=function(){done(false);};document.head.appendChild(s);}
+function buildAndDownloadPDF(ok,fb){ensureJsPDF(function(){const doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"});let y=18;const need=(h)=>{if(y+h>285){doc.addPage();y=18;}};const title=(t,sz)=>{doc.setFont("helvetica","bold");doc.setFontSize(sz||16);doc.setTextColor(20,20,25);const ls=doc.splitTextToSize(pdfTxt(t),170);need(ls.length*7+4);doc.text(ls,15,y);y+=ls.length*7+4;};const body=(t)=>{doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(60,60,65);const ls=doc.splitTextToSize(pdfTxt(t),170);need(ls.length*5+2);doc.text(ls,15,y);y+=ls.length*5+2;};const bar=(pct)=>{need(8);doc.setDrawColor(200,200,205);doc.rect(15,y,120,4);doc.setFillColor(0,113,227);doc.rect(15,y,120*Math.max(0,Math.min(100,pct))/100,4,"F");y+=9;};const cg=getCurrentGateCalc(state,evState);const m=nextMissionCalc(state,evState,practice,reviewState);const cs=competenceStats(state,compState,evState);
+title("Java Backend -> Junior");body("Relatorio visual · exportado em "+new Date().toLocaleDateString("pt-BR")+" · "+cg.g.id+" - "+cg.g.titulo+" ("+cg.s.pct+"%)");
+title("Resumo do progresso",13);const b=backendCoreCalc(state);const g2=gateStats(GATES[2],state);const f=frontStatsCalc(state);body("Backend Core "+b.pct+"% · G2 Estagio "+g2.pct+"% · Frontend "+f.pct+"% · Estudado "+cs.estudadoPct+"% · Praticado "+cs.praticadoPct+"% · Comprovado "+cs.comprovadoPct+"%");body("Proxima missao ("+m.kind+"): "+(m.c?m.c[1]:m.label));bar(cg.s.pct);
+title("Gates",13);GATES.forEach(g=>{const s=gateStats(g,state);const st=gateStatusLegacy(g,s);body(g.id+" - "+g.titulo+": "+s.done+"/"+s.tot+" ("+s.pct+"%, meta "+g.threshold+"%) - "+st[1]);});
+title("Projetos",13);const allP=[];GATES.forEach(g=>{if(g.projeto)allP.push(g.projeto);});if(FRONT.projeto)allP.push(FRONT.projeto);allP.forEach(p=>{const pe=evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const pp=projProgress(p,evState,compState);body((p.nome||p.id)+" ["+(pe.nivel||"ESTUDADO")+"] "+pp.pct+"%"+(pe.link?" - "+pe.link:""));});
+title("Historico e revisoes",13);const evs=studyHistory.slice(0,10);if(!evs.length)body("(sem atividade registrada)");evs.forEach(e=>{let d="";try{d=new Date(e.ts).toLocaleDateString("pt-BR");}catch(_){}body(d+" "+(e.label||e.id)+" ["+(e.status||"")+"]");});const rs=reviewSummaryLegacy();body("Ultima revisao: "+(reviewState.date?new Date(reviewState.date).toLocaleDateString("pt-BR"):"nao registrada")+" · Consolidado "+rs.consolidated.length+" · Reforco "+rs.reinforce.length+" · Nao comprovado "+rs.unproven.length);
+title("Proximas missoes",13);cg.g.criterios.filter(c=>!state[c[0]]).slice(0,10).forEach(c=>body("- "+c[1]));(cg.g.projeto&&cg.g.projeto.next||[]).forEach(t=>body("- [Projeto] "+t));
+doc.save("roadmap-java-backend-"+exportStamp()+".pdf");if(ok)ok();},function(){if(fb)fb();});}
 /* ============ VUE APP ============ */
-migrate();migrateV3();
+migrate();migrateV3();migrateV42();
 if(window.Vue){
 const {createApp}=Vue;
 const app=createApp({
   data(){return{GATES,FRONT,CAND,DIF,EVL:EV_LEVELS,
     state,difState,evState,candState,vagas,practice,streak,studyHistory,reviewState,
-    filterQuery:"",copyFeedback:"",vagaTitulo:"",vagaReqs:"",vagaLacunas:""};},
+    filterQuery:"",copyFeedback:"",vagaTitulo:"",vagaReqs:"",vagaLacunas:"",compState,impMsg:""};},
   computed:{
     q(){return this.filterQuery.trim().toLowerCase();},
     backend(){return backendCoreCalc(this.state);},
@@ -554,10 +647,19 @@ const app=createApp({
     candDone(){return this.CAND.filter(c=>this.candState[c[0]]).length;},
     difTotal(){let t=0,d=0;this.DIF.forEach((cat,ci)=>cat.itens.forEach((_,ii)=>{t++;if(this.difState["d"+ci+"-item-"+ii])d++;}));return{t,d,pct:t?Math.round(d/t*100):0};},
     recentEvents(){const since=Date.now()-14*864e5;return this.studyHistory.filter(e=>(e.type==="criterio"||e.type==="projeto")&&e.ts>=since).sort((a,b)=>b.ts-a.ts).slice(0,10);},
-    reviewCounts(){const out={consolidated:[],reinforce:[],unproven:[]};Object.keys(this.reviewState.items||{}).forEach(id=>{const r=this.reviewState.items[id],item=this.studyHistory.find(e=>e.id===id);if(!item)return;const b=r==="CONSOLIDADO"?"consolidated":r==="REFORCAR"?"reinforce":"unproven";if(!out[b].some(x=>x.label===item.label))out[b].push(item);});return out;},
+    reviewCounts(){const out={consolidated:[],reinforce:[],unproven:[]};Object.keys(this.reviewState.items||{}).forEach(id=>{const r=this.reviewState.items[id];let item=this.studyHistory.find(e=>e.id===id);if(!item){try{if(id.indexOf("-proj")>=0||projectLabel(id).gate){const p=projectLabel(id);item={label:p.label,gate:p.gate};}else{const c=criterionLabel(id);item={label:c.label,gate:c.gate};}}catch(e){return;}}const b=r==="CONSOLIDADO"?"consolidated":r==="REFORCAR"?"reinforce":"unproven";if(!out[b].some(x=>x.label===item.label))out[b].push(item);});return out;},
     reviewDateText(){return this.reviewState.date?new Date(this.reviewState.date).toLocaleDateString("pt-BR"):"Ainda não registrada";},
     copyBtnLabel(){return this.copyFeedback||"Copiar status pra IA";},
-    copyIcon(){return this.copyFeedback?"check":"content_copy";}
+    copyIcon(){return this.copyFeedback?"check":"content_copy";},
+    comp(){return competenceStats(this.state,this.compState,this.evState);},
+    compText(){const c=this.comp;return c.estudadoPct+"% est · "+c.praticadoPct+"% pra · "+c.comprovadoPct+"% comp";},
+    curGate(){const cg=getCurrentGateCalc(this.state,this.evState);return{title:cg.g.id+" — "+cg.g.titulo+" · "+cg.s.pct+"% do Gate",core:cg.s.coreDone+"/"+cg.s.coreTot+" critérios CORE",color:cg.st.color,text:cg.st.text};},
+    aiGate(){const cg=getCurrentGateCalc(this.state,this.evState);return cg.g.id+" — "+cg.g.titulo+" · "+cg.s.pct+"%";},
+    aiMission(){const m=nextMissionCalc(this.state,this.evState,this.practice,this.reviewState);return m.c?m.c[1]:m.label;},
+    aiCore(){const cg=getCurrentGateCalc(this.state,this.evState);return cg.g.criterios.filter(c=>c[2]==="CORE"&&!this.state[c[0]]).length+" neste Gate";},
+    aiReview(){return this.reviewCounts.reinforce.length+" itens";},
+    iaPreview(){return this.generateStatusText();},
+    projCards(){const all=[];this.GATES.forEach(g=>{if(g.projeto)all.push({proj:g.projeto,gate:g});});if(this.FRONT.projeto)all.push({proj:this.FRONT.projeto,gate:this.FRONT});return all.map(({proj:p,gate:g})=>{const pr=projProgress(p,this.evState,this.compState);const e=this.evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const checks=e.checks||{};const b=p.base?projById(p.base):null;return{proj:p,gate:g,pr,nivel:e.nivel||"ESTUDADO",link:e.link||"",checks,comps:(p.comps||[]).map(id=>{let lab=id,gt="";try{const cc=criterionLabel(id);lab=cc.label;gt=cc.gate;}catch(_){}return{id:id,lab:lab,gt:gt};}),baseLine:b?("evolução de "+(b.proj.nome||b.proj.id)+" ("+b.gate.id+")"):"",openHref:e.link?e.link:(g.id==="F1"?"#frontend":"#gate-"+g.id),openBlank:!!e.link,openLabel:e.link?"Abrir evidência →":"Ver no gate →"};});},
   },
   methods:{
     hidden(text){return!!this.q&&text.toLowerCase().indexOf(this.q)<0;},
@@ -567,7 +669,7 @@ const app=createApp({
     evLink(pid){const e=this.evState[pid];return e?e.link||"":"";},
     difId(ci,ii){return "d"+ci+"-item-"+ii;},
     difDone(ci){const cat=this.DIF[ci];return cat.itens.filter((_,ii)=>this.difState[this.difId(ci,ii)]).length;},
-    persistMeta(){save(K.history,this.studyHistory);save(K.review,this.reviewState);},
+    persistMeta(){studyHistory=this.studyHistory;reviewState=this.reviewState;save(K.history,this.studyHistory);save(K.review,this.reviewState);},
     registerActivity(){const t=todayStr();if(this.streak.lastActive===t)return;const y=new Date(Date.now()-864e5).toISOString().slice(0,10);this.streak.count=(this.streak.lastActive===y)?this.streak.count+1:1;this.streak.lastActive=t;},
     recordStudyEvent(type,id,status,label,gate){if(!id)return;const now=Date.now(),last=this.studyHistory[0];if(last&&last.id===id&&last.status===status&&now-last.ts<2*60*1000)return;this.studyHistory.unshift({ts:now,type,id,status,label,gate});this.studyHistory=this.studyHistory.slice(0,STUDY_HISTORY_LIMIT);this.persistMeta();},
     toggleCrit(id,checked){this.state[id]=checked;if(checked){this.registerActivity();const x=criterionLabel(id);this.recordStudyEvent("criterio",id,"ESTUDADO",x.label,x.gate);}else if(this.practice[id]){delete this.practice[id];}},
@@ -578,23 +680,41 @@ const app=createApp({
     evLinkChange(pid,value){if(value.trim()){const x=projectLabel(pid);this.recordStudyEvent("projeto",pid,"EVIDENCIA_EDITADA",x.label,x.gate);}},
     dismissPractice(id){const x=criterionLabel(id);delete this.practice[id];this.registerActivity();this.recordStudyEvent("criterio",id,"PRATICADO",x.label,x.gate);},
     setReview(id,status){this.reviewState.date=Date.now();this.reviewState.items[id]=status;this.persistMeta();},
+    toggleComp(id,k){if(!this.compState[id])this.compState[id]={studied:null,practiced:null,proven:false};const cur=this.compState[id];if(k==="proven"){cur.proven=!cur.proven;}else{cur[k]=cur[k]?null:Date.now();}this.registerActivity();const x=criterionLabel(id);this.recordStudyEvent("criterio",id,k==="proven"?(cur.proven?"COMPROVADO":"COMPROVADO_OFF"):((k==="studied"?"ESTUDADO":"PRATICADO")+(cur[k]?"":"_OFF")),x.label,x.gate);},
+    compPressed(id,k){const c=this.compState[id]||{};return k==="proven"?!!c.proven:!!c[k];},
+    compBadge(id){const c=this.compState[id]||{};if(c.proven)return{icon:"check_circle",color:"var(--accent-green)"};if(c.practiced)return{icon:"science",color:"var(--accent-yellow)"};if(c.studied)return{icon:"menu_book",color:"var(--accent-blue)"};return{icon:"circle",color:"var(--mute)"};},
+    toggleProjCheck(pid,idx){const f=projById(pid);if(!f||idx>=((f.proj.evidence||[]).length))return;const cur=this.evState[pid]||{nivel:"ESTUDADO",link:""};cur.checks=cur.checks||{};cur.checks[idx]=!cur.checks[idx];this.evState[pid]=cur;this.registerActivity();const x=projectLabel(pid);if(cur.checks[idx])this.recordStudyEvent("projeto",pid,"EVIDENCIA_CHECK",x.label,x.gate);},
+    projCheckOn(pid,idx){const e=this.evState[pid]||{};return!!((e.checks||{})[idx]);},
+    gotoFilter(label){this.filterQuery=label.slice(0,40);const gsec=document.getElementById("gates");if(gsec)gsec.scrollIntoView();this.$nextTick(()=>{const i=this.$refs.cmdkInput;if(i)i.focus();});},
+    syncOuters(){state=this.state;difState=this.difState;evState=this.evState;candState=this.candState;vagas=this.vagas;practice=this.practice;streak=this.streak;studyHistory=this.studyHistory;reviewState=this.reviewState;compState=this.compState;},
+    expJson(){this.syncOuters();try{downloadBlob("roadmap-java-backend-"+exportStamp()+".json","application/json",JSON.stringify(this.buildExport(),null,2));this.impMsg="";}catch(e){this.impMsg="Falha ao exportar JSON.";}},
+    expMd(){this.syncOuters();try{downloadBlob("roadmap-java-backend-"+exportStamp()+".md","text/markdown",buildMarkdown());this.impMsg="";}catch(e){this.impMsg="Falha ao exportar Markdown.";}},
+    expPdf(){this.syncOuters();try{buildAndDownloadPDF(()=>{this.impMsg="PDF gerado.";},()=>{this.impMsg="Use a impressão do navegador.";});}catch(e){this.impMsg="Falha ao exportar PDF.";}},
+    impTrigger(){const f=this.$refs.impFile;if(f)f.click();},
+    impFileChange(e){const input=e.target;const f=input.files&&input.files[0];input.value="";if(!f)return;const rd=new FileReader();const self=this;rd.onload=function(){let o=null;try{o=JSON.parse(rd.result);}catch(err){self.impMsg="Arquivo inválido: não é um JSON válido.";return;}const v=validateImport(o);if(!v.ok){self.impMsg=v.error;return;}let exp="desconhecida";const _ed=new Date(o.exportedAt);if(!isNaN(_ed))exp=_ed.toLocaleDateString("pt-BR");if(!confirm("Substituir todo o progresso atual pelo arquivo exportado em "+exp+"? Esta ação não pode ser desfeita."))return;try{self.applyImportData(o);self.impMsg="Importação concluída.";}catch(err){self.impMsg="Falha ao aplicar: "+(err&&err.message?err.message:err);}};rd.onerror=function(){self.impMsg="Falha ao ler o arquivo.";};rd.readAsText(f);},
+    applyImportData(o){this.state=o.criteria.checked||{};this.practice=o.criteria.practice||{};this.compState=o.criteria.competence||{};this.evState=o.projects||{};this.studyHistory=Array.isArray(o.studyHistory)?o.studyHistory.slice(0,80):[];this.reviewState=o.reviews||{date:null,items:{}};this.vagas=Array.isArray(o.vagas)?o.vagas:[];this.difState=o.diferenciais||{};this.candState=o.candidatura||{};this.streak=o.streak||{count:0,lastActive:null};this.syncOuters();try{localStorage.setItem(K.mig,"1");localStorage.setItem(K.mig3,"1");localStorage.setItem(K.mig42,"1");}catch(e){}},
+    buildExport(){const cg=getCurrentGateCalc(this.state,this.evState);return{app:"roadmap-backend-java-junior",version:"4.0",exportedAt:new Date().toISOString(),currentGate:{id:cg.g.id,pct:cg.s.pct},progress:{backend:backendCoreCalc(this.state),g2:gateStats(this.GATES[2],this.state),front:frontStatsCalc(this.state),competence:competenceStats(this.state,this.compState,this.evState)},criteria:{checked:this.state,practice:this.practice,competence:this.compState},projects:this.evState,studyHistory:this.studyHistory,reviews:this.reviewState,vagas:this.vagas,diferenciais:this.difState,candidatura:this.candState,streak:this.streak,settings:{}};},
     addVaga(){const t=this.vagaTitulo.trim();if(!t)return;this.vagas.push({t,r:this.vagaReqs.trim(),l:this.vagaLacunas.trim()});this.vagaTitulo="";this.vagaReqs="";this.vagaLacunas="";this.registerActivity();},
     delVaga(i){this.vagas.splice(i,1);},
-    resetAll(){if(!confirm("Zerar todo o progresso (gates, frontend, diferenciais, evidências, vagas, candidatura, histórico de estudo, revisão e streak)?"))return;
-      this.state={};this.difState={};this.evState={};this.candState={};this.vagas=[];this.practice={};this.streak={count:0,lastActive:null};this.studyHistory=[];this.reviewState={date:null,items:{}};
+    resetAll(){if(!confirm("Zerar todo o progresso (gates, frontend, diferenciais, evidências, vagas, candidatura, histórico de estudo, revisão, competências e streak)?"))return;
+      this.state={};this.difState={};this.evState={};this.candState={};this.vagas=[];this.practice={};this.streak={count:0,lastActive:null};this.studyHistory=[];this.reviewState={date:null,items:{}};this.compState={};
       Object.values(K).forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});save(K.prog,this.state);},
     generateStatusText(){
-      const nb=this.nb,lines=[],hoje=new Date().toLocaleDateString("pt-BR");
+      const m=nextMissionCalc(this.state,this.evState,this.practice,this.reviewState),lines=[],hoje=new Date().toLocaleDateString("pt-BR");
       lines.push("📍 Meu progresso no roadmap Java Backend → Júnior (gerado em "+hoje+")","");
-      const g=nb.g,s=gateStats(g,this.state),st=gateStatusObj(g,s,this.evState);
+      const g=m.g,s=gateStats(g,this.state),st=gateStatusObj(g,s,this.evState);
       lines.push("GATE ATUAL: "+g.id+" — "+g.titulo+" ("+s.pct+"% · meta "+g.threshold+"%) — "+st.text,"Objetivo do Gate: "+g.objetivo,"");
       const pendCore=g.criterios.filter(c=>c[2]==="CORE"&&!this.state[c[0]]).map(c=>c[1]);
       if(pendCore.length){lines.push("Critérios CORE pendentes neste Gate:");pendCore.forEach(t=>lines.push("- "+t));}else lines.push("Todos os critérios CORE deste Gate já estão marcados.");
       lines.push("");
       if(g.projeto){const e=this.evState[g.projeto.id]||{nivel:"ESTUDADO",link:""};lines.push("Projeto do Gate ("+(g.projeto.nome||g.projeto.titulo)+"): nível atual "+e.nivel+(e.link?" — com evidência registrada":" — ainda sem link de evidência"));}
-      lines.push("","🚀 Próxima missão: "+(nb.c?nb.c[1]:"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)"),"","🔥 Sequência atual: "+this.streak.count+(this.streak.count===1?" dia seguido":" dias seguidos"));
+      lines.push("","🛠️ PROJETOS:");
+      const allProjs=[];this.GATES.forEach(gg=>{if(gg.projeto)allProjs.push(gg.projeto);});if(this.FRONT.projeto)allProjs.push(this.FRONT.projeto);
+      allProjs.forEach(p=>{const pe=this.evState[p.id]||{nivel:"ESTUDADO",link:"",checks:{}};const pp=projProgress(p,this.evState,this.compState);const cks=p.evidence||[];const ckd=cks.filter((_,i)=>(pe.checks||{})[i]).length;lines.push("- "+(p.nome||p.id)+": "+(pe.nivel||"ESTUDADO")+" · "+pp.pct+"% · evidências "+ckd+"/"+cks.length+(pe.link?" · com link":" · sem link"));});
+      lines.push("","🎯 COMPETÊNCIAS:");const _cs=competenceStats(this.state,this.compState,this.evState);const _rf=this.reviewCounts.reinforce.length;lines.push("- Estudado "+_cs.est+"/"+_cs.tot+" ("+_cs.estudadoPct+"%) · Praticado "+_cs.pra+"/"+_cs.tot+" ("+_cs.praticadoPct+"%) · Comprovado "+_cs.cp+"/"+_cs.tot+" ("+_cs.comprovadoPct+"%) · Precisa de reforço "+_rf);
+      lines.push("","🚀 Próxima missão ("+({core:"CORE",practice:"prática",evidence:"evidência",review:"revisão",comp:"complementar"}[m.kind]||m.kind)+"): "+(m.c?m.c[1]:(m.label||"comprovar o projeto do Gate atual com link de evidência (nível COMPROVADO)")),"" ,"🔥 Sequência atual: "+this.streak.count+(this.streak.count===1?" dia seguido":" dias seguidos"));
       const events=this.studyHistory.filter(e=>e.type==="criterio"||e.type==="projeto"),studied=[],practiced=[];
-      events.forEach(e=>{const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
+      events.forEach(e=>{const off=(e.status||"").endsWith("_OFF");if(off)return;const bucket=(["PRATICADO","APLICADO","COMPROVADO"].includes(e.status))?practiced:studied;if(!bucket.some(x=>x.id===e.id&&x.status===e.status))bucket.push(e);});
       const rs=this.reviewCounts;
       lines.push("","📚 ESTUDADO RECENTEMENTE (últimos 14 dias):");
       if(studied.length)studied.slice(0,8).forEach(e=>lines.push("- ["+fmtStudyDate(e.ts)+"] "+e.label+(e.gate?" · "+e.gate:"")));else lines.push("- Nenhum item registrado como estudado neste período.");
@@ -616,13 +736,14 @@ const app=createApp({
     }
   },
   watch:{
-    state:{deep:true,handler(v){save(K.prog,v);}},
-    difState:{deep:true,handler(v){save(K.dif,v);}},
-    evState:{deep:true,handler(v){save(K.ev,v);}},
-    candState:{deep:true,handler(v){save(K.cand,v);}},
-    vagas:{deep:true,handler(v){save(K.vagas,v);}},
-    practice:{deep:true,handler(v){save(K.prac,v);}},
-    streak:{deep:true,handler(v){save(K.streak,v);}}
+    state:{deep:true,handler(v){state=v;save(K.prog,v);}},
+    difState:{deep:true,handler(v){difState=v;save(K.dif,v);}},
+    evState:{deep:true,handler(v){evState=v;save(K.ev,v);}},
+    candState:{deep:true,handler(v){candState=v;save(K.cand,v);}},
+    vagas:{deep:true,handler(v){vagas=v;save(K.vagas,v);}},
+    practice:{deep:true,handler(v){practice=v;save(K.prac,v);}},
+    streak:{deep:true,handler(v){streak=v;save(K.streak,v);}},
+    compState:{deep:true,handler(v){compState=v;save(K.comp,v);}}
   },
   mounted(){
     const input=this.$refs.cmdkInput;

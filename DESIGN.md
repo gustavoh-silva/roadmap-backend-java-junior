@@ -556,6 +556,26 @@ There is no photography or product imagery. The only visuals are CSS-native: the
 
 **`evidence-link-input`** — Full-width pill input for the proof link (commit/PR/API/deploy). No link + below-COMPROVADO = project doesn't count, and the gate header says so.
 
+**`mission-card`** — evolução do next-blocker (spec V4 §7): tile-1, 18px, título 24px (`card-big`), badge `Gx · CORE/COMP/kind`, CTA primário único “Começar missão →” (`button-primary btn-small`); secundário “Copiar status” permanece ghost. Prioridade: CORE gate atual → prática → evidência → revisão → comp.
+
+**`current-location-card`** — localização explícita (spec V4 §6): tile-1, 18px, `ref-time` “Você está aqui”, título 20px on-dark `Gx — título · pct%`, linha `n/m CORE`, status 13px semibold texto+cor (red/yellow/green via accent-*). `role=status`, `aria-label="Você está aqui"`.
+
+**`project-card`** — card rico por projeto na seção #projetos (spec V4 §15): `gate-card` reutilizado com `id="proj-<pid>"`; topo nome + `gate-meta` (gate · nível · pct%); linhagem `dif-encaixe` ("evolução de X") quando `base`; `titulo` como objetivo; `dont-list` de tecnologias; competências com ícone de estado (✅/🧪/📚/○ via `compOf`) + `data-text` para o ⌘K; `bar-track` com `projProgress().pct`; checks de evidência `review-btn` com `aria-pressed`; `explain-box` de próximos passos; CTA `btn-ghost` (Abrir evidência com link, senão Ver no gate).
+
+**`project-progress`** — fórmula honesta `round(nivelIdx/3*50 + compsPraticadasOuComprovadas/total*50)` (nível ESTUDADO=0..COMPROVADO=3; comps vazias → metade evidência); exibida como % + `done/tot` no gate (resumo) e no card.
+
+**`evidence-checks`** — booleanos por rótulo de evidência em `evState[pid].checks{}` (aditivo; legado `{nivel,link}` válido); evento de histórico só ao marcar; texto+cor + `aria-pressed`, nunca só cor.
+
+**`competence-state`** — per-criterion Estudado → Praticado → Comprovado (spec V4 §§8–12): `.comp-states` flex-wrap group + `.comp-state` 11px semibold pills; studied blue-wash, practiced yellow-wash, proven green-wash + ✓, only when `aria-pressed="true"`; rest transparent/mute. Toggle semantics: studied/practiced store timestamps (null when off), proven flips boolean, no link required (links stay project-level). `aria-pressed` + `aria-label` on every button; `role="group"` + `aria-label="Estados de competência"`. Store `roadmap-competence-v1` (`{studied: ts|null, practiced: ts|null, proven: bool}`), one-shot `migrateV42()` from `state/practice`, flag `roadmap-v4-2-migrated`, old keys kept for rollback.
+
+**`review-panel` / `history-panel`** — revisão datada + atividade recente (spec V4 §§17–18): counters Consolidado/Reforço/Não-comprovado resolvem labels via criterion/project lookup mesmo sem evento recente; até 3 atalhos ⚠ Reforçar alimentam o filtro ⌘K (`data-goto-filter`, valor fatiado em 40 chars); bloco de atalho omitido quando vazio. `readiness-panel` segue stub V4.5. comprovado% do dashboard é fração de critérios `proven` (+ projetos contam em seus próprios cards); após migração pode cair até o usuário marcar ✅ — comportamento esperado, não bug.
+
+**`ai-context-panel`** — seção #contexto-ia após #projetos (spec V4 §§22–23): `tile-1`, `aria-label="Contexto para IA"`; `tile-head` (ref-time "Leve seu estado", `h2 🤖 Contexto para IA`); `sec-card` com `review-list` de 4 linhas (`aiGate/aiMission/aiCore/aiReview`); UM primário por fold (`btn-primary#copyContextBtn` "Copiar contexto"; atalho ghost do hero mantido, ambos via `copyAiText()`); `details.ia-details>summary` "Ver prévia do texto" + `pre.ia-preview` (`tile-1`, hairline, 8px, 12px mono, `pre-wrap`, `max-height:320px` scroll); preview via `textContent` (XSS-safe), sem `aria-live` no `pre`. Texto: missão kind-aware via `nextMission()` + bloco 🎯 COMPETÊNCIAS (contagens reais); demais blocos e ordem intactos.
+
+**`export-panel`** — seção #exportar após #contexto-ia (spec V4 §§24–28): `tile-2`, `sec-card` com 3 `btn-ghost` (JSON/Markdown/PDF) + nota de versão; JSON `{app, version:"4.0", exportedAt, currentGate, progress, criteria, projects, studyHistory, reviews, vagas, diferenciais, candidatura, streak, settings}` para backup e futura importação V4.6; Markdown com 8 blocos e cap de 30 itens; PDF jsPDF UMD pinado (`jspdf@2.5.1`, sem autotable) em 6 blocos com fallback `window.print()` + CSS de impressão.
+
+**`import-panel`** — restauração via JSON na #exportar (spec V4 §26): ghost `impJson` + `input#impFile[type=file][hidden][accept]` + `p#impMsg`; fluxo escolher→ler(FileReader)→parse→`validateImport()` (app idêntico, major 4, tipos por seção; rejeição total com motivo PT-BR, zero escritas)→`confirm()` com data de exportação→`applyImport()` (10 lets + 10 saves + flags `mig/mig3/mig42` seladas + re-render do reset); erro mostra motivo em `impMsg` + `✕`; `input.value` limpo para reselecionar; escondido no print como os exports.
+
 ### Secondary Sections
 
 **`section-card`** — Generic tile-2 rounded-18px container for candidatura, vaga registration, and informational notes.
